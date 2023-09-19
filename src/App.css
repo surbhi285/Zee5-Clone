@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+
+body{
+  background-color: #0F0617;
+  color: "white";
+ }
+
+.card{
+  padding: "0";
+  border: "1px solid black";
+  cursor: "pointer";
+  background:"black";
+  margin-left:"40px";
+  transition: "transform 550ms";
+} 
