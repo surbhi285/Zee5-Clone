@@ -3,9 +3,6 @@ import { AddIcon, SmallAddIcon } from '@chakra-ui/icons';
 import {useEffect, useState} from 'react';
 import { Link, json } from 'react-router-dom';
 import ImageSlider from './ImageSlider';
-import 'react-slideshow-image/dist/styles.css'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css';
 import React from 'react';
 import Footer from './Footer';
 import ComponentCard from './ComponentCard';
