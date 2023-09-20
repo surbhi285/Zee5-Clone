@@ -31,6 +31,14 @@ export default function Nav({ isLoggedIn}) {
         setIsOption(!option);
     }
 
+    const handleLogout = ()=>{
+        isLoggedIn(false);
+    }
+
+    const clearSearchValue = () => {
+        setSearchData('');
+      };
+
     const handleSearchInputChange = (event) => {
         const userInput = event.target.value;
         setSearchData(userInput);
@@ -80,9 +88,7 @@ export default function Nav({ isLoggedIn}) {
     <InputGroup>
     <Input value={searchData} onChange ={handleSearchInputChange} type="text" placeholder='Search for Movies, Shows, Channels etc'
     sx={searchStyle} />
-   {showSuggestions && <SearchCard searchData={searchData} />
-    
-    }
+   {showSuggestions && <SearchCard searchData={searchData}  clearSearchValue={clearSearchValue}/>}
     <InputLeftElement>
     {/* <Link to="/SearchResult"> */}
     <SearchIcon sx={{cursor:"pointer", color:"white", padding:"10px"}} />
@@ -96,13 +102,13 @@ export default function Nav({ isLoggedIn}) {
     style={{width:"20px", height:"20px", borderRadius:"50%", marginRight:"50px"}}  onClick={handleOption}/> 
         {option && (
             <div style={{position:"absolute", border:"1px solid gray", marginTop:"10px", backgroundColor:"#0F0617"}}>
-                <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"100px", border:"0.5px solid grey", borderRadius:"5px"}}>
+                <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"150px", border:"0.5px solid grey", borderRadius:"5px"}}>
                 <NavLink to='/Watchlist' style={{color:"white", textDecoration:"none"}}>
-               <h4><li style={{marginTop:"10px", marginLeft:"0px", marginRight:"20px"}}>My Watchlist</li></h4> 
+               <li style={{marginTop:"10px", marginLeft:"0px", marginRight:"20px"}}>My Watchlist</li> 
                 </NavLink>
                 <br />
-               <Button style={{marginTop:"0px", border:"1px solid #0F0617", backgroundColor:"#0F0617", color:"white"}}><h4>
-                <li style={{cursor:"pointer"}}>Logout</li></h4></Button>
+               <Button onClick={handleLogout} style={{marginTop:"0px", border:"1px solid #0F0617", backgroundColor:"#0F0617", color:"white"}}>
+                <li style={{cursor:"pointer", marginBottom:"20px", fontSize:"15px"}}>Logout</li></Button>
                 </ul>
             </div>
         )}

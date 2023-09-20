@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { color } from 'framer-motion';
 import { ListItem, UnorderedList, Container } from '@chakra-ui/react';
 
-export default function SearchCard({searchData, suggestionData}) {
+export default function SearchCard({searchData, clearSearchValue}) {
      
   const cardStyle={
     backgroundColor:"#0F0617",
@@ -15,7 +15,8 @@ export default function SearchCard({searchData, suggestionData}) {
   
 }
     const navigate = useNavigate();
-    const[result, setResult] = useState([]);   
+    const[result, setResult] = useState([]); 
+    const suggestionRef = useRef(null); 
 
     useEffect(() => {
         const storedData = localStorage.getItem("videoData");
@@ -33,15 +34,31 @@ export default function SearchCard({searchData, suggestionData}) {
         setResult(movieName);
       }, [searchData]);
 
+      useEffect(()=>{
+        const handleClickOutside = (event) => {
+          if (suggestionRef.current && !suggestionRef.current.contains(event.target)) {
+            setResult([]);
+          }
+        }
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+          document.removeEventListener("click", handleClickOutside);
+        };
+      }, []);
+     
+
       const handleSuggestionClick = (selectedItem) => {
         console.log("Suggestion clicked:", selectedItem);
         navigate(`/result/${selectedItem._id}`)
+        clearSearchValue();
+        setResult([]);
       }
   return (
     <Container style={{backgroundColor:"#0F0617"}}>
       {/* Suggestions Container */}
       {result.length > 0 && (
         <Container
+        ref={suggestionRef}
           style={{
           position:"absolute",
             backgroundColor:"#0F0617",

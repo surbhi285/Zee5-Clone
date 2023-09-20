@@ -71,7 +71,7 @@ const getMovies=async()=>{
         <li style={{marginLeft:"30px", marginRight:"40px"}}>U/A 16+</li>
         <li style={{color:"white", marginRight:"40px"}}>
         {itemId.createdAt ? itemId.createdAt.substring(0, 4): 'N/A'}</li> 
-        <li style={{color:"white"}}>{itemId.type.charAt(0).toUpperCase()+ itemId.type.slice(1)}</li>
+        <li style={{color:"white"}}>{itemId.type?.toUpperCase()}</li>
         </Flex>
         </ul>
          
@@ -86,9 +86,19 @@ const getMovies=async()=>{
         {/* <img src={wishlistIcon}/> */}
         Watchlist</Button>
         <Flex>
-        <p style={{marginLeft:"50px"}}>Genre : </p>
-        <p style={{marginLeft:"5px", color:"#A785FF"}}>{itemId.keywords[0].charAt(0).toUpperCase()+ itemId.keywords[0].slice(1)},</p>
-       <p  style={{marginLeft:"5px", color:"#A785FF"}}>{itemId.keywords[1].charAt(0).toUpperCase()+ itemId.keywords[1].slice(1)}</p>
+        <p style={{ marginLeft: "50px" }}>Genre : </p>
+        <p style={{ marginLeft: "5px", color: "#A785FF" }}>
+        {itemId.keywords?.length > 0 ? (
+        itemId.keywords.map((keyword, index) => (
+        <span key={index}>
+        {keyword.toUpperCase()}
+        {index < itemId.keywords.length - 1 ? ", " : ""}
+      </span>
+    ))
+  ) : (
+    "N/A"
+  )}
+</p>
         
     </Flex>
     <Flex>

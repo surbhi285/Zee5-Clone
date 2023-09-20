@@ -12,7 +12,7 @@ import ShortFilm from './Main/ShortFilm';
 import Watch from './Main/Watch';
 import Login from './Main/Login';
 import Register from './Main/Register';
-// import Watchlist from './Main/Watchlist';
+import Watchlist from './Main/Watchlist';
 import SearchResult from './Main/SearchResult';
 // import BuyPlan from './Main/BuyPlan';
 
@@ -32,8 +32,6 @@ function App() {
        setShowNav(false);
   }
 
- 
-
   return (
 <>
    <Router>
@@ -46,7 +44,7 @@ function App() {
                 <Route path="/Song" element={<VideoSong handleShown={handleShown}/>} />
                 <Route path="/shortfilm" element={<ShortFilm handleShown={handleShown}/>} />
                 <Route path="/watch/:id" element={<Watch handleShown={handleShown}/>} />
-                {/* <Route path="/Watchlist" element={<Watchlist handleShown={handleShown}/>} /> */}
+                <Route path="/Watchlist" element={<Watchlist handleShown={handleShown}/>} />
                 <Route path="/result/:id"   element={<SearchResult />} />
               
               {/* No need to include Nav for /Login and /Register */}

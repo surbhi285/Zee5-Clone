@@ -1,9 +1,32 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import { Button, Box } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
-const ComponentCard = ({ item, isHovered, handleHover }) => {
+const ComponentCard = ({ item, isHovered, handleHover}) => {
+
+  async function addRemoveWatchList(movieId){
+    const userInfo = localStorage.getItem("signup");
+    if(userInfo){
+      const userDetail = JSON.parse(userInfo);
+
+      const response = await(fetch("https://academics.newtonschool.co/api/v1/ott/watchlist/like",
+      {
+          method: 'PATCH',
+          headers: {
+            Authorization: `Bearer ${userDetail.sign.token}`,
+            projectID : '8jf3b15onzua'
+          },
+        body: JSON.stringify({ showId: movieId })
+      }))
+      if (response.ok) {
+        console.log("Successfully added to watchlist"); 
+      } else {
+        console.error("Failed to add to watchlist"); 
+      }
+    } 
+  }
+  const userInfo = localStorage.getItem("signup");
   return (
     <Box
       mr={5}
@@ -72,11 +95,13 @@ const ComponentCard = ({ item, isHovered, handleHover }) => {
                   Watch
                 </Button>
               </Link>
-              <Button
+              {userInfo && (
+              <Button onClick={()=>addRemoveWatchList(item._id)}
                 style={{ border: "1px solid grey", height: "30px", borderRadius: "10px", cursor: "pointer" }}
               >
                 <AddIcon sx={{ fontSize: "15px", color: "grey" }} />
               </Button>
+              )}
             </Box>
           </Box>
         )}

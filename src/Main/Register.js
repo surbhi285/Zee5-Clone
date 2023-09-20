@@ -55,7 +55,7 @@ const handleusername=(event)=>{
         if(response.ok){
           const responseData = await response.json();
           localStorage.setItem(
-            `signup: ${username}`,
+            `signup`,
             JSON.stringify({
               sign: responseData,
             })
@@ -63,6 +63,7 @@ const handleusername=(event)=>{
           setError("Registered successfully");
           setColor("green");
           setSign(true);
+         
         
         }else{
           console.error("Registration Failed", response);
@@ -102,7 +103,7 @@ const handleusername=(event)=>{
             {sign ? (
               <>
               <Link to="/">
-              <Button style={{marginLeft:"40%",backgroundColor:"purple", color:"White", marginTop:"40px", height:"60px", width:"100px",border:"2px solid puprle", borderRadius:"8px"}}>
+              <Button style={{marginLeft:"40%",backgroundColor:"purple", color:"White", marginTop:"40px", height:"40px", width:"100px",border:"2px solid purple", borderRadius:"8px"}}>
               Go to Home</Button>
               </Link>
               </>

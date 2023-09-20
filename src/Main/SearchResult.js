@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-
+import { Button, Box } from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 export default function SearchResult() {
     const {id} = useParams();
     console.log("itemId ", id)
     const[suggestionData, setSuggestionData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isHovered, setIsHovered] = useState(false);
   
 
     const getMovies=async()=>{
@@ -23,7 +26,7 @@ export default function SearchResult() {
           console.log("API Response:", data.data);
           
           // Assuming the API response has 'title' and 'image' properties
-          setSuggestionData(data);
+          setSuggestionData(data.data);
           setLoading(false);
         }}catch (error) {
           console.error("Error fetching data:", error);
@@ -47,10 +50,86 @@ export default function SearchResult() {
       }
   return (
     <div style={{marginTop:"7rem", marginLeft:"40px"}}>
-        <h3 style={{color:"Grey"}}>Showing results for </h3>
+        <h3 style={{color:"Grey"}}>Showing results for "{suggestionData.title}" </h3>
         <hr style={{marginLeft:"5px", marginRight:"45px"}}></hr>
-        {/* <h1>{suggestionData.title}</h1> */}
-        <img src={suggestionData.thumbnail} alt={suggestionData.title} />
+        <Button
+        sx={{
+          padding: "0",
+          border: "1px solid black",
+          cursor: "pointer",
+          background: "black",
+          marginLeft: "5px",
+          transition: "transform 550ms",
+          ":hover": {
+            border: "5px solid white",
+            borderRadius: "10px",
+          },
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <img
+          src={suggestionData?.thumbnail}
+          alt={suggestionData?.title}
+          style={{ height: "20rem", width: "15rem", borderRadius: "10px", border: "none" }}
+        />
+        {isHovered && (
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "0",
+              right: "0",
+              bottom: "0",
+              background: "white",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "white",
+              marginTop: "80px",
+            }}
+          >
+            <h5 style={{ color: "#505050", textAlign: "left" }}>{suggestionData?.title}</h5>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Link to={`/watch/${suggestionData?._id}`}>
+                <Button
+                  sx={{
+                    color: "gray",
+                    height: "30px",
+                    width: "90px",
+                    background: "white",
+                    border: "1px solid gray",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    marginLeft: "0",
+                    marginRight: "100px",
+                    marginBottom: "10px",
+                    padding: "0",
+                  }}
+                >
+                  <img
+                    src="https://www.pngitem.com/pimgs/m/52-520203_right-side-triangle-arrow-grey-color-pattern-hd.png"
+                    style={{ width: "10px", height: "10px", marginRight: "8px" }}
+                  />
+                  Watch
+                </Button>
+              </Link>
+              <Button
+                style={{ border: "1px solid grey", height: "30px", borderRadius: "10px", cursor: "pointer" }}
+              >
+                <AddIcon sx={{ fontSize: "15px", color: "grey" }} />
+              </Button>
+            </Box>
+          </Box>
+        )}
+      </Button>
     </div>
-  )
+  );
 }
+
+
+
+
+
+
