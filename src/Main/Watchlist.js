@@ -17,7 +17,7 @@ export default function Watchlist({userDetail}) {
                   Accept: "application/json",
                   "Content-Type": "application/json",
                   Authorization: `Bearer ${userDetail.sign.token}`,
-                    'projectId': "8jf3b15onzua",
+                    projectId: "8jf3b15onzua",
                 }
             }))
             
