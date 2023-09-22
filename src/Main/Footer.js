@@ -9,10 +9,10 @@ export default function Footer() {
         <h3 >Download Apps</h3>
         <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="googleplaystore" style={{width:"100px", height:"40px", marginTop:"10px", marginLeft:"5px"}}/>
         <h3 style={{marginLeft:"45%"}}>Connect with us</h3>
-        <img src="https://i.pinimg.com/originals/63/42/e0/6342e06ac7fbcef4595e6978b791beb5.jpg" alt="facebook" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/>
-        <img src="https://i.pinimg.com/736x/a0/a6/66/a0a66670e75807e529358cb88a5972df.jpg" alt="instagram" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/>
-        <img src="https://i.pinimg.com/474x/14/fc/05/14fc05cbaf4e67318c060d25a8462b1b.jpg" alt="twitter" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/>
-        <img src="https://i.pinimg.com/originals/50/68/ca/5068cae0be0b67710dda0360d42e64ac.jpg" alt="twitter" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/>
+      <div><a href='https://m.facebook.com/ZEE5/events/'><img src="https://i.pinimg.com/originals/63/42/e0/6342e06ac7fbcef4595e6978b791beb5.jpg" alt="facebook" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}} /></a></div>
+      <div><a href='https://www.instagram.com/zee5/'><img src="https://i.pinimg.com/736x/a0/a6/66/a0a66670e75807e529358cb88a5972df.jpg" alt="instagram" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/></a></div>
+       <div><a href='https://twitter.com/ZEE5India?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor'><img src="https://i.pinimg.com/474x/14/fc/05/14fc05cbaf4e67318c060d25a8462b1b.jpg" alt="twitter" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/></a></div>
+       <div><a href='https://www.youtube.com/channel/UCXOgAl4w-FQero1ERbGHpXQ'><img src="https://i.pinimg.com/originals/50/68/ca/5068cae0be0b67710dda0360d42e64ac.jpg" alt="youtube" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/></a></div>
     
     </Flex>
     <Flex style={{color:"grey", marginTop:"40px"}}>

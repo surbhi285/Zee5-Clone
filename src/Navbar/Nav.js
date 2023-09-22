@@ -67,7 +67,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                 <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"150px", border:"0.5px solid grey", borderRadius:"5px"}}>
                 
                 <NavLink to='/Documentary' style={{color:"white", textDecoration:"none"}}>
-                <li style={{marginTop:"20px", marginLeft:"0px", left:"20px"}}>
+                <li style={{marginTop:"20px", marginLeft:"0px", left:"20px", ':hover':{backgroundColor:"purple"}}}>
                 <span
                 onMouseEnter={(e) => {
                 e.target.style.backgroundColor = "purple";
@@ -157,7 +157,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                     borderRadius: "5px",
                   }}
                 >
-                  <li style={{marginTop: "10px",  marginLeft: "0px", marginRight: "20px", display: "flex", marginBottom: "20px", wordWrap: "break-word"}}>
+                  <li style={{marginTop: "10px", float:"left",marginLeft: "0px", marginRight: "20px", display: "flex", marginBottom: "20px", wordWrap: "break-word"}}>
                    <span
                    onMouseEnter={(e) => {
                    e.target.style.backgroundColor = "purple";
