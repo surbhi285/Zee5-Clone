@@ -69,6 +69,7 @@ export default function SearchCard({searchData, clearSearchValue}) {
             overflowY: result.length>5?"scroll" :"auto",
             zIndex: 2,
             cursor:"pointer",
+           
           }}
         >
           <UnorderedList style={{listStyle:"none"}}>

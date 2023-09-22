@@ -72,10 +72,27 @@ export default function Home({handleShown}) {
                     'projectId': "8jf3b15onzua",
                 }
             }))
-        const data = await (response.json());
+        const data = await response.json();
         console.log(data);
         const result = data.data;
-        console.log(result);
+        const exclusiveList = result.filter(item=>item.type==="short film")
+            const moviesData = result.filter(item=>item.type==='movie');
+            const tvShowData = result.filter(item=>item.type==="tv show");
+            const videoData = result.filter(item=>item.type==="video song");
+            const trailerData = result.filter(item=>item.type==="trailer");
+            const webSeriesData = result.filter(item=>item.type==="web series");
+            const documentriesData = result.filter(item=>item.type==="documentary");
+        
+        
+        //  console.log(data.data);
+         setExclusivesList(exclusiveList);
+         setMoviesList(moviesData);
+         setTvList(tvShowData);
+         setVideo(videoData);
+         setTrailer(trailerData);
+         setWebSeries(webSeriesData);
+         setDocumentries(documentriesData);
+        console.log("result", result);
         
         localStorage.setItem("videoData", JSON.stringify({"videoData": result}))
         }} catch(error){console.error("error")}
@@ -84,11 +101,7 @@ export default function Home({handleShown}) {
             getMovies();
         },[])
      
-  const addtoFav = (item) => {
-  const favMovies = JSON.parse(localStorage.getItem("favouriteMovies")) || [];
-  favMovies.push(item);
-  localStorage.setItem("favouriteMovies", JSON.stringify(favMovies));
-};
+  
   
   return (
     <>

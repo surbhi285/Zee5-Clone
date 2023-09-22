@@ -1,9 +1,10 @@
 import React from 'react'
 import { Button, Container, Input } from '@chakra-ui/react'
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
+import { CloseIcon } from '@chakra-ui/icons';
 
-export default function Register({handleNotShown}) {
+export default function Register({handleNotShown, setLoggedInStatus, setUserName}) {
   handleNotShown();
     
 const [error, setError]  = useState('')
@@ -63,6 +64,8 @@ const handleusername=(event)=>{
           setError("Registered successfully");
           setColor("green");
           setSign(true);
+          setUserName(username);
+          setLoggedInStatus(true);
          
         
         }else{
@@ -80,6 +83,10 @@ const handleusername=(event)=>{
 }
   return (
     <Container sx={{bg:"white", width:"30%", marginLeft:"38%", marginTop:"50px", borderRadius:"10px", height:"530px"}}>
+            <NavLink to ="/">
+            <CloseIcon style={{color:"purple", borderRadius:"50%", marginLeft:"95%", height:"20px", width:"20px"}}/>
+            </NavLink>
+
             <form style ={{border:"2px solid white", borderRadius:"10px"}}>
             
             <h2 style={{marginLeft:"15%", color:"#363636"}}> Create a new account </h2>
@@ -109,8 +116,8 @@ const handleusername=(event)=>{
               </>
               ):(
               <>
-            <Input type="checkbox" style={{marginTop:"8%", marginLeft:"5%"}}/>
-            <label style={{fontSize:"11px"}}>By proceeding you agree to our Terms of services & privacy policy</label>
+            <Input type="checkbox"  style={{marginTop:"8%", marginLeft:"5%"}}/>
+            <label style={{fontSize:"10px"}}>By proceeding you agree to our Terms of services & privacy policy</label>
            
           <Button type="button" style={{cursor:"pointer", marginLeft:"8%", height:"45px", width:"82%", fontSize:"Bolder", borderRadius:"5px", border:"2px solid plum", marginTop:"25px", color:"white", background:"plum", 
            }}onMouseEnter={(e) => {

@@ -17,7 +17,7 @@ const ComponentCard = ({ item, isHovered, handleHover}) => {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${userDetail.sign.token}`,
-            projectId : '8jf3b15onzua'
+            projectId: '8jf3b15onzua'
           },
         body: JSON.stringify({ showId: movieId })
       }))

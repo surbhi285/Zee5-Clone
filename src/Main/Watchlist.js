@@ -1,9 +1,19 @@
 import { useEffect, useState, useParams } from "react";
-import { Container } from "@chakra-ui/react";
+import { Container, Box, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { MinusIcon } from "@chakra-ui/icons";
 
-export default function Watchlist({userDetail}) {
+export default function Watchlist({addRemoveWatchList}) {
     const[watchlist, setWatchList] = useState({});
     const [loading, setLoading] = useState(true);
+    const[hover, setHover] = useState([]);
+
+   const handleHover = (index, isHovered)=>{
+    const updatedHoveredStates = { ...hover };
+        updatedHoveredStates[index] = isHovered;
+        setHover(updatedHoveredStates);
+      };
+   
    
     async function getWatchList (){
       const userInfo = localStorage.getItem("signup")
@@ -37,19 +47,102 @@ export default function Watchlist({userDetail}) {
     getWatchList();
   }, []);
     return (
-      <div style={{marginTop:"10rem"}}>
+      <div style={{ marginTop: "7rem" }}>
+      <h1 style={{ color: "white", marginLeft: "40px" }}>Watchlist</h1>
       {loading ? (
         <div>loading..</div>
       ) : (
-        <Container sx={{ marginTop: "10rem" }}>
-          {watchlist.map((item) => (
-            <div key={item._id}>
-              <img src={item.thumbnail} alt={item.title} />
-              <p>{item.title}</p>
+        <Container sx={{ display: "flex", marginLeft: "20px" }}>
+          {watchlist.map((item, index) => (
+            <div
+              key={item._id}
+              style={{ position: "relative", marginRight: "20px" }}
+              onMouseEnter={() => handleHover(index, true)}
+              onMouseLeave={() => handleHover(index, false)}
+            >
+               <Button sx={{
+                padding: "0",
+                border: "1px solid black",
+                cursor: "pointer",
+                background: "black",
+                marginLeft: "5px",
+                transition: "transform 550ms",
+                ":hover": {
+                border: "5px solid white",
+                borderRadius: "10px",
+          },
+        }}
+      >
+              <img
+                src={item.thumbnail}
+                alt={item.title}
+                style={{
+                  height: "20rem",
+                  width: "15rem",
+                  borderRadius: "10px",
+                  border:"none"
+                }}
+              />
+              {hover[index] && (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "0",
+                    right: "0",
+                    bottom: "0",
+                    background: "white",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "white",
+                    marginTop: "70px",
+                  }}
+                >
+                  <h5 style={{ color: "#505050", textAlign: "left" }}>
+                    {item.title}
+                  </h5>
+                  <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Link to={`/watch/${item._id}`}>
+                      <Button
+                        sx={{
+                          color: "gray",
+                          height: "30px",
+                          width: "90px",
+                          background: "white",
+                          border: "1px solid gray",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                          marginLeft: "10px",
+                          marginRight: "100px",
+                          marginBottom: "10px",
+                          padding: "0",
+                        }}
+                      >
+                        <img
+                          src="https://www.pngitem.com/pimgs/m/52-520203_right-side-triangle-arrow-grey-color-pattern-hd.png"
+                          style={{
+                            width: "10px",
+                            height: "10px",
+                            marginRight: "8px",
+                          }}
+                        />
+                        Watch
+                      </Button>
+                    </Link>
+                    <Button onClick={()=>addRemoveWatchList(item._id)}
+                    style={{ border: "1px solid grey", height: "30px", borderRadius: "10px", cursor: "pointer" }}>
+                    <MinusIcon sx={{ fontSize: "15px", color: "grey" }} />
+              </Button>
+                  </Box>
+                </Box>
+              )}
+              </Button>
             </div>
           ))}
         </Container>
       )}
-      </div>
-    );
+    </div>
+  );
 }

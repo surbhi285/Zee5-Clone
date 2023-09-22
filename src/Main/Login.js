@@ -1,9 +1,10 @@
+import { CloseIcon } from '@chakra-ui/icons';
 import { Button, Container } from '@chakra-ui/react'
 import React from 'react'
 import {useState} from 'react'
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
-export default function Login({handleNotShown, setLoggedInStatus}) {
+export default function Login({handleNotShown, setLoggedInStatus, setUserName}) {
   handleNotShown();
 
   const[email, setEmail] = useState("");
@@ -50,6 +51,7 @@ export default function Login({handleNotShown, setLoggedInStatus}) {
           setError("Registered successfully");
           setColor("green");
           setLogin(true);
+          setUserName(email);
           setLoggedInStatus(true);
         
         }else{
@@ -66,9 +68,12 @@ export default function Login({handleNotShown, setLoggedInStatus}) {
 }
   }
   return (
-        <Container sx={{bg:"white", width:"30%", marginLeft:"38%", marginTop:"100px", borderRadius:"10px", height:"450px"}}>
-            <form style ={{border:"2px solid white", borderRadius:"10px"}}>
 
+        <Container sx={{bg:"white", width:"30%", marginLeft:"38%", marginTop:"100px", borderRadius:"10px", height:"450px"}}>
+            <NavLink to ="/">
+            <CloseIcon style={{color:"purple", borderRadius:"50%", marginLeft:"95%", height:"20px", width:"20px"}}/>
+            </NavLink>
+            <form style ={{border:"2px solid white", borderRadius:"10px"}}>
             <h2 style={{marginLeft:"25%"}}> Login to ZEE5</h2>
 
             <h4 style={{color:"#363636",marginLeft:"8%", marginRight:"5%"}}>Login to continue enjoying uninterrupted video and personalised experience.</h4>
@@ -84,13 +89,21 @@ export default function Login({handleNotShown, setLoggedInStatus}) {
              {login ? (
               <>
               <Link to="/">
-              <Button style={{marginLeft:"40%",backgroundColor:"purple", color:"White", marginTop:"40px", height:"60px", width:"100px",border:"2px solid puprle", borderRadius:"8px"}}>
+              <Button style={{marginLeft:"40%",backgroundColor:"purple", color:"White", marginTop:"40px", height:"40px", width:"100px",border:"2px solid purple", borderRadius:"8px"}}>
               Go to Home</Button>
               </Link>
               </>
               ):(
               <>
-            <Button type="button" style={{cursor:"pointer",marginLeft:"8%", height:"45px", width:"82%", fontSize:"Bolder", borderRadius:"5px", border:"2px solid plum", marginTop:"25px", color:"white", background:"plum" }}
+            <Button type="button" style={{cursor:"pointer", marginLeft:"8%", height:"45px", width:"82%", fontSize:"Bolder", borderRadius:"5px", border:"2px solid plum", marginTop:"25px", color:"white", background:"plum", 
+           }}onMouseEnter={(e) => {
+            e.target.style.backgroundColor = "purple";
+            e.target.style.border = "1px solid purple";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = "plum";
+            e.target.style.border = "2px solid plum";
+          }}
             onClick={handleLogin}>
                 LOGIN
             </Button>

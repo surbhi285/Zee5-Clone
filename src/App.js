@@ -14,12 +14,12 @@ import Login from './Main/Login';
 import Register from './Main/Register';
 import Watchlist from './Main/Watchlist';
 import SearchResult from './Main/SearchResult';
-// import BuyPlan from './Main/BuyPlan';
+import BuyPlan from './Main/BuyPlan';
 
 function App() {
   const [showNav, setShowNav] = useState(true);
   const[isLoggedIn, setIsLoggedIn] = useState(false);
-  // const[searchData, setSearchData] = useState("");
+  const[userName, setUserName] = useState("");
 
   const setLoggedInStatus = (status) => {
     setIsLoggedIn(status);
@@ -35,7 +35,7 @@ function App() {
   return (
 <>
    <Router>
-    {showNav &&  <Nav isLoggedIn={isLoggedIn} />} 
+    {showNav &&  <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} username={userName}/>} 
    <Routes>
             <Route path="/" element={<Home handleShown={handleShown}/>} />
                 <Route path="/Movies" element={<Movies handleShown={handleShown}/>} />
@@ -49,9 +49,9 @@ function App() {
               
               {/* No need to include Nav for /Login and /Register */}
             
-              <Route path="/Login" element={<Login handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} />} />
-                <Route path="/Register" element={<Register handleNotShown={handleNotShown} />} />
-                {/* <Route path="/BuyPlan" element={<BuyPlan handleNotShown={handleNotShown} />} /> */}
+              <Route path="/Login" element={<Login handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName}/>} />
+                <Route path="/Register" element={<Register handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName}/>} />
+                <Route path="/BuyPlan" element={<BuyPlan handleNotShown={handleNotShown} />} />
             </Routes>
     </Router>
     </>

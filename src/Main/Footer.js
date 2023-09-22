@@ -7,9 +7,13 @@ export default function Footer() {
     <Container style={{marginTop:"3%", marginLeft:"4%"}}>
     <Flex style={{color:"white"}}>
         <h3 >Download Apps</h3>
-        <img></img>
-        <h3 style={{marginLeft:"50%"}}>Connect with us</h3>
-        
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="googleplaystore" style={{width:"100px", height:"40px", marginTop:"10px", marginLeft:"5px"}}/>
+        <h3 style={{marginLeft:"45%"}}>Connect with us</h3>
+        <img src="https://i.pinimg.com/originals/63/42/e0/6342e06ac7fbcef4595e6978b791beb5.jpg" alt="facebook" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/>
+        <img src="https://i.pinimg.com/736x/a0/a6/66/a0a66670e75807e529358cb88a5972df.jpg" alt="instagram" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/>
+        <img src="https://i.pinimg.com/474x/14/fc/05/14fc05cbaf4e67318c060d25a8462b1b.jpg" alt="twitter" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/>
+        <img src="https://i.pinimg.com/originals/50/68/ca/5068cae0be0b67710dda0360d42e64ac.jpg" alt="twitter" style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%"}}/>
+    
     </Flex>
     <Flex style={{color:"grey", marginTop:"40px"}}>
         <div >About Us</div>

@@ -6,7 +6,8 @@ import {NavLink, Link} from 'react-router-dom';
 import SearchCard from '../Main/SearchCard';
 
 
-export default function Nav({ isLoggedIn}) {
+export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
+    console.log(username);
     const searchStyle={
         bg:"#0F0617", 
         color:"white", 
@@ -31,8 +32,8 @@ export default function Nav({ isLoggedIn}) {
         setIsOption(!option);
     }
 
-    const handleLogout = ()=>{
-        isLoggedIn(false);
+    const handleLogout = ()=>{    
+        setIsLoggedIn(false);
     }
 
     const clearSearchValue = () => {
@@ -97,30 +98,94 @@ export default function Nav({ isLoggedIn}) {
     </InputGroup>
      </Box>
      {isLoggedIn ? (
-    <div>
-   <img src="https://t3.ftcdn.net/jpg/06/04/79/52/360_F_604795233_5zIpEvhWizTN7bUxSADUdrQQFGj315G3.jpg" 
-    style={{width:"20px", height:"20px", borderRadius:"50%", marginRight:"50px"}}  onClick={handleOption}/> 
-        {option && (
-            <div style={{position:"absolute", border:"1px solid gray", marginTop:"10px", backgroundColor:"#0F0617"}}>
-                <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"150px", border:"0.5px solid grey", borderRadius:"5px"}}>
-                <NavLink to='/Watchlist' style={{color:"white", textDecoration:"none"}}>
-               <li style={{marginTop:"10px", marginLeft:"0px", marginRight:"20px"}}>My Watchlist</li> 
-                </NavLink>
-                <br />
-               <Button onClick={handleLogout} style={{marginTop:"0px", border:"1px solid #0F0617", backgroundColor:"#0F0617", color:"white"}}>
-                <li style={{cursor:"pointer", marginBottom:"20px", fontSize:"15px"}}>Logout</li></Button>
+          <div>
+            <img src="https://t3.ftcdn.net/jpg/06/04/79/52/360_F_604795233_5zIpEvhWizTN7bUxSADUdrQQFGj315G3.jpg"
+              style={{ width: "20px", height: "20px", borderRadius: "50%", marginRight: "50px" }}
+              onClick={handleOption}
+            />
+            {option && (
+              <div style={{position: "absolute", border: "1px solid gray", marginTop: "20px", backgroundColor: "#0F0617", ":hover": { backgroundColor: "purple" },}}>
+                <ul style={{
+                    listStyleType: "none",
+                    position: "fixed",
+                    backgroundColor: "#0F0617",
+                    width: "170px",
+                    border: "0.5px solid grey",
+                    borderRadius: "5px",
+                  }}
+                >
+                  <li
+                    style={{
+                      marginTop: "10px",
+                      marginLeft: "0px",
+                      marginRight: "20px",
+                      display: "flex",
+                      marginBottom: "20px",
+                      wordWrap: "break-word",
+                    }}
+                  >
+                    Welcome, {username}
+                  </li>
+                  <NavLink to="/Watchlist" style={{ color: 'white', textDecoration: 'none' }}>
+                    <li
+                      style={{
+                        marginTop: '10px',
+                        marginLeft: '0px',
+                        marginRight: '20px',
+                        marginBottom: '20px',
+                        fontSize: '15px',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      My Watchlist
+                    </li>
+                  </NavLink>
+                  <br />
+                  <Button
+                    onClick={handleLogout}
+                    style={{
+                      marginTop: '0px',
+                      border: '1px solid #0F0617',
+                      backgroundColor: '#0F0617',
+                      color: 'white',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <li
+                      style={{
+                        cursor: 'pointer',
+                        marginBottom: '20px',
+                        fontSize: '15px',
+                        marginBottom: '20px',
+                      }}
+                    >
+                      Logout
+                    </li>
+                  </Button>
                 </ul>
-            </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          // Conditionally render the login button
+          <NavLink to="/Login">
+            <Button
+              mr={30}
+              sx={{
+                bg: '#0F0617',
+                color: 'white',
+                width: '70px',
+                border: '1px white solid',
+                height: '35px',
+                borderRadius: '5px',
+                fontSize: 'Bold',
+                cursor: 'pointer',
+              }}
+            >
+              Login
+            </Button>
+          </NavLink>
         )}
-        </div>
-        ): (
-    <NavLink to='/Login'>
-        <Button mr={30} sx={{bg:"#0F0617", color:"white", width:"70px", border:"1px white solid", height:"35px", 
-        borderRadius:"5px", fontSize:"Bold", cursor:"pointer"}}>
-        Login
-        </Button>
-        </NavLink>
-)}
         <NavLink to='/BuyPlan'>
         <Button mr={30} sx={{bg:"#4B0082", color:"white", border: "1px #4B0082 solid", borderRadius:"5px", width:"90px", height:"35px"}}>BUY PLANS</Button>
         </NavLink>
