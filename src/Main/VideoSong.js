@@ -63,12 +63,6 @@ export default function VideoSong({handleShown}) {
         useEffect(()=>{
             getMovies();
         },[])
-
-    const addtoFav = (item) => {
-    const favMovies = JSON.parse(localStorage.getItem("favouriteMovies")) || [];
-    favMovies.push(item);
-    localStorage.setItem("favouriteMovies", JSON.stringify(favMovies));
-          };
      
   
   return (

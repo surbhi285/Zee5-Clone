@@ -60,11 +60,6 @@ export default function Documentary({handleShown}) {
             getMovies();
         },[])
         
-        const addtoFav = (item) => {
-            const favMovies = JSON.parse(localStorage.getItem("favouriteMovies")) || [];
-            favMovies.push(item);
-            localStorage.setItem("favouriteMovies", JSON.stringify(favMovies));
-          };
   
   return (
     <>

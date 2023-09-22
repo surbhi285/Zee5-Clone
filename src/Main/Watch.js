@@ -5,7 +5,7 @@ import { Container, Flex, Button } from '@chakra-ui/react';
 import { useParams } from 'react-router';
 
 
-export default function Watch() {
+export default function Watch(addRemoveWatchList) {
 const [itemId, setShowItemId] = useState([]);
 // const [isPlaying, setIsPlaying] = useState(false);
 const videoRef = useRef(null);
@@ -49,11 +49,6 @@ const getMovies=async()=>{
         getMovies();
       },[])
 
-      const addtoFav = (item) => {
-        const favMovies = JSON.parse(localStorage.getItem("favouriteMovies")) || [];
-        favMovies.push(item);
-        localStorage.setItem("favouriteMovies", JSON.stringify(favMovies));
-      };
 
   return (
     <>
@@ -75,16 +70,17 @@ const getMovies=async()=>{
         </Flex>
         </ul>
          
-        <Button sx={{width:"100px", 
+        {/* <Button sx={{width:"100px", 
         height:"40px", 
         color:"white", 
+        display:"flex",
         background:"#0F0617", 
         marginTop:"0", 
         border:"2px solid white", 
         borderRadius:"8px", 
-        marginLeft:"50px" }}>
-        {/* <img src={wishlistIcon}/> */}
-        Watchlist</Button>
+        marginLeft:"50px" }}  onClick={()=>addRemoveWatchList(itemId._id)}>
+        <img src="https://cdn-icons-png.flaticon.com/512/2543/2543240.png" alt="image" style={{color:"white", width:"20px", height:"20px"}}/>
+        Watchlist</Button> */}
         <Flex>
         <p style={{ marginLeft: "50px" }}>Genre : </p>
         <p style={{ marginLeft: "5px", color: "#A785FF" }}>
