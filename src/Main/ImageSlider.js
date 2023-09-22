@@ -1,5 +1,6 @@
 import React from 'react'
 import 'react-slideshow-image/dist/styles.css'
+import { useState, useEffect } from 'react';
 import{Fade} from 'react-slideshow-image'
 
 const slideImages = [
@@ -16,6 +17,8 @@ const slideImages = [
     },{
    url: 'https://occ-0-56-32.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABZ4CzQsQ08HGNqvtf-Nad-I5_Umqsx2TYKAuC77A6mdHhmgWNT0i8iIlnLM3aMnRgALxfTyBcl3PevR1aR0TdxNa32f9rZCPzS96.jpg?r=b4f',
   }];
+
+
   
   const divStyle={
     display:"flex", 
@@ -28,17 +31,55 @@ const slideImages = [
     marginRight: 'px',
     backgroundRepeat:"no-repeat",
   }
-//   const slideSettings = {
-//     infinite: false, // Disable infinite looping
-//   };
+ 
+  
 
 export default function ImageSlider() {
+  const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 600);
+
+  useEffect(()=>{
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 800);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  },[])
+
   return (
+    <>
+    {smallerScreen ? (
+      <div>
+      <Fade>
+          {slideImages.map((image, index)=>(
+              <div key={index}>
+              <div style={{ display:"flex", 
+              alignItems:"center", 
+              justifyContent:"center", 
+              backgroundSize: "cover",
+              height: '300px',
+              width: '100%',
+              marginLeft: '5%',
+              marginRight: '10%',
+              backgroundRepeat:"no-repeat", 
+              backgroundImage: `url(${image.url})`,
+              marginTop:"2rem",
+              maxWidth: '100%'}}>
+  
+                  </div>
+  
+              </div>
+  
+          ))}
+      </Fade>
+    </div>
+    ):(
     <div style={{marginTop:"5rem"}}>
     <Fade>
         {slideImages.map((image, index)=>(
             <div key={index}>
-                <div style={{...divStyle, backgroundImage: `url(${image.url})`, width:"80%"}}>
+                <div style={{...divStyle, backgroundImage: `url(${image.url})`, width:"80%", maxWidth: '100%'}}>
 
                 </div>
 
@@ -47,5 +88,7 @@ export default function ImageSlider() {
         ))}
     </Fade>
   </div>
+    )}
+    </>
   )
 }

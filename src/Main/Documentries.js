@@ -59,6 +59,7 @@ export default function Documentary({handleShown}) {
         useEffect(()=>{
             getMovies();
         },[])
+       
         
   
   return (

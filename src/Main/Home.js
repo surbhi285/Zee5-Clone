@@ -19,6 +19,8 @@ export default function Home({handleShown}) {
     const[webSeries, setWebSeries] = useState([]);
     const[documentries, setDocumentries] = useState([]);
 
+    const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 600);
+
     const [hoveredStates, setHoveredStates] = useState({
         exclusive: [],
         movie: [],
@@ -97,14 +99,27 @@ export default function Home({handleShown}) {
         localStorage.setItem("videoData", JSON.stringify({"videoData": result}))
         }} catch(error){console.error("error")}
         };
+
         useEffect(()=>{
-            getMovies();
+          getMovies();
+          const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 800);
+          };
+          window.addEventListener("resize", handleResize);
+          return () => {
+            window.removeEventListener("resize", handleResize);
+          };
+          
         },[])
-     
-  
   
   return (
     <>
+    {smallerScreen ? (
+      <>
+      <ImageSlider />
+      </>
+    ):(
+<>
     <Container >
         <Container>
             <ImageSlider />
@@ -297,5 +312,7 @@ export default function Home({handleShown}) {
     </Container>
     <Footer />
     </>
-  );
+    )}
+    </>
+  )
 }

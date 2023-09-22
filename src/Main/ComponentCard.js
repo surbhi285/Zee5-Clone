@@ -3,6 +3,7 @@ import { Link, json } from "react-router-dom";
 import { Button, Box } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
+
 const ComponentCard = ({ item, isHovered, handleHover}) => {
 
   async function addRemoveWatchList(movieId){

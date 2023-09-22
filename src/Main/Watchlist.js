@@ -3,7 +3,8 @@ import { Container, Box, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { MinusIcon } from "@chakra-ui/icons";
 
-export default function Watchlist({addRemoveWatchList}) {
+export default function Watchlist() {
+  
     const[watchlist, setWatchList] = useState({});
     const [loading, setLoading] = useState(true);
     const[hover, setHover] = useState([]);
@@ -13,7 +14,10 @@ export default function Watchlist({addRemoveWatchList}) {
         updatedHoveredStates[index] = isHovered;
         setHover(updatedHoveredStates);
       };
-   
+    const addRemoveWatchList=(itemId)=>{
+      const updatedWatchList = watchlist.filter((item)=>item._id !== itemId);
+      setWatchList(updatedWatchList)
+    }
    
     async function getWatchList (){
       const userInfo = localStorage.getItem("signup")
