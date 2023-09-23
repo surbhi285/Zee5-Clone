@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import {Container, Flex, UnorderedList, ListItem, Spacer, Button, Box, Input, InputGroup, InputLeftElement, textDecoration, position} from '@chakra-ui/react'
 import {SearchIcon, DragHandleIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {NavLink, Link} from 'react-router-dom';
@@ -18,34 +18,14 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         border:"1px solid white",
         borderRadius:"5px",  
     }
-    const listItem ={
-        marginTop:"5px",
-        paddingLeft: "20px",
-        marginLeft: "-30px",
-        marginRight: "12px",
-        cursor: "pointer", 
-        height:"40px",
-        marginBottom:"0"
-      };
-      const handleMouseEnter = (e) => {
-        e.target.style.backgroundColor = "#301934";
-        e.target.style.border = "1px solid #301934";
-        e.target.style.borderRadius = "5px";
-        e.target.style.paddingRight = "40px";
-      };
-      
-      const handleMouseLeave = (e) => {
-        e.target.style.backgroundColor = "#0F0617";
-        e.target.style.border = "2px solid #0F0617"; 
-      };
-    
 
     const[isDropdownOpen, setIsDropDownOpen] = useState(false);
+   
     const[option, setIsOption] = useState(false);
    
     const [searchData, setSearchData] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 600);
+    const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 800);
    
     const toggleDropDown = () =>{
         setIsDropDownOpen(!isDropdownOpen);
@@ -55,7 +35,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         setIsOption(!option);
     }
 
-    const handleLogout = ()=>{    
+    const handleLogout = ()=>{  
+        localStorage.removeItem('sign.token');
         setIsLoggedIn(false);
     }
 
@@ -72,15 +53,16 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
          
       useEffect(()=>{
       const handleResize = () => {
-        setIsSmallScreen(window.innerWidth < 800);
+        setIsSmallScreen(window.innerWidth < 600);
       };
-  
       window.addEventListener("resize", handleResize);
-  
       return () => {
         window.removeEventListener("resize", handleResize);
       };
     },[])
+     
+    
+   
 
   return (
     <>
@@ -190,21 +172,19 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <ListItem mr={30} ml={20} fontSize={18} _hover={{textDecoration: "underline" }}>Home</ListItem>
         </NavLink>
         <NavLink to='/TvShows' style={{color:"white", textDecoration:"none"}}>
-        <ListItem mr={30} ml={20} fontSize={18} _hover={{textDecoration: "underline"}}>TV Shows</ListItem>
+        <ListItem mr={20} ml={20} width="100px" fontSize={18} _hover={{textDecoration: "underline"}}>TV Shows</ListItem>
         </NavLink>
         <NavLink to='/Movies' style={{color:"white", textDecoration:"none"}}>
-        <ListItem mr={30} ml={20} fontSize={18} _hover={{textDecoration: "underline"}}>Movies</ListItem>
+        <ListItem mr={20} ml={20} fontSize={18} _hover={{textDecoration: "underline"}}>Movies</ListItem>
         </NavLink>
-        <ListItem onClick={toggleDropDown}><DragHandleIcon fontSize={22} width={50} _hover={{color:"purple"}}/>
+        <ListItem onClick={toggleDropDown}><DragHandleIcon fontSize={22}  ml={30} width={50} _hover={{color:"purple"}}/>
         {isDropdownOpen && (
-            <div style={{position:"relative", border:"1px solid gray", marginTop:"20px", backgroundColor:"#0F0617", width:"20px"}}>
-                <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"150px", border:"0.5px solid grey", borderRadius:"5px"}}>
+            <div  style={{position:"absolute", border:"1px solid gray", marginTop:"20px", backgroundColor:"#0F0617", width:"20px"}}>
+                <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"120px", border:"0.5px solid grey", borderRadius:"5px"}}>
                  
     
                 <NavLink to='/Documentary' style={{color:"white", textDecoration:"none"}}>
-                <li style={listItem}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}>
+                <li className="listItem" style={{marginTop:"20px"}}>
                     Documentary
                     </li>
                     </NavLink>
@@ -212,16 +192,13 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                 
                 
                 <NavLink to='/Song' style={{color:"white", textDecoration:"none"}}>
-                <li style={listItem}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}>Video Songs</li>
+                <li className="listItem">Video Songs</li>
                 </NavLink>
                 <br />
 
                 <NavLink to='/shortFilm' style={{color:"white", textDecoration:"none"}}>
-                <li className={listItem}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}>Short Film</li>
+                <li className="listItem">
+                Short Film</li>
                 </NavLink>
                 <br />
                 </ul>
@@ -232,7 +209,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <Spacer />
         
         
-    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"150px", marginTop:"10px"}}>
+    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"100px", marginTop:"10px"}}>
     <InputGroup>
     <Input value={searchData} onChange ={handleSearchInputChange} type="text" placeholder='Search for Movies, Shows, Channels etc'
     sx={searchStyle} />
@@ -247,11 +224,11 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
      {isLoggedIn ? (
           <div style={{marginTop:"10px"}}>
             <img src="https://t3.ftcdn.net/jpg/06/04/79/52/360_F_604795233_5zIpEvhWizTN7bUxSADUdrQQFGj315G3.jpg"
-              style={{ width: "20px", height: "20px", borderRadius: "50%", marginRight: "50px", marginTop:"10px" }}
+              style={{ width: "30px", height: "30px", borderRadius: "50%", marginRight: "40px", marginTop:"5px" }}
               onClick={handleOption}
             />
             {option && (
-              <div style={{position: "absolute", border: "1px solid gray", marginTop: "20px", backgroundColor: "#0F0617", ":hover": { backgroundColor: "purple" },}}>
+              <div style={{position: "absolute", border: "1px solid gray", marginTop: "5px", backgroundColor: "#0F0617", ":hover": { backgroundColor: "purple" },}}>
                 <ul style={{
                     listStyleType: "none",
                     position: "fixed",
@@ -261,20 +238,13 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                     borderRadius: "5px",
                   }}
                 >
-                 <li style={listItem}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}>
+                 <li className="listItem listItem1">
                 Welcome, {username}</li> 
                 <NavLink to="/Watchlist" style={{ color: 'white', textDecoration: 'none' }}>
-                <li style={listItem}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                >My Watchlist</li>
+                <li className="listItem" style={{marginTop:"10px"}}>My Watchlist</li>
                   </NavLink>
                   <br />
-                  <li style={listItem}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                  <li className="listItem" style={{marginBottom:"10px", marginTop:"0"}}
                 onClick={handleLogout}>
                       Logout
                     </li>
@@ -292,7 +262,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                 color: 'white',
                 width: '70px',
                 border: '1px white solid',
-                height: '35px',
+                height: '36px',
                 borderRadius: '5px',
                 fontSize: 'Bold',
                 cursor: 'pointer',
@@ -304,7 +274,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </NavLink>
         )}
         <NavLink to='/BuyPlan'>
-        <Button mr={30} sx={{marginTop:"10px", bg:"#4B0082", color:"white", border: "1px #4B0082 solid", borderRadius:"5px", width:"90px", height:"35px"}}>BUY PLANS</Button>
+        <Button mr={30} sx={{marginTop:"10px", bg:"#4B0082", color:"white", border: "1px #4B0082 solid", borderRadius:"5px", width:"90px", height:"36px"}}>BUY PLANS</Button>
         </NavLink>
         <NavLink to='/BuyPlan'>
         <HamburgerIcon fontSize={25} textDecoration='none' color="white" marginTop="10px"/>

@@ -79,7 +79,7 @@ export default function Login({handleNotShown, setLoggedInStatus, setUserName}) 
             <h4 style={{color:"#363636",marginLeft:"8%", marginRight:"5%"}}>Login to continue enjoying uninterrupted video and personalised experience.</h4>
             
             <input style={{marginLeft:"8%", height:"40px", width:"80%", borderRadius:"5px", border:"1px solid gray"}}
-            type="text" placeholder='Enter Email or mobile Number' value={email} onChange={handleEmail}/>
+            type="text" placeholder='Enter Your Email ID' value={email} onChange={handleEmail}/>
             <br />
             
             <input style={{marginLeft:"8%", height:"40px", width:"80%", borderRadius:"5px", border:"1px solid gray", marginTop:"20px"}}

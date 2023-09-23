@@ -115,11 +115,11 @@ export default function SearchResult() {
                   Watch
                 </Button>
               </Link>
-              <Button
+              {/* <Button
                 style={{ border: "1px solid grey", height: "30px", borderRadius: "10px", cursor: "pointer" }}
               >
                 <AddIcon sx={{ fontSize: "15px", color: "grey" }} />
-              </Button>
+              </Button> */}
             </Box>
           </Box>
         )}

@@ -99,7 +99,7 @@ const handleusername=(event)=>{
             <br />
             
             <Input style={{marginLeft:"8%", height:"40px", width:"80%", borderRadius:"5px", border:"1px solid gray"}}
-            type="text" placeholder='Enter Email or mobile Number' value={email} onChange={handleEmail}/>
+            type="text" placeholder='Enter Your Email ID' value={email} onChange={handleEmail}/>
             <br />
             
             <Input style={{marginLeft:"8%", height:"40px", width:"80%", borderRadius:"5px", border:"1px solid gray", marginTop:"20px"}}

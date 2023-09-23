@@ -138,7 +138,7 @@ export default function Home({handleShown}) {
           >
             ZEE5 Exclusives
           </Box>
-          <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
+          <Flex sx={{overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {exclusiveList.map((exclusive, index) => (
               <ComponentCard
                 key={exclusive._id}
@@ -152,7 +152,7 @@ export default function Home({handleShown}) {
 
     
 
-        <Container style={{ marginTop: "40px", marginLeft:"40px"}}>
+        <Container style={{ marginTop: "20px", marginLeft:"40px"}}>
           <Box
             as="p"
             sx={{
@@ -268,8 +268,7 @@ export default function Home({handleShown}) {
       marginLeft: "20px",
       letterSpacing: "1px",
       marginBottom: "20px",
-    }}
-  >
+    }}>
     Documentary
   </Box>
   <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>

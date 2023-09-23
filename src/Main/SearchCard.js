@@ -6,14 +6,7 @@ import { ListItem, UnorderedList, Container } from '@chakra-ui/react';
 
 export default function SearchCard({searchData, clearSearchValue}) {
      
-  const cardStyle={
-    backgroundColor:"#0F0617",
-    color:"white",
-    marginTop:"30px",
-    marginLeft:"0px",
-    marginRight:"100px",   
   
-}
     const navigate = useNavigate();
     const[result, setResult] = useState([]); 
     const suggestionRef = useRef(null); 
@@ -62,19 +55,18 @@ export default function SearchCard({searchData, clearSearchValue}) {
           style={{
           position:"absolute",
             backgroundColor:"#0F0617",
-            top: "150%",
+            top: "110%",
             left: 0,
             width: "100%",
             maxHeight: "450px",
             overflowY: result.length>5?"scroll" :"auto",
             zIndex: 2,
             cursor:"pointer",
-           
           }}
         >
           <UnorderedList style={{listStyle:"none"}}>
             {result.map((item) => (
-              <ListItem  sx={cardStyle} key={item.id}>
+              <ListItem  className='cardStyle' key={item.id}>
                 <Link  to={`/result/${item._id}`} onClick={() => handleSuggestionClick(item)} style={{textDecoration:"none", color:"white"}}>
                 {item.title}
                 </Link>
