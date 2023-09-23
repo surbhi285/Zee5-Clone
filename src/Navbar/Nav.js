@@ -219,7 +219,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                 <br />
 
                 <NavLink to='/shortFilm' style={{color:"white", textDecoration:"none"}}>
-                <li style={listItem}
+                <li className={listItem}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}>Short Film</li>
                 </NavLink>
@@ -232,7 +232,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <Spacer />
         
         
-    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"120px", marginTop:"10px"}}>
+    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"150px", marginTop:"10px"}}>
     <InputGroup>
     <Input value={searchData} onChange ={handleSearchInputChange} type="text" placeholder='Search for Movies, Shows, Channels etc'
     sx={searchStyle} />

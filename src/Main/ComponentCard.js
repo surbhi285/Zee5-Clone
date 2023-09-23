@@ -39,6 +39,7 @@ const ComponentCard = ({ item, isHovered, handleHover}) => {
     >
       <Button
         sx={{
+          zIndex:"100",
           padding: "0",
           border: "1px solid black",
           cursor: "pointer",
