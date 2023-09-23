@@ -18,6 +18,27 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         border:"1px solid white",
         borderRadius:"5px",  
     }
+    const listItem ={
+        marginTop:"5px",
+        paddingLeft: "20px",
+        marginLeft: "-30px",
+        marginRight: "12px",
+        cursor: "pointer", 
+        height:"40px",
+        marginBottom:"0"
+      };
+      const handleMouseEnter = (e) => {
+        e.target.style.backgroundColor = "#301934";
+        e.target.style.border = "1px solid #301934";
+        e.target.style.borderRadius = "5px";
+        e.target.style.paddingRight = "40px";
+      };
+      
+      const handleMouseLeave = (e) => {
+        e.target.style.backgroundColor = "#0F0617";
+        e.target.style.border = "2px solid #0F0617"; 
+      };
+    
 
     const[isDropdownOpen, setIsDropDownOpen] = useState(false);
     const[option, setIsOption] = useState(false);
@@ -176,61 +197,31 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         </NavLink>
         <ListItem onClick={toggleDropDown}><DragHandleIcon fontSize={22} width={50} _hover={{color:"purple"}}/>
         {isDropdownOpen && (
-            <div style={{position:"absolute", border:"1px solid gray", marginTop:"20px", backgroundColor:"#0F0617"}}>
+            <div style={{position:"relative", border:"1px solid gray", marginTop:"20px", backgroundColor:"#0F0617", width:"20px"}}>
                 <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"150px", border:"0.5px solid grey", borderRadius:"5px"}}>
-                
+                 
+    
                 <NavLink to='/Documentary' style={{color:"white", textDecoration:"none"}}>
-                <li style={{marginTop:"20px", marginLeft:"0px", left:"20px", ':hover':{backgroundColor:"purple"}}}>
-                <span
-                onMouseEnter={(e) => {
-                e.target.style.backgroundColor = "purple";
-                e.target.style.border = "1px solid purple";
-                e.target.style.borderRadius = "5px";
-                e.target.style.paddingRight = "40px";
-
-                }}
-                onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "#0F0617";
-                e.target.style.border = "0.5px solid #0F0617";
-                }}
-                >
+                <li style={listItem}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>
                     Documentary
-                    </span>
                     </li>
                     </NavLink>
                     <br />
                 
                 
                 <NavLink to='/Song' style={{color:"white", textDecoration:"none"}}>
-                <li><span
-                onMouseEnter={(e) => {
-                e.target.style.backgroundColor = "purple";
-                e.target.style.border = "1px solid purple";
-                e.target.style.borderRadius = "5px";
-                e.target.style.paddingRight = "40px";
-
-                }}
-                onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "#0F0617";
-                e.target.style.border = "0.5px solid #0F0617";
-                }}
-                >Video Songs</span></li>
+                <li style={listItem}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>Video Songs</li>
                 </NavLink>
                 <br />
 
                 <NavLink to='/shortFilm' style={{color:"white", textDecoration:"none"}}>
-                <li><span
-                onMouseEnter={(e) => {
-                e.target.style.backgroundColor = "purple";
-                e.target.style.border = "1px solid purple";
-                e.target.style.borderRadius = "5px";
-                e.target.style.paddingRight = "40px";
-
-                }}
-                onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "#0F0617";
-                e.target.style.border = "0.5px solid #0F0617";
-                }}>Short Film</span></li>
+                <li style={listItem}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>Short Film</li>
                 </NavLink>
                 <br />
                 </ul>
@@ -270,55 +261,23 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                     borderRadius: "5px",
                   }}
                 >
-                  <li style={{marginTop: "10px", float:"left",marginLeft: "0px", marginRight: "20px", display: "flex", marginBottom: "20px", wordWrap: "break-word"}}>
-                   <span
-                   onMouseEnter={(e) => {
-                   e.target.style.backgroundColor = "purple";
-                   e.target.style.border = "1px solid purple";
-                   e.target.style.borderRadius = "5px";
-                   e.target.style.paddingRight = "40px";
-   
-                   }}
-                   onMouseLeave={(e) => {
-                   e.target.style.backgroundColor = "#0F0617";
-                   e.target.style.border = "0.5px solid #0F0617";
-                   }}>
-                    Welcome, {username}
-                    </span> </li> 
-                  <NavLink to="/Watchlist" style={{ color: 'white', textDecoration: 'none' }}>
-                    <li style={{marginTop: '10px', marginLeft: '0px', marginRight: '20px', marginBottom: '5px', fontSize: '15px', cursor: 'pointer'}}>
-                    <span
-                   onMouseEnter={(e) => {
-                   e.target.style.backgroundColor = "purple";
-                   e.target.style.border = "1px solid purple";
-                   e.target.style.borderRadius = "5px";
-                   e.target.style.paddingRight = "50px";
-                   }}
-                   onMouseLeave={(e) => {
-                   e.target.style.backgroundColor = "#0F0617";
-                   e.target.style.border = "0.5px solid #0F0617";
-                   }}>My Watchlist</span>
-                    </li>
+                 <li style={listItem}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>
+                Welcome, {username}</li> 
+                <NavLink to="/Watchlist" style={{ color: 'white', textDecoration: 'none' }}>
+                <li style={listItem}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                >My Watchlist</li>
                   </NavLink>
                   <br />
-                  <Button onClick={handleLogout} style={{ border: '1px solid #0F0617', backgroundColor: '#0F0617', color: 'white', cursor: 'pointer'}}>
-                    <li style={{cursor: 'pointer', fontSize: '15px', marginBottom: '20px'}}>
-                    <span
-                   onMouseEnter={(e) => {
-                   e.target.style.backgroundColor = "purple";
-                   e.target.style.border = "1px solid purple";
-                   e.target.style.borderRadius = "5px";
-                   e.target.style.paddingRight = "40px";
-   
-                   }}
-                   onMouseLeave={(e) => {
-                   e.target.style.backgroundColor = "#0F0617";
-                   e.target.style.border = "0.5px solid #0F0617";
-                   }}>
+                  <li style={listItem}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onClick={handleLogout}>
                       Logout
-                      </span>
                     </li>
-                  </Button>
                 </ul>
               </div>
             )}
