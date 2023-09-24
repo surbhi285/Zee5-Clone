@@ -4,8 +4,7 @@ import {Container, Flex, UnorderedList, ListItem, Spacer, Button, Box, Input, In
 import {SearchIcon, DragHandleIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {NavLink, Link} from 'react-router-dom';
 import SearchCard from '../Main/SearchCard';
-
-
+import Zee from '../Assets/Zee.jpeg';
 
 export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     console.log(username);
@@ -25,7 +24,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
    
     const [searchData, setSearchData] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 800);
+    const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 600);
    
     const toggleDropDown = () =>{
         setIsDropDownOpen(!isDropdownOpen);
@@ -69,7 +68,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     {smallerScreen ? (
     <Container style={{marginTop:"20px"}}>
     <Flex>
-    <img src="https://www.zee5.com/images/ZEE5_logo.svg?ver=2.52.40" alt="zee logo" style={{width: "40px", marginLeft: "20px"}} />
+    <img src={Zee} alt="zee logo" style={{width: "40px", marginLeft: "20px"}} />
     <NavLink to='/BuyPlan'>
     <Button mr={30} ml={30} sx={{bg:"#4B0082", color:"white", border: "1px #4B0082 solid", borderRadius:"5px", width:"90px", height:"25px"}}>BUY PLANS</Button>
     </NavLink>
