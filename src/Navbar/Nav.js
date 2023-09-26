@@ -35,7 +35,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     }
 
     const handleLogout = ()=>{  
-        localStorage.removeItem('sign.token');
+       console.log("ashg")
+        localStorage.removeItem('signupDeatils');
         setIsLoggedIn(false);
     }
 
@@ -244,7 +245,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                   </NavLink>
                   <br />
                   <li className="listItem" style={{marginBottom:"10px", marginTop:"0"}}
-                onClick={handleLogout}>
+                onClick={()=>handleLogout()}>
                       Logout
                     </li>
                 </ul>
