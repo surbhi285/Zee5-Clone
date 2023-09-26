@@ -81,8 +81,8 @@ export default function Watchlist() {
                 src={item.thumbnail}
                 alt={item.title}
                 style={{
-                  height: "20rem",
-                  width: "15rem",
+                  height: "15rem",
+                  width: "13rem",
                   borderRadius: "10px",
                   border:"none"
                 }}
@@ -91,7 +91,7 @@ export default function Watchlist() {
                 <Box
                   sx={{
                     position: "absolute",
-                    top: "50%",
+                    top: "40%",
                     left: "0",
                     right: "0",
                     bottom: "0",
@@ -118,8 +118,8 @@ export default function Watchlist() {
                           border: "1px solid gray",
                           borderRadius: "5px",
                           cursor: "pointer",
-                          marginLeft: "10px",
-                          marginRight: "100px",
+                          marginLeft: "5px",
+                          marginRight: "70px",
                           marginBottom: "10px",
                           padding: "0",
                         }}

@@ -37,9 +37,9 @@ const ComponentCard = ({ item, isHovered, handleHover}) => {
 
   
   return (
-    <Box style={{position:"relative", width:"15rem", height:"22rem", marginLeft:"20px"}}
-      mr={5}
-      ml={5}
+    <Box style={{position:"relative", width:"13rem", height:"20rem", marginLeft:"20px", marginRight:"25px"}}
+      mr={10}
+      ml={10}
       onMouseEnter={() => handleHover(true)}
       onMouseLeave={() => handleHover(false)}
     >
@@ -62,11 +62,17 @@ const ComponentCard = ({ item, isHovered, handleHover}) => {
         <img
           src={item.thumbnail}
           alt={item.title}
-          style={{ height: "20rem", width: "15rem", borderRadius: "5px", border: "none" }}
+          style={{ 
+            height: "20rem", 
+            width: "15rem", 
+            borderRadius: "5px", 
+            border: "none",  
+            }}
+        
         />
         </Link>
         {isHovered && (
-          <Box
+          <Box className="hover"
             sx={{
               position: "absolute",
               top: "50%",

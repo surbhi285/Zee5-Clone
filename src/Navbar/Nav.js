@@ -6,15 +6,16 @@ import {NavLink, Link} from 'react-router-dom';
 import SearchCard from '../Main/SearchCard';
 import Zee from '../Assets/Zee.jpeg';
 
+
 export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     console.log(username);
     const searchStyle={
         bg:"#0F0617", 
         color:"white", 
-        width:"300px", 
+        width:"250px", 
         height:"35px", 
         pl:"40px",
-        border:"1px solid white",
+        border:"1px solid grey",
         borderRadius:"5px",  
     }
 
@@ -24,7 +25,14 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
    
     const [searchData, setSearchData] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 600);
+    const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 800);
+
+    const navLinkStyle = ({ isActive }) => {
+      return {
+        borderBottom: isActive ? "2px solid white" : "none",
+        
+      };
+    };
    
     const toggleDropDown = () =>{
         setIsDropDownOpen(!isDropdownOpen);
@@ -53,7 +61,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
          
       useEffect(()=>{
       const handleResize = () => {
-        setIsSmallScreen(window.innerWidth < 600);
+        setIsSmallScreen(window.innerWidth < 800);
       };
       window.addEventListener("resize", handleResize);
       return () => {
@@ -73,17 +81,11 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     <NavLink to='/BuyPlan'>
     <Button mr={30} ml={30} sx={{bg:"#4B0082", color:"white", border: "1px #4B0082 solid", borderRadius:"5px", width:"90px", height:"25px"}}>BUY PLANS</Button>
     </NavLink>
-    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"150px"}}>
-    <InputGroup>
-    <Input value={searchData} onChange ={handleSearchInputChange} type="text" placeholder='Search....'
-    sx={{bg:"#0F0617", color:"white", width:"150px", height:"25px", pl:"40px", border:"1px solid white", borderRadius:"5px",}} />
-   {showSuggestions && <SearchCard searchData={searchData}  clearSearchValue={clearSearchValue}/>}
-    <InputLeftElement>
+    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"70px"}}>
     {/* <Link to="/SearchResult"> */}
-    <SearchIcon sx={{cursor:"pointer", color:"white", padding:"10px"}} />
+    <SearchIcon  onChange ={handleSearchInputChange} sx={{cursor:"pointer", color:"white", padding:"10px", }} />
+    {showSuggestions && <SearchCard searchData={searchData}  clearSearchValue={clearSearchValue} />}
     {/* </ Link> */}
-    </InputLeftElement>
-    </InputGroup>
      </Box>
      {isLoggedIn ? (
           <div style={{marginTop:"10px"}}>
@@ -143,22 +145,22 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         </Flex>
     <Flex sx={{marginBottom:"0", marginTop:"10px"}}>
     <NavLink to='/' style={{color:"white", textDecoration:"none"}}>
-    <Container mr={20} ml={70} mb={5} fontSize={15} _hover={{textDecoration: "underline" }}>Home</Container>
+    <Container mr={10} ml={30} mb={5} fontSize={15} _hover={{textDecoration: "underline" }}>Home</Container>
     </NavLink>
     <NavLink to='/TvShows' style={{color:"white", textDecoration:"none"}}>
-    <Container mr={20} ml={20} fontSize={15} _hover={{textDecoration: "underline"}}>TV Shows</Container>
+    <Container mr={10} ml={10} fontSize={15} _hover={{textDecoration: "underline"}}>TV Shows</Container>
     </NavLink>
     <NavLink to='/Movies' style={{color:"white", textDecoration:"none"}}>
-    <Container  mr={20} ml={20} fontSize={15} _hover={{textDecoration: "underline"}}>Movies</Container>
+    <Container  mr={10} ml={10} fontSize={15} _hover={{textDecoration: "underline"}}>Movies</Container>
     </NavLink> 
     <NavLink to='/Documentary' style={{color:"white", textDecoration:"none"}}>
-    <Container  mr={20} ml={20} fontSize={15} _hover={{textDecoration: "underline"}}>Documentries</Container>
+    <Container  mr={10} ml={10} fontSize={15} _hover={{textDecoration: "underline"}}>Documentries</Container>
     </NavLink>
     <NavLink to='/Song' style={{color:"white", textDecoration:"none"}}>
-    <Container  mr={20} ml={20} fontSize={18} _hover={{textDecoration: "underline"}}>Video Song</Container>
+    <Container  mr={10} ml={10} fontSize={18} _hover={{textDecoration: "underline"}}>Video Song</Container>
     </NavLink>
     <NavLink to='/ShortFilm' style={{color:"white", textDecoration:"none"}}>
-    <Container  mr={20} ml={20} fontSize={18} _hover={{textDecoration: "underline"}}>Short Film</Container>
+    <Container  mr={10} ml={10} fontSize={18} _hover={{textDecoration: "underline"}}>Short Film</Container>
     </NavLink> 
     </Flex>
     </Container>
@@ -168,16 +170,20 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     <img src="https://www.zee5.com/images/ZEE5_logo.svg?ver=2.52.40" alt="zee logo" style={{width: "60px"}}/>
         <Flex>
     <UnorderedList style ={{listStyleType:"none", display:"flex", p:"10px"}}>
-        <NavLink to='/' style={{color:"white", textDecoration:"none"}}>
-        <ListItem mr={30} ml={20} fontSize={18} _hover={{textDecoration: "underline" }}>Home</ListItem>
+        
+        <NavLink to='/' style={navLinkStyle} className="navLink">
+        <ListItem >Home</ListItem>
         </NavLink>
-        <NavLink to='/TvShows' style={{color:"white", textDecoration:"none"}}>
-        <ListItem mr={20} ml={20} width="100px" fontSize={18} _hover={{textDecoration: "underline"}}>TV Shows</ListItem>
+
+        <NavLink to='/TvShows' style={navLinkStyle} className="navLink">
+        <ListItem>TV Shows</ListItem>
         </NavLink>
-        <NavLink to='/Movies' style={{color:"white", textDecoration:"none"}}>
-        <ListItem mr={20} ml={20} fontSize={18} _hover={{textDecoration: "underline"}}>Movies</ListItem>
+
+        <NavLink to='/Movies' style={navLinkStyle} className="navLink">
+        <ListItem>Movies</ListItem>
         </NavLink>
-        <ListItem onClick={toggleDropDown}><DragHandleIcon fontSize={22}  ml={30} width={50} _hover={{color:"purple"}}/>
+        
+        <ListItem onClick={toggleDropDown}><DragHandleIcon fontSize={22}  ml={10} width={50} _hover={{color:"purple"}}/>
         {isDropdownOpen && (
             <div  style={{position:"absolute", border:"1px solid gray", marginTop:"20px", backgroundColor:"#0F0617", width:"20px"}}>
                 <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"120px", border:"0.5px solid grey", borderRadius:"5px"}}>
@@ -209,7 +215,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <Spacer />
         
         
-    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"100px", marginTop:"10px"}}>
+    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"250px", marginTop:"10px"}}>
     <InputGroup>
     <Input value={searchData} onChange ={handleSearchInputChange} type="text" placeholder='Search for Movies, Shows, Channels etc'
     sx={searchStyle} />
@@ -274,7 +280,11 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </NavLink>
         )}
         <NavLink to='/BuyPlan'>
-        <Button mr={30} sx={{marginTop:"10px", bg:"#4B0082", color:"white", border: "1px #4B0082 solid", borderRadius:"5px", width:"90px", height:"36px"}}>BUY PLANS</Button>
+        <Button mr={30} sx={{marginTop:"10px", bg:"#8230c6", 
+        color:"white", border: "1px #8230c6 solid", 
+        borderRadius:"5px", width:"90px", height:"36px", ":hover":{backgroundColor:"#4B0082", border: "1px #4B0082 solid"}}}>
+          BUY PLANS
+          </Button>
         </NavLink>
         <NavLink to='/BuyPlan'>
         <HamburgerIcon fontSize={25} textDecoration='none' color="white" marginTop="10px"/>
