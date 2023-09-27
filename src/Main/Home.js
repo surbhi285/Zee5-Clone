@@ -6,6 +6,7 @@ import ImageSlider from './ImageSlider';
 import React from 'react';
 import Footer from './Footer';
 import ComponentCard from './ComponentCard';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 
 export default function Home({handleShown}) {
@@ -21,24 +22,24 @@ export default function Home({handleShown}) {
 
     const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 600);
 
-    const [hoveredStates, setHoveredStates] = useState({
-        exclusive: [],
-        movie: [],
-        tv: [],
-        video: [],
-        trailer: [],
-        webSeries: [],
-        documentry: [],
-      });
+    // const [hoveredStates, setHoveredStates] = useState({
+    //     exclusive: [],
+    //     movie: [],
+    //     tv: [],
+    //     video: [],
+    //     trailer: [],
+    //     webSeries: [],
+    //     documentry: [],
+    //   });
     
-      const handleHover = (rowName, index, isHovered) => {
-        // Clone the current state object
-        const updatedHoveredStates = { ...hoveredStates };
-        // Update the hover state for the specified row and index
-        updatedHoveredStates[rowName][index] = isHovered;
-        // Set the updated state object
-        setHoveredStates(updatedHoveredStates);
-      };
+      // const handleHover = (rowName, index, isHovered) => {
+      //   // Clone the current state object
+      //   const updatedHoveredStates = { ...hoveredStates };
+      //   // Update the hover state for the specified row and index
+      //   updatedHoveredStates[rowName][index] = isHovered;
+      //   // Set the updated state object
+      //   setHoveredStates(updatedHoveredStates);
+      // };
     
   
     const getMovies=async()=>{
@@ -124,27 +125,31 @@ export default function Home({handleShown}) {
         <Container>
             <ImageSlider />
             </Container>
-            <Container style={{ marginTop: "40px", marginLeft:"40px"}}>
+            <Container style={{ marginTop: "40px", marginLeft:"10px"}}>
           <Box
             as="p"
             sx={{
-              fontSize: "25px",
+              fontSize: "20px",
               color: "white",
               fontFamily: "Arial",
               marginLeft: "20px",
               letterSpacing: "1px",
-              marginBottom: "20px",
+              marginBottom: "0",
+
             }}
           >
             ZEE5 Exclusives
           </Box>
-          <Flex sx={{overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
+          <Link to="/ZeeExclusive" style={{textDecoration:"none", color:"#a785ff"}}>
+          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          </Link>
+          <Flex sx={{ marginLeft:"20px", overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {exclusiveList.map((exclusive, index) => (
-              <ComponentCard
+              <ComponentCard 
                 key={exclusive._id}
                 item={exclusive}
-                isHovered={hoveredStates.exclusive[index]}
-                handleHover={(isHovered) => handleHover("exclusive", index, isHovered)}
+                // isHovered={hoveredStates.exclusive[index]}
+                // handleHover={(isHovered) => handleHover("exclusive", index, isHovered)}
               />
             ))}
           </Flex>
@@ -156,23 +161,26 @@ export default function Home({handleShown}) {
           <Box
             as="p"
             sx={{
-              fontSize: "25px",
+              fontSize: "20px",
               color: "white",
               fontFamily: "Arial",
               marginLeft: "20px",
               letterSpacing: "1px",
-              marginBottom: "20px",
+              marginBottom: "0",
             }}
           >
-            Movies
+            Top Hollywood Movies 
           </Box>
+          <Link to="/AllMovies" style={{textDecoration:"none", color:"#a785ff"}}>
+          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          </Link>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {moviesList.map((movie, index) => (
               <ComponentCard
                 key={movie._id}
                 item={movie}
-                isHovered={hoveredStates.movie[index]}
-                handleHover={(isHovered) => handleHover("movie", index, isHovered)}
+                // isHovered={hoveredStates.movie[index]}
+                // handleHover={(isHovered) => handleHover("movie", index, isHovered)}
               />
             ))}
           </Flex>
@@ -182,23 +190,26 @@ export default function Home({handleShown}) {
           <Box
             as="p"
             sx={{
-              fontSize: "25px",
+              fontSize: "20px",
               color: "white",
               fontFamily: "Arial",
               marginLeft: "20px",
               letterSpacing: "1px",
-              marginBottom: "20px",
+              marginBottom: "0",
             }}
           >
-            Tv shows
+           Unmissable shows
           </Box>
+          <Link to="/AllShows" style={{textDecoration:"none", color:"#a785ff"}}>
+          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          </Link>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {tvShow.map((tvShow, index) => (
               <ComponentCard
                 key={tvShow._id}
                 item={tvShow}
-                isHovered={hoveredStates.tv[index]}
-                handleHover={(isHovered) => handleHover("tv", index, isHovered)}
+                // isHovered={hoveredStates.tv[index]}
+                // handleHover={(isHovered) => handleHover("tv", index, isHovered)}
               />
             ))}
           </Flex>
@@ -208,23 +219,26 @@ export default function Home({handleShown}) {
           <Box
             as="p"
             sx={{
-              fontSize: "25px",
+              fontSize: "20px",
               color: "white",
               fontFamily: "Arial",
               marginLeft: "20px",
               letterSpacing: "1px",
-              marginBottom: "20px",
+              marginBottom: "0",
             }}
           >
-            Video Songs
+           World Hits | Free Dubbed Movies
           </Box>
+          <Link to="/AllTrailer" style={{textDecoration:"none", color:"#a785ff"}}>
+          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          </Link>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {video.map((video, index) => (
               <ComponentCard
                 key={video._id}
                 item={video}
-                isHovered={hoveredStates.video[index]}
-                handleHover={(isHovered) => handleHover("video", index, isHovered)}
+                // isHovered={hoveredStates.video[index]}
+                // handleHover={(isHovered) => handleHover("video", index, isHovered)}
               />
             ))}
           </Flex>
@@ -235,23 +249,26 @@ export default function Home({handleShown}) {
           <Box
             as="p"
             sx={{
-              fontSize: "25px",
+              fontSize: "20px",
               color: "white",
               fontFamily: "Arial",
               marginLeft: "20px",
               letterSpacing: "1px",
-              marginBottom: "20px",
+              marginBottom: "0",
             }}
           >
-            Trailer
+          Cross Border Drama Shows
           </Box>
+          <Link to="/AllDrama" style={{textDecoration:"none", color:"#a785ff"}}>
+          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          </Link>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {trailer.map((trailer, index) => (
               <ComponentCard
                 key={trailer._id}
                 item={trailer}
-                isHovered={hoveredStates.trailer[index]}
-                handleHover={(isHovered) => handleHover("trailer", index, isHovered)}
+                // isHovered={hoveredStates.trailer[index]}
+                // handleHover={(isHovered) => handleHover("trailer", index, isHovered)}
               />
             ))}
           </Flex>
@@ -267,17 +284,20 @@ export default function Home({handleShown}) {
       fontFamily: "Arial",
       marginLeft: "20px",
       letterSpacing: "1px",
-      marginBottom: "20px",
+      marginBottom: "0",
     }}>
-    Documentary
+    Inspired From Real Life
   </Box>
+  <Link to="/AllDocumentries" style={{textDecoration:"none", color:"#a785ff"}}>
+  <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box> 
+  </Link>
   <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
     {documentries.map((documentary, index) => (
       <ComponentCard
         key={documentary._id}
         item={documentary}
-        isHovered={hoveredStates.documentry[index]}
-        handleHover={(isHovered) => handleHover("documentry", index, isHovered)}
+        // isHovered={hoveredStates.documentry[index]}
+        // handleHover={(isHovered) => handleHover("documentry", index, isHovered)}
       />
     ))}
   </Flex>
@@ -291,19 +311,22 @@ export default function Home({handleShown}) {
               color: "white",
               fontFamily: "Arial",
               marginLeft: "20px",
-              marginBottom:"20px",
+              marginBottom:"0",
               letterSpacing: "1px",
             }}
           >
             Web Series
           </Box>
+          <Link to="/AllWebSeries" style={{textDecoration:"none", color:"#a785ff"}}>
+          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box> 
+          </Link>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {webSeries.map((webSeries, index) => (
               <ComponentCard
                 key={webSeries._id}
                 item={webSeries}
-                isHovered={hoveredStates.webSeries[index]}
-                handleHover={(isHovered) => handleHover("webSeries", index, isHovered)}
+                // isHovered={hoveredStates.webSeries[index]}
+                // handleHover={(isHovered) => handleHover("webSeries", index, isHovered)}
               />
             ))}
           </Flex>

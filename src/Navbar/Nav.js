@@ -5,6 +5,8 @@ import {SearchIcon, DragHandleIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {NavLink, Link} from 'react-router-dom';
 import SearchCard from '../Main/SearchCard';
 import Zee from '../Assets/Zee.jpeg';
+import AppsIcon from '@mui/icons-material/Apps';
+
 
 
 export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
@@ -35,6 +37,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     };
    
     const toggleDropDown = () =>{
+      console.log("dropdown clicked")
         setIsDropDownOpen(!isDropdownOpen);
     };
    
@@ -183,9 +186,9 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <ListItem>Movies</ListItem>
         </NavLink>
         
-        <ListItem onClick={toggleDropDown}><DragHandleIcon fontSize={22}  ml={10} width={50} _hover={{color:"purple"}}/>
+        <ListItem as={AppsIcon} fontSize={22}  ml={10} width={50} _hover={{color:"purple"}} onClick={toggleDropDown} >
         {isDropdownOpen && (
-            <div  style={{position:"absolute", border:"1px solid gray", marginTop:"20px", backgroundColor:"#0F0617", width:"20px"}}>
+            <div  style={{position:"absolute", border:"1px solid gray", marginTop:"20px", backgroundColor:"#0F0617", width:"200px"}}>
                 <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"120px", border:"0.5px solid grey", borderRadius:"5px"}}>
                  
     
@@ -210,8 +213,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                 </ul>
             </div>
         )}
-        </ListItem>
-        </UnorderedList>
+       </ListItem>
+       </UnorderedList>
         <Spacer />
         
         

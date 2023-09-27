@@ -16,22 +16,22 @@ export default function Movies({handleShown}) {
     const[horror, setHorror] = useState([]);
     const[comedy, setComedy] = useState([]);
 
-    const [hoveredStates, setHoveredStates] = useState({
-      exclusive: [],
-      romantic: [],
-      action: [],
-      horror: [],
-      comedy: [],
-    });
+    // const [hoveredStates, setHoveredStates] = useState({
+    //   exclusive: [],
+    //   romantic: [],
+    //   action: [],
+    //   horror: [],
+    //   comedy: [],
+    // });
   
-    const handleHover = (rowName, index, isHovered) => {
-      // Clone the current state object
-      const updatedHoveredStates = { ...hoveredStates };
-      // Update the hover state for the specified row and index
-      updatedHoveredStates[rowName][index] = isHovered;
-      // Set the updated state object
-      setHoveredStates(updatedHoveredStates);
-    };
+    // const handleHover = (rowName, index, isHovered) => {
+    //   // Clone the current state object
+    //   const updatedHoveredStates = { ...hoveredStates };
+    //   // Update the hover state for the specified row and index
+    //   updatedHoveredStates[rowName][index] = isHovered;
+    //   // Set the updated state object
+    //   setHoveredStates(updatedHoveredStates);
+    // };
     
     
 
@@ -87,8 +87,8 @@ export default function Movies({handleShown}) {
               <ComponentCard
                 key={exclusive._id}
                 item={exclusive}
-                isHovered={hoveredStates.exclusive[index]}
-                handleHover={(isHovered) => handleHover("exclusive", index, isHovered)}
+                // isHovered={hoveredStates.exclusive[index]}
+                // handleHover={(isHovered) => handleHover("exclusive", index, isHovered)}
               />
             ))}
           </Flex>
@@ -115,8 +115,8 @@ export default function Movies({handleShown}) {
               <ComponentCard
                 key={action._id}
                 item={action}
-                isHovered={hoveredStates.action[index]}
-                handleHover={(isHovered) => handleHover("action", index, isHovered)}
+                // isHovered={hoveredStates.action[index]}
+                // handleHover={(isHovered) => handleHover("action", index, isHovered)}
               />
             ))}
           </Flex>
@@ -141,8 +141,8 @@ export default function Movies({handleShown}) {
               <ComponentCard
                 key={comedy._id}
                 item={comedy}
-                isHovered={hoveredStates.comedy[index]}
-                handleHover={(isHovered) => handleHover("comedy", index, isHovered)}
+                // isHovered={hoveredStates.comedy[index]}
+                // handleHover={(isHovered) => handleHover("comedy", index, isHovered)}
               />
             ))}
           </Flex>
@@ -167,8 +167,8 @@ export default function Movies({handleShown}) {
               <ComponentCard
                 key={romantic._id}
                 item={romantic}
-                isHovered={hoveredStates.romantic[index]}
-                handleHover={(isHovered) => handleHover("romantic", index, isHovered)}
+                // isHovered={hoveredStates.romantic[index]}
+                // handleHover={(isHovered) => handleHover("romantic", index, isHovered)}
               />
             ))}
           </Flex>
@@ -194,8 +194,8 @@ export default function Movies({handleShown}) {
               <ComponentCard
                 key={horror._id}
                 item={horror}
-                isHovered={hoveredStates.horror[index]}
-                handleHover={(isHovered) => handleHover("horror", index, isHovered)}
+                // isHovered={hoveredStates.horror[index]}
+                // handleHover={(isHovered) => handleHover("horror", index, isHovered)}
               />
             ))}
           </Flex>

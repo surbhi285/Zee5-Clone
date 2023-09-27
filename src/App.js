@@ -15,6 +15,13 @@ import Register from './Main/Register';
 import Watchlist from './Main/Watchlist';
 import SearchResult from './Main/SearchResult';
 import BuyPlan from './Main/BuyPlan';
+import AllMovies from './Main/AllMovies';
+import AllShows from './Main/AllShows';
+import AllDocumentries from './Main/AllDocumentries';
+import ZeeExclusive from './Main/ZeeExclusive';
+import AllTrailer from './Main/AllTrailer';
+import AllWebSeries from './Main/AllWebSeries';
+import AllDrama from './Main/AllDrama';
 
 function App() {
   const [showNav, setShowNav] = useState(true);
@@ -45,8 +52,14 @@ function App() {
                 <Route path="/shortfilm" element={<ShortFilm handleShown={handleShown}/>} />
                 <Route path="/watch/:id" element={<Watch handleShown={handleShown}/>} />
                 <Route path="/Watchlist" element={<Watchlist handleShown={handleShown}/>} />
-                <Route path="/result/:id"   element={<SearchResult />} />
-              
+                <Route path="/result/:id"   element={<SearchResult handleShown={handleShown}/>} />
+                <Route path='/AllMovies' element={<AllMovies handleShown={handleShown}/>}/>
+                 <Route path="/AllShows" element={<AllShows handleShown={handleShown}/>} />
+                 <Route path="/AllDocumentries" element={<AllDocumentries handleShown={handleShown}/>} />
+                 <Route path="/ZeeExclusive" element={<ZeeExclusive handleShown={handleShown}/>} />
+                 <Route path="/AllTrailer" element={<AllTrailer handleShown={handleShown}/>} />
+                 <Route path="/AllWebSeries" element={<AllWebSeries handleShown={handleShown}/>} />
+                 <Route path="/AllDrama" element={<AllDrama handleShown={handleShown}/>} />
               {/* No need to include Nav for /Login and /Register */}
             
               <Route path="/Login" element={<Login handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName}/>} />
