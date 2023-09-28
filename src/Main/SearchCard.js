@@ -59,7 +59,6 @@ export default function SearchCard({searchData, clearSearchValue}) {
             left: 0,
             width: "100%",
             maxHeight: "450px",
-            overflowY: result.length>5?"scroll" :"auto",
             zIndex: 2,
             cursor:"pointer",
           }}

@@ -22,6 +22,7 @@ import ZeeExclusive from './Main/ZeeExclusive';
 import AllTrailer from './Main/AllTrailer';
 import AllWebSeries from './Main/AllWebSeries';
 import AllDrama from './Main/AllDrama';
+import NoResult from './Main/NoResult';
 
 function App() {
   const [showNav, setShowNav] = useState(true);
@@ -60,6 +61,7 @@ function App() {
                  <Route path="/AllTrailer" element={<AllTrailer handleShown={handleShown}/>} />
                  <Route path="/AllWebSeries" element={<AllWebSeries handleShown={handleShown}/>} />
                  <Route path="/AllDrama" element={<AllDrama handleShown={handleShown}/>} />
+                 <Route path="/NoResult" element={<NoResult handleShown={handleShown}/>} />
               {/* No need to include Nav for /Login and /Register */}
             
               <Route path="/Login" element={<Login handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName}/>} />

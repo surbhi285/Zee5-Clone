@@ -126,6 +126,7 @@ export default function Home({handleShown}) {
             <ImageSlider />
             </Container>
             <Container style={{ marginTop: "40px", marginLeft:"10px"}}>
+            <Flex style={{justifyContent:"space-between"}}>
           <Box
             as="p"
             sx={{
@@ -141,8 +142,9 @@ export default function Home({handleShown}) {
             ZEE5 Exclusives
           </Box>
           <Link to="/ZeeExclusive" style={{textDecoration:"none", color:"#a785ff"}}>
-          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
+          </Flex>
           <Flex sx={{ marginLeft:"20px", overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {exclusiveList.map((exclusive, index) => (
               <ComponentCard 
@@ -158,6 +160,7 @@ export default function Home({handleShown}) {
     
 
         <Container style={{ marginTop: "20px", marginLeft:"40px"}}>
+        <Flex style={{justifyContent:"space-between"}}>
           <Box
             as="p"
             sx={{
@@ -172,8 +175,9 @@ export default function Home({handleShown}) {
             Top Hollywood Movies 
           </Box>
           <Link to="/AllMovies" style={{textDecoration:"none", color:"#a785ff"}}>
-          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          <Box style={{color:"#a785ff", paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
+          </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {moviesList.map((movie, index) => (
               <ComponentCard
@@ -187,6 +191,7 @@ export default function Home({handleShown}) {
         </Container>
 
          <Container style={{ marginTop: "40px", marginLeft:"40px"}}>
+         <Flex style={{justifyContent:"space-between"}}>
           <Box
             as="p"
             sx={{
@@ -201,8 +206,9 @@ export default function Home({handleShown}) {
            Unmissable shows
           </Box>
           <Link to="/AllShows" style={{textDecoration:"none", color:"#a785ff"}}>
-          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          <Box style={{color:"#a785ff", paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
+          </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {tvShow.map((tvShow, index) => (
               <ComponentCard
@@ -216,6 +222,7 @@ export default function Home({handleShown}) {
         </Container>
 
         <Container style={{ marginTop: "40px", marginLeft:"40px"}}>
+        <Flex style={{justifyContent:"space-between"}}>
           <Box
             as="p"
             sx={{
@@ -230,8 +237,9 @@ export default function Home({handleShown}) {
            World Hits | Free Dubbed Movies
           </Box>
           <Link to="/AllTrailer" style={{textDecoration:"none", color:"#a785ff"}}>
-          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          <Box style={{color:"#a785ff", paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
+          </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {video.map((video, index) => (
               <ComponentCard
@@ -246,6 +254,7 @@ export default function Home({handleShown}) {
 
 
         <Container style={{ marginTop: "40px", marginLeft:"40px"}}>
+          <Flex style={{justifyContent:"space-between"}}>
           <Box
             as="p"
             sx={{
@@ -260,8 +269,9 @@ export default function Home({handleShown}) {
           Cross Border Drama Shows
           </Box>
           <Link to="/AllDrama" style={{textDecoration:"none", color:"#a785ff"}}>
-          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          <Box style={{color:"#a785ff", paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
+          </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {trailer.map((trailer, index) => (
               <ComponentCard
@@ -276,6 +286,7 @@ export default function Home({handleShown}) {
 
 
         <Container style={{ marginTop: "40px", marginLeft:"40px"}}>
+        <Flex style={{justifyContent:"space-between"}}>
   <Box
     as="p"
     sx={{
@@ -289,8 +300,9 @@ export default function Home({handleShown}) {
     Inspired From Real Life
   </Box>
   <Link to="/AllDocumentries" style={{textDecoration:"none", color:"#a785ff"}}>
-  <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box> 
+  <Box style={{color:"#a785ff", paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box> 
   </Link>
+  </Flex>
   <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
     {documentries.map((documentary, index) => (
       <ComponentCard
@@ -304,6 +316,7 @@ export default function Home({handleShown}) {
 </Container>
 
         <Container style={{ marginTop: "40px", marginLeft:"40px"}}>
+        <Flex style={{justifyContent:"space-between"}}>
           <Box
             as="p"
             sx={{
@@ -318,8 +331,9 @@ export default function Home({handleShown}) {
             Web Series
           </Box>
           <Link to="/AllWebSeries" style={{textDecoration:"none", color:"#a785ff"}}>
-          <Box style={{color:"#a785ff", marginLeft:"93%", padding:"0"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box> 
+          <Box style={{color:"#a785ff", paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box> 
           </Link>
+          </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
             {webSeries.map((webSeries, index) => (
               <ComponentCard

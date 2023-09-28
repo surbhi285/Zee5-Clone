@@ -39,6 +39,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     const toggleDropDown = () =>{
       console.log("dropdown clicked")
         setIsDropDownOpen(!isDropdownOpen);
+        console.log("isDropDown:", isDropdownOpen)
     };
    
     const handleOption=()=>{
@@ -72,7 +73,9 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
       };
     },[])
      
-    
+    useEffect(() => {
+      console.log("isDropdownOpen:", isDropdownOpen);
+    }, [isDropdownOpen]);
    
 
   return (
@@ -186,35 +189,80 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <ListItem>Movies</ListItem>
         </NavLink>
         
-        <ListItem as={AppsIcon} fontSize={22}  ml={10} width={50} _hover={{color:"purple"}} onClick={toggleDropDown} >
-        {isDropdownOpen && (
-            <div  style={{position:"absolute", border:"1px solid gray", marginTop:"20px", backgroundColor:"#0F0617", width:"200px"}}>
-                <ul style={{listStyleType:"none", position:"fixed", backgroundColor:"#0F0617", width:"120px", border:"0.5px solid grey", borderRadius:"5px"}}>
-                 
-    
-                <NavLink to='/Documentary' style={{color:"white", textDecoration:"none"}}>
-                <li className="listItem" style={{marginTop:"20px"}}>
-                    Documentary
-                    </li>
-                    </NavLink>
-                    <br />
-                
-                
-                <NavLink to='/Song' style={{color:"white", textDecoration:"none"}}>
-                <li className="listItem">Video Songs</li>
-                </NavLink>
-                <br />
+       
+        <ListItem  onClick={(e)=>{toggleDropDown();
+        }}>
+        <div className='AppsIcon'><AppsIcon /></div>
+  {isDropdownOpen && (
+    <div style={{ position: "absolute", marginTop: "20px", backgroundColor: "#0F0617", width: "200px" }}>
+      <ul className="ul">
+      <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem" style={{marginTop:"20px"}}>
+            Premium
+          </li>
+          </NavLink>
+        <NavLink to='/AllShows' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Web Series
+          </li>
+          </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            News
+          </li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Eduaruaa
+          </li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Live TV
+          </li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Music
+          </li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Sports
+          </li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Rent
+          </li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Kids
+          </li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Songs
+          </li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Videos
+          </li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+          <li className="listItem">
+            Channels
+          </li>
+        </NavLink>
 
-                <NavLink to='/shortFilm' style={{color:"white", textDecoration:"none"}}>
-                <li className="listItem">
-                Short Film</li>
-                </NavLink>
-                <br />
-                </ul>
-            </div>
-        )}
-       </ListItem>
-       </UnorderedList>
+        <br />
+      </ul>
+    </div>
+  )}
+</ListItem>
+    </UnorderedList>
         <Spacer />
         
         
