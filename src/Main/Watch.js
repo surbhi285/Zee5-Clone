@@ -3,9 +3,14 @@ import { Container, Flex, Button } from '@chakra-ui/react';
 import {MdPlaylistAdd, MdPlaylistAddCheck} from 'react-icons/md';
 
 import { useParams } from 'react-router';
+import VideoSong from './VideoSong';
+import Footer from './Footer';
+import ShortFilm from './ShortFilm';
+
 
 
 export default function Watch() {
+
 const [itemId, setShowItemId] = useState([]);
 const[isAdded, setIsAdded] = useState(false);
 
@@ -78,9 +83,17 @@ const getMovies=async()=>{
   return (
     <>
     {itemId.video_url ? (
-      <video ref={videoRef} width="70%" height="auto" controls>
+     
+      <Flex marginTop="5rem">
+      <video ref={videoRef} width="65%" height="100%" controls>
         <source src={itemId.video_url} type="video/mp4" />
       </video>
+      <Container style={{height:"20px", top:"0"}}>
+      <VideoSong />
+      </Container>
+      </Flex>
+     
+      
     ) : (
       <p>Loading...</p>
     )}
@@ -95,13 +108,14 @@ const getMovies=async()=>{
         </Flex>
         </ul>
          
-        <Button sx={{width:"100px", 
-        height:"40px", 
+        <Button sx={{width:"150px", 
+        height:"100px", 
         color:"white", 
         display:"flex",
-        background:"#0F0617", 
+        backgroundColor:"rgba(41, 37, 45, 0.6)",
         marginTop:"0", 
-        border:"2px solid white", 
+         border:"none",
+         fontSize:"20px",
         borderRadius:"8px", 
         marginLeft:"50px",
         ':hover':{
@@ -131,8 +145,6 @@ const getMovies=async()=>{
         
     </Flex>
     <Flex>
-    {/* <Button sx={{width:"30", height:"50", color:"white", background:"purple", border:"1px solid purple", borderRadius:"5px", marginLeft:"20px" }}>
-    Continue Watching <ArrowRightIcon style={{fontSize:"25"}}/></Button> */}
     </Flex>
     </Container>
     <Container>
@@ -144,7 +156,8 @@ const getMovies=async()=>{
     <p style={{color:"#A785FF", marginLeft :"50px", marginRight:"10px"}}>Director:</p><p style={{color:"white"}}>
     {itemId.director}</p>
     </Flex>
-   
+    <ShortFilm />
+     <Footer />
     </>
   )
 
