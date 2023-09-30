@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import { CloseIcon } from '@chakra-ui/icons';
 
-export default function Register({handleNotShown, setLoggedInStatus, setUserName}) {
+export default function Register({handleNotShown, setLoggedInStatus, setUserName, setEMail}) {
   handleNotShown();
     
 const [error, setError]  = useState('')
@@ -65,6 +65,7 @@ const handleusername=(event)=>{
           setColor("green");
           setSign(true);
           setUserName(username);
+          setEMail(email)
           setLoggedInStatus(true);
          
         

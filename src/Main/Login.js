@@ -4,7 +4,7 @@ import React from 'react'
 import {useState} from 'react'
 import {Link, NavLink} from "react-router-dom";
 
-export default function Login({handleNotShown, setLoggedInStatus, setUserName}) {
+export default function Login({handleNotShown, setLoggedInStatus, setEMail, setUserName}) {
   handleNotShown();
 
   const[email, setEmail] = useState("");
@@ -48,10 +48,11 @@ export default function Login({handleNotShown, setLoggedInStatus, setUserName}) 
         const data = await response.json();
         if(response.ok && data.status==="success"){
           console.log("registration successfully !")
-          setError("Registered successfully");
+          setError("Login Successfully");
           setColor("green");
           setLogin(true);
           setUserName(email);
+          setEMail(email);
           setLoggedInStatus(true);
         
         }else{

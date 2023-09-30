@@ -6,6 +6,10 @@ import {NavLink, Link} from 'react-router-dom';
 import SearchCard from '../Main/SearchCard';
 import Zee from '../Assets/Zee.jpeg';
 import AppsIcon from '@mui/icons-material/Apps';
+import {AiOutlineUser, AiOutlineRight} from 'react-icons/ai';
+import {CiUser} from 'react-icons/ci'
+import { Accordion, AccordionButton, AccordionIcon, AccordionPanel, AccordionItem } from '@chakra-ui/react';
+
 
 
 
@@ -22,8 +26,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     }
 
     const[isDropdownOpen, setIsDropDownOpen] = useState(false);
-   
     const[option, setIsOption] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
    
     const [searchData, setSearchData] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -42,8 +46,12 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         console.log("isDropDown:", isDropdownOpen)
     };
    
-    const handleOption=()=>{
-        setIsOption(!option);
+    const handleOption = () => {
+      setIsOption(!option);
+    };
+
+    const handleMenuToggle=()=>{
+        setMenuOpen(!menuOpen)
     }
 
     const handleLogout = ()=>{  
@@ -73,11 +81,6 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
       };
     },[])
      
-    useEffect(() => {
-      console.log("isDropdownOpen:", isDropdownOpen);
-    }, [isDropdownOpen]);
-   
-
   return (
     <>
     {smallerScreen ? (
@@ -95,12 +98,12 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
      </Box>
      {isLoggedIn ? (
           <div style={{marginTop:"10px"}}>
-            <img src="https://t3.ftcdn.net/jpg/06/04/79/52/360_F_604795233_5zIpEvhWizTN7bUxSADUdrQQFGj315G3.jpg"
+           <AiOutlineUser
               style={{ width: "10px", height: "10px", borderRadius: "50%", marginRight: "50px" }}
               onClick={handleOption}
             />
             {option && (
-              <div style={{position: "absolute", border: "1px solid gray", marginTop: "20px", backgroundColor: "#0F0617", ":hover": { backgroundColor: "purple" },}}>
+              <div style={{ zIndex:"2000",position: "absolute", border: "1px solid gray", marginTop: "20px", backgroundColor: "#0F0617", ":hover": { backgroundColor: "purple" },}}>
                 <ul style={{
                     listStyleType: "none",
                     position: "fixed",
@@ -182,7 +185,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         </NavLink>
 
         <NavLink to='/TvShows' style={navLinkStyle} className="navLink">
-        <ListItem>TV Shows</ListItem>
+        <ListItem style={{width:"80px"}}>TV Shows</ListItem>
         </NavLink>
 
         <NavLink to='/Movies' style={navLinkStyle} className="navLink">
@@ -266,7 +269,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <Spacer />
         
         
-    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"250px", marginTop:"10px"}}>
+    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"200px", marginTop:"10px"}}>
     <InputGroup>
     <Input value={searchData} onChange ={handleSearchInputChange} type="text" placeholder='Search for Movies, Shows, Channels etc'
     sx={searchStyle} />
@@ -280,33 +283,65 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
      </Box>
      {isLoggedIn ? (
           <div style={{marginTop:"10px"}}>
-            <img src="https://t3.ftcdn.net/jpg/06/04/79/52/360_F_604795233_5zIpEvhWizTN7bUxSADUdrQQFGj315G3.jpg"
+            <div class="icon-container">
+            <AiOutlineUser className='icon'
               style={{ width: "30px", height: "30px", borderRadius: "50%", marginRight: "40px", marginTop:"5px" }}
               onClick={handleOption}
-            />
+            /> <div class="tooltip">My Profile</div>
+            </div>
             {option && (
-              <div style={{position: "absolute", border: "1px solid gray", marginTop: "5px", backgroundColor: "#0F0617", ":hover": { backgroundColor: "purple" },}}>
+              <>
+              <div className="overlay" onClick={handleOption}></div>
+              <div style={{position: "absolute", zIndex:"1000", paddingLeft:"0", marginTop: "5px", backgroundColor: "#0F0617", ":hover": { backgroundColor: "purple" },}}>
                 <ul style={{
                     listStyleType: "none",
                     position: "fixed",
                     backgroundColor: "#0F0617",
-                    width: "170px",
-                    border: "0.5px solid grey",
+                    width: "260px",
                     borderRadius: "5px",
+                    transform: "translateX(-30%)",
+                    paddingLeft:"30px"
                   }}
                 >
-                 <li className="listItem listItem1">
-                Welcome, {username}</li> 
-                <NavLink to="/Watchlist" style={{ color: 'white', textDecoration: 'none' }}>
-                <li className="listItem" style={{marginTop:"10px"}}>My Watchlist</li>
-                  </NavLink>
-                  <br />
-                  <li className="listItem" style={{marginBottom:"10px", marginTop:"0"}}
-                onClick={()=>handleLogout()}>
-                      Logout
-                    </li>
+             <li className="listItem listItem1">
+              <Link to="/Profile" style={{textDecoration:"none", color:"grey", display:"flex"}}>
+             <CiUser style={{marginLeft:"5px",marginRight:"5px", backgroundColor:"rgb(90, 90, 90)", width:"25px", height:"25px", borderRadius:"50%"}}/> 
+             <div> {username} </div><AiOutlineRight style={{marginLeft:"40px", marginTop:"0px", color:"#8230c6", fontSize:"25px"}}/>
+             </Link>
+             </li> 
+                
+  <Accordion defaultIndex={[0]} allowMultiple>
+  <AccordionItem>
+    <h2>
+      <AccordionButton style={{backgroundColor:"#0F0617", border:"none"}}>
+        <Box flex='1' style={{backgroundColor:"#0F0617", marginLeft:"5px", color:"grey", fontSize:"15px", textAlign:"left",fontFamily:"Noto Sans, sans-serif", fontWeight:"bold"}}>
+          My Account
+        </Box>
+        <AccordionIcon style={{color:"white"}}/>
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+      <ul className= "ProfileList">
+        <NavLink to="/Watchlist" style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem">My WatchList</li>
+        </NavLink>
+        <NavLink to='/Subscription' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem">My Subscription</li>
+        </NavLink>
+        <li  className="profileItem">My Rentals</li>
+        <li  className="profileItem">My Transactions</li>
+        <li  className="profileItem">Manage your devices</li>
+        <li  onClick={()=>handleLogout()} className="profileItem">Logout</li>
+        <hr style={{marginLeft:"0", width:"100%", color:"grey"}}/>
+        <li style={{fontSize:"11px", color:"grey", paddingLeft:"50px"}}>Version 3.14.4</li>
+      </ul>
+    </AccordionPanel>
+  </AccordionItem>
+  </Accordion>
+
                 </ul>
               </div>
+              </>
             )}
           </div>
         ) : (
@@ -333,13 +368,141 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <NavLink to='/BuyPlan'>
         <Button mr={30} sx={{marginTop:"10px", bg:"#8230c6", 
         color:"white", border: "1px #8230c6 solid", 
-        borderRadius:"5px", width:"90px", height:"36px", ":hover":{backgroundColor:"#4B0082", border: "1px #4B0082 solid"}}}>
+        borderRadius:"5px", width:"90px", height:"36px", 
+        ":hover":{backgroundColor:"#4B0082", border: "1px #4B0082 solid"}}}>
           BUY PLANS
           </Button>
         </NavLink>
-        <NavLink to='/BuyPlan'>
-        <HamburgerIcon fontSize={25} textDecoration='none' color="white" marginTop="10px"/>
+      
+        <HamburgerIcon  onClick = {handleMenuToggle} fontSize={25} textDecoration='none' color="white" marginTop="10px"/>
+      {menuOpen &&  (
+          <div className='menu'>
+            <NavLink to ="/" style={{textDecoration:"none", color:"white"}}>
+           <div style={{paddingLeft:"50px", 
+           fontWeight:"bold", 
+           paddingBottom:"20px",
+           paddingTop:"20px",
+           marginBottom:"20px",
+           backgroundColor: "rgba(41, 37, 45, 0.6)",
+           borderRadius: "10px",
+           }}>Home</div>
+           </NavLink>
+           <hr className='divider'/>
+           <Accordion defaultIndex={[0]} allowMultiple>
+           <AccordionItem>
+    <h2>
+      <AccordionButton style={{backgroundColor:"#0F0617", border:"none"}}>
+        <Box flex='1' style={{backgroundColor:"#0F0617", marginLeft:"25px", color:"grey", fontSize:"15px", textAlign:"left",fontFamily:"Noto Sans, sans-serif", fontWeight:"bold"}}>
+          Explore
+        </Box>
+        <AccordionIcon style={{color:"white"}}/>
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+      <ul className= "ProfileList">
+        <NavLink to="/TvShows" style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Tv Shows</li>
         </NavLink>
+        <NavLink to='/Movies' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Movies</li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Premium</li>
+        </NavLink>
+        <NavLink to='/AllShows' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Web Series</li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>News</li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Music</li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+        <li className='profileItem' style={{paddingLeft:"35px"}}>Kids</li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Songs</li>
+        </NavLink>
+        <NavLink to='/VideoSong' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Video</li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Channels</li>
+        </NavLink>
+      </ul>
+    </AccordionPanel>
+  </AccordionItem>
+  </Accordion> 
+        <hr className='divider'/>
+        <Accordion defaultIndex={[0]} allowMultiple>
+           <AccordionItem>
+    <h2>
+      <AccordionButton style={{backgroundColor:"#0F0617", border:"none"}}>
+        <Box flex='1' style={{backgroundColor:"#0F0617", marginLeft:"25px", color:"grey", fontSize:"15px", textAlign:"left",fontFamily:"Noto Sans, sans-serif", fontWeight:"bold"}}>
+          Settings
+        </Box>
+        <AccordionIcon style={{color:"white"}}/>
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+      <ul className= "ProfileList">
+      <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Parental Control</li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Activate TV</li>
+        </NavLink>
+        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Reset Settings to default</li>
+        </NavLink>
+        <hr className='divider'/>
+      </ul>
+    </AccordionPanel>
+  </AccordionItem>
+  </Accordion> 
+  <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
+  <div style={{paddingLeft:"50px", 
+           fontWeight:"bold", 
+           paddingBottom:"20px",
+           paddingTop:"20px",
+           marginBottom:"20px",
+           ':hover':{backgroundColor: "rgba(41, 37, 45, 0.6)"},
+           borderRadius: "10px"}}>Refer and earn Discount
+           </div>
+  </NavLink>
+        <hr className='divider'/>
+        <Accordion defaultIndex={[0]} allowMultiple>
+           <AccordionItem>
+    <h2>
+      <AccordionButton style={{backgroundColor:"#0F0617", border:"none"}}>
+        <Box flex='1' style={{backgroundColor:"#0F0617", marginLeft:"25px", color:"grey", fontSize:"15px", textAlign:"left",fontFamily:"Noto Sans, sans-serif", fontWeight:"bold"}}>
+          Info
+        </Box>
+        <AccordionIcon style={{color:"white"}}/>
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+      <ul className= "ProfileList">
+      <NavLink to="/AboutUs"style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>About us</li>
+        </NavLink>
+        <NavLink to="/TermOfUse"style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Term of Use</li>
+        </NavLink>
+        <NavLink to="/NoResult"style={{textDecoration:"none", color:"white"}}>
+        <li  className="profileItem" style={{paddingLeft:"35px"}}>Privacy Policy</li>
+        </NavLink>
+        <hr className='divider'/>
+      </ul>
+    </AccordionPanel>
+  </AccordionItem>
+  </Accordion>
+  <div style={{fontSize:"11px", color:"grey", paddingLeft:"130px", paddingBottom:"30px"}}>Version 3.14.4</div>
+          </div>
+
+        )}
+       
         </Flex>
         
     </Flex>

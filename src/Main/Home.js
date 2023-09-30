@@ -283,8 +283,6 @@ export default function Home({handleShown}) {
             ))}
           </Flex>
         </Container>
-
-
         <Container style={{ marginTop: "40px", marginLeft:"40px"}}>
         <Flex style={{justifyContent:"space-between"}}>
   <Box

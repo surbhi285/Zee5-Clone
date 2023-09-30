@@ -23,11 +23,18 @@ import AllTrailer from './Main/AllTrailer';
 import AllWebSeries from './Main/AllWebSeries';
 import AllDrama from './Main/AllDrama';
 import NoResult from './Main/NoResult';
+import Profile from './Main/Profile';
+import Subscription from './Main/Subscription';
+import Rental from './Main/Rental';
+import Transaction from './Main/Transaction';
+import AboutUS from './Main/AboutUS';
+import TermOfUse from './Main/TermOfUse';
 
 function App() {
   const [showNav, setShowNav] = useState(true);
   const[isLoggedIn, setIsLoggedIn] = useState(false);
   const[userName, setUserName] = useState("");
+  const [Email, setEMail] = useState("");
 
   const setLoggedInStatus = (status) => {
     setIsLoggedIn(status);
@@ -62,10 +69,16 @@ function App() {
                  <Route path="/AllWebSeries" element={<AllWebSeries handleShown={handleShown}/>} />
                  <Route path="/AllDrama" element={<AllDrama handleShown={handleShown}/>} />
                  <Route path="/NoResult" element={<NoResult handleShown={handleShown}/>} />
+                 <Route path="/Profile" element = {<Profile handleShown={handleShown} username={userName} email={Email}/>}/>
+                 <Route path="/Subscription" element = {<Subscription handleShown={handleShown}/>}/>
+                 <Route path="/Rental" element = {<Rental handleShown={handleShown}/>}/>
+                  <Route path="/transaction" element= {<Transaction handleShown={handleShown}/>}/>
+                  <Route path="/AboutUs" element={<AboutUS handleShown={handleShown}/>}/>
+                  <Route path="/TermOfUse" element={<TermOfUse handleShown={handleShown}/>}/>
               {/* No need to include Nav for /Login and /Register */}
             
-              <Route path="/Login" element={<Login handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName}/>} />
-                <Route path="/Register" element={<Register handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName}/>} />
+              <Route path="/Login" element={<Login handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName} setEMail={setEMail}/>} />
+                <Route path="/Register" element={<Register handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName} setEMail={setEMail}/>} />
                 <Route path="/BuyPlan" element={<BuyPlan handleNotShown={handleNotShown} />} />
             </Routes>
     </Router>
