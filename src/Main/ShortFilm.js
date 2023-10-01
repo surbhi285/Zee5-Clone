@@ -1,5 +1,4 @@
 import { Container, Box, Flex, Button, border} from '@chakra-ui/react'
-import { SmallAddIcon } from '@chakra-ui/icons';
 import {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import ComponentCard from './ComponentCard';
@@ -37,7 +36,7 @@ export default function ShortFilm() {
   
   return (
     <>
-    <Container style={{marginTop:"4rem"}}>
+    <Container style={{marginTop:"8rem"}}>
     <Container style={{marginLeft:"40px"}}>
           <Box
             as="p"

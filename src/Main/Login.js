@@ -45,8 +45,13 @@ export default function Login({handleNotShown, setLoggedInStatus, setEMail, setU
             })
           }
         );
-        const data = await response.json();
-        if(response.ok && data.status==="success"){
+        
+        if(response.ok){
+          const responseData = await response.json();
+          localStorage.setItem(
+            'sign', JSON.stringify({
+              sign:responseData,
+            }))
           console.log("registration successfully !")
           setError("Login Successfully");
           setColor("green");

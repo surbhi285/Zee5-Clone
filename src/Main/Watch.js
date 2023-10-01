@@ -48,9 +48,10 @@ const getMovies=async()=>{
 
       async function addRemoveWatchList(showId){
           const user = localStorage.getItem("signup");
+          console.log("userData", user);
           if(user){
             const parsedData = JSON.parse(user);
-            const isShowInWatchlist = parsedData.watchlist.some((item) => item.showId === showId);
+            // const isShowInWatchlist = parsedData.watchlist.some((item) => item.showId === showId);
            const response= await fetch(`https://academics.newtonschool.co/api/v1/ott/watchlist/like`,{
                 method:"PATCH",
                 headers:{
@@ -60,32 +61,21 @@ const getMovies=async()=>{
                     projectId: "8jf3b15onzua",
                   },
                   body: JSON.stringify({ showId: showId }),
-            })
-      //       if (response.ok) {
-      // If the show was added successfully or removed, update the local storage
-      if (isShowInWatchlist) {
-        // If the show was in the watchlist, remove it
-        parsedData.watchlist = parsedData.watchlist.filter((item) => item.showId !== showId);
-      } else {
-        // If the show was not in the watchlist, add it
-        parsedData.watchlist.push({ showId: showId });
-      }
-      localStorage.setItem("signup", JSON.stringify(parsedData));
-
-      // Toggle the isAdded state
-      setIsAdded((prevState) => !prevState);
-    } else {
-      console.error('Failed to add/remove show from the watchlist.');
-    }
-  }
+            });
+            if (response.ok){
+              setIsAdded(!isAdded)
+            }
+            
+          }
+        }
 
 
   return (
     <>
     {itemId.video_url ? (
      
-      <Flex marginTop="5rem">
-      <video ref={videoRef} width="65%" height="100%" controls>
+      <Flex marginTop="8rem" marginLeft="40px">
+      <video ref={videoRef} width="60%" height="120%" marginLeft="40px" controls>
         <source src={itemId.video_url} type="video/mp4" />
       </video>
       <Container style={{height:"20px", top:"0"}}>

@@ -400,3 +400,37 @@ background-color: grey;
 border-radius: 5px;
 }
 
+.BuyPlanButton{
+margin-left: 30px;
+background-color: #4B0082;
+color: white;
+border: 1px solid #4B0082;
+border-radius:"10px"; 
+width:120px;
+height:30px;
+margin-top: 20px;
+}
+.navButton{
+  margin-left: 30px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  margin-top: 20px;
+}
+.navButton:hover{
+  color: #4B0082;
+}
+
+.searchButton{
+  margin-right: 30px;
+  background-color: #0F0617;
+  margin-left: 400px;
+  margin-top: 20px;
+}
+
+.navButtonSmaller{
+  margin-right: 5px;
+  margin-top: 10px;
+  font-size: 15px;
+  margin-left: 15px;
+}

@@ -1,11 +1,10 @@
 import { Flex, Button, Popover, PopoverArrow, PopoverBody, PopoverHeader, PopoverContent, PopoverTrigger, background } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { PiShareFat } from 'react-icons/pi';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import MailOutlineSharpIcon from '@mui/icons-material/MailOutlineSharp';
+import {BiLogoFacebookCircle} from 'react-icons/bi';
+import {AiFillInstagram} from'react-icons/ai';
+import {BsWhatsapp} from 'react-icons/bs';
+import {ImMail4} from 'react-icons/im';
 
 
 export default function ShareButton() {
@@ -21,12 +20,12 @@ export default function ShareButton() {
         <PopoverContent style={{ border:"none"}}>
            
             <PopoverBody style={{ border: "none", padding: "0"}}>
-                <Flex style={{border:"none", justifyContent:"space-evenly"}}>
-                    <Button style={{fontSize:"5px", border:"none", backgroundColor:"white", color:"#4267B2", padding:"1px"}}><FacebookIcon/></Button>
-                    <Button style={{fontSize:"5px", border:"none", backgroundColor:"white", color:"#962fbf", padding:"1px"}}><InstagramIcon/></Button>
-                    <Button style={{fontSize:"5px", border:"none", backgroundColor:"white", color:"#075e54", padding:"1px"}}><WhatsAppIcon/></Button>
-                    <Button style={{fontSize:"5px", border:"none", backgroundColor:"white", color:"#26a7de", padding:"1px"}}><TwitterIcon/></Button>
-                    <Button style={{fontSize:"5px", border:"none", backgroundColor:"white", color:"red", padding:"1px"}}><MailOutlineSharpIcon/></Button>
+                <Flex style={{border:"none", justifyContent:"space-evenly", cursor:"pointer"}}>
+                    <Button style={{fontSize:"15px", border:"none", padding:"5px", cursor:"pointer"}}><BiLogoFacebookCircle/></Button>
+                    <Button style={{fontSize:"15px", border:"none", padding:"5px", cursor:"pointer"}}><AiFillInstagram /></Button>
+                    <Button style={{fontSize:"10px", border:"none",  padding:"5px", cursor:"pointer"}}><BsWhatsapp/></Button>
+                    <Button style={{fontSize:"5px", border:"none",  padding:"5px", cursor:"pointer"}}><ImMail4/></Button>
+                    
                 </Flex>
             </PopoverBody>
         </PopoverContent>
