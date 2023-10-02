@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link} from "react-router-dom";
 import { Button, Box, Flex } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
@@ -11,10 +11,51 @@ import ShareButton from "./ShareButton";
 
 const ComponentCard = ({ item}) => {
 
+  const [smallerScreen, setSmallerScreen] = useState(window.innerWidth<550);
+  useEffect(()=>{
+    const handleResize = () => {
+      setSmallerScreen(window.innerWidth<550)
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+    
+  },[])
+
+
   const share = ()=>{
 
   }
   return (
+    <>
+    {smallerScreen ?(
+      <div style={{display:"flex", flexDirection:"center", height:"200px"}}>
+      <div style={{width : "150px",
+           transition: "0.2s",
+          height: "200px",
+          marginTop: "25px",
+          }}>
+          <div className="image-container">
+          <div className="image-overlay">
+          <Link to={`/watch/${item._id}`} style={{textDecoration:"none"}}>
+              <img
+              src={item.thumbnail}
+              alt="image.title"
+              style={{width: "8rem",
+                height: "10rem",
+                display: "block",
+                width: "100%",
+                borderRadius: "8px",
+                zIndex: "1000",
+                backgroundColor: "black",}}
+            />
+            </Link>
+          </div>
+        </div>
+        </div>
+      </div>
+    ):(
       <div className="container">
         <div className="box">
           <div className="image-container">
@@ -48,7 +89,8 @@ const ComponentCard = ({ item}) => {
           
         </div>
       </div>
-      
+    )}
+      </>
   );
 };
 

@@ -18,7 +18,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     const searchStyle={
         bg:"#0F0617", 
         color:"white", 
-        width:"250px", 
+        width:"220px", 
         height:"35px", 
         pl:"40px",
         border:"1px solid grey",
@@ -31,8 +31,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
    
     const [searchData, setSearchData] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [extraSmallerScreen, setExtraSmallerScreen] = useState(window.innerWidth<500)
-    const [smallerScreen,  setIsSmallScreen] = useState(window.innerWidth < 1250);
+   
+    const [smallerScreen,  setSmallerScreen] = useState(window.innerWidth < 1000);
 
     const navLinkStyle = ({ isActive }) => {
       return {
@@ -53,6 +53,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
 
     const handleMenuToggle=()=>{
         setMenuOpen(!menuOpen)
+        console.log("hamburger opened");
     }
 
     const handleLogout = ()=>{  
@@ -74,8 +75,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
          
       useEffect(()=>{
       const handleResize = () => {
-        setIsSmallScreen(window.innerWidth < 1250);
-        setExtraSmallerScreen(window.innerWidth<500);
+        setSmallerScreen(window.innerWidth < 1000);
+        
       };
       window.addEventListener("resize", handleResize);
       return () => {
@@ -85,45 +86,9 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
      
   return (
     <>
-    {extraSmallerScreen ? (
-    <Container>
-    <Flex>
-    <img src={Zee} alt="zee logo" style={{width: "50px", marginTop:"10px",marginLeft: "20px"}} />
-    <NavLink to='/BuyPlan'>
-    <Button className='BuyPlanButton'><LuCrown style={{paddingRight:"5px", fontSize:"15px"}}/>
-    BUY PLANS</Button>
-    </NavLink> 
-    <NavLink to='/SearchCard' style={{textDecoration:"none", color:"white"}}>
-    <Box style={{ 
-    marginRight: "10px",
-    marginLeft:"100px",
-    backgroundColor: "#0F0617",
-    marginTop: "20px",}}>
-    <SearchIcon />
-     </Box>
-     </NavLink>
-      </Flex>
-      <Flex style={{overflow:"hidden"}}>
-    <NavLink to='/' style={{color:"white", textDecoration:"none"}}>
-    <Container className='navButtonSmaller'>Home</Container>
-    </NavLink>
-    <NavLink to='/TvShows' style={{color:"white", textDecoration:"none"}}>
-    <Container className='navButtonSmaller'>TV Shows</Container>
-    </NavLink>
-    <NavLink to='/Movies' style={{color:"white", textDecoration:"none"}}>
-    <Container className='navButtonSmaller'>Movies</Container>
-    </NavLink> 
-    <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
-    <Container  className='navButtonSmaller'>Premium</Container>
-    </NavLink>
-    <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
-    <Container className='navButtonSmaller'>News</Container>
-    </NavLink> 
-    </Flex>
-    </Container>
-
-    ): smallerScreen ? (
+    { smallerScreen ? (
     <Container style={{marginTop:"20px"}}>
+    <Flex justifyContent="space-between">
     <Flex>
     <img src={Zee} alt="zee logo" style={{width: "60px", marginLeft: "20px"}} />
       
@@ -131,105 +96,16 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     <Button className='BuyPlanButton'><LuCrown style={{paddingRight:"5px", fontSize:"15px"}}/>
     BUY PLANS</Button>
     </NavLink> 
-    
+    </Flex>
+    <Flex>
     <NavLink to='/SearchCard' style={{textDecoration:"none", color:"white"}}>
     <Box className='searchButton'>
     <SearchIcon />
      </Box>
      </NavLink>
-
-     <HamburgerIcon  onClick = {handleMenuToggle} fontSize={25} textDecoration='none' color="white" marginTop="20px"/>
-      {menuOpen &&  (
-          <div className='menu'>
-          <NavLink to ="/" style={{textDecoration:"none", color:"white"}}>
-           <div style={{paddingLeft:"50px", 
-           fontWeight:"bold", 
-           paddingBottom:"20px",
-           paddingTop:"20px",
-           marginBottom:"20px",
-           backgroundColor: "rgba(41, 37, 45, 0.6)",
-           borderRadius: "10px",
-           }}>Home</div>
-           </NavLink>
-           <hr className='divider'/>
-           <Accordion defaultIndex={[0]} allowMultiple>
-           <AccordionItem>
-    <h2>
-      <AccordionButton style={{backgroundColor:"#0F0617", border:"none"}}>
-        <Box flex='1' style={{backgroundColor:"#0F0617", marginLeft:"25px", color:"grey", fontSize:"15px", textAlign:"left",fontFamily:"Noto Sans, sans-serif", fontWeight:"bold"}}>
-          Explore
-        </Box>
-        <AccordionIcon style={{color:"white"}}/>
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4}>
-      <ul className= "ProfileList">
-        <NavLink to="/TvShows" style={{textDecoration:"none", color:"white"}}>
-        <li  className="profileItem" style={{paddingLeft:"35px"}}>Tv Shows</li>
-        </NavLink>
-        <NavLink to='/Movies' style={{textDecoration:"none", color:"white"}}>
-        <li  className="profileItem" style={{paddingLeft:"35px"}}>Movies</li>
-        </NavLink>
-        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
-        <li  className="profileItem" style={{paddingLeft:"35px"}}>Premium</li>
-        </NavLink>
-        <NavLink to='/AllShows' style={{textDecoration:"none", color:"white"}}>
-        <li  className="profileItem" style={{paddingLeft:"35px"}}>Web Series</li>
-        </NavLink>
-        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
-        <li  className="profileItem" style={{paddingLeft:"35px"}}>News</li>
-        </NavLink>
-      </ul>
-    </AccordionPanel>
-  </AccordionItem>
-  </Accordion> 
-        <hr className='divider'/>
-        <Accordion defaultIndex={[0]} allowMultiple>
-           <AccordionItem>
-    <h2>
-      <AccordionButton style={{backgroundColor:"#0F0617", border:"none"}}>
-        <Box flex='1' style={{backgroundColor:"#0F0617", marginLeft:"25px", color:"grey", fontSize:"15px", textAlign:"left",fontFamily:"Noto Sans, sans-serif", fontWeight:"bold"}}>
-          Settings
-        </Box>
-        <AccordionIcon style={{color:"white"}}/>
-      </AccordionButton>
-    </h2>
-    <AccordionPanel pb={4}>
-      <ul className= "ProfileList">
-      <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
-        <li  className="profileItem" style={{paddingLeft:"35px"}}>Parental Control</li>
-        </NavLink>
-        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
-        <li  className="profileItem" style={{paddingLeft:"35px"}}>Activate TV</li>
-        </NavLink>
-        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
-        <li  className="profileItem" style={{paddingLeft:"35px"}}>Reset Settings to default</li>
-        </NavLink>
-        <hr className='divider'/>
-      </ul>
-    </AccordionPanel>
-  </AccordionItem>
-  </Accordion> 
-  <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
-  <div style={{paddingLeft:"50px", 
-           fontWeight:"bold", 
-           paddingBottom:"20px",
-           paddingTop:"20px",
-           marginBottom:"20px",
-           ':hover':{backgroundColor: "rgba(41, 37, 45, 0.6)"},
-           borderRadius: "10px"}}>Refer and earn Discount
-           </div>
-  </NavLink>
-  <hr className='divider'/>
-  <div style={{fontSize:"11px", color:"grey", paddingLeft:"130px", paddingBottom:"30px"}}>Version 3.14.4</div>
-          </div>
-
-        )}
-
-    
      </Flex>
-    
-    <Flex style={{overflow:"hidden"}}>
+    </Flex>
+    <Flex style={{overflowX: 'auto', whiteSpace: 'nowrap'}}>
     <NavLink to='/' style={{color:"white", textDecoration:"none"}}>
     <Container className='navButton'>Home</Container>
     </NavLink>
@@ -239,7 +115,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     <NavLink to='/Movies' style={{color:"white", textDecoration:"none"}}>
     <Container className='navButton'>Movies</Container>
     </NavLink> 
-    <NavLink to='/AllWebSeries' style={{color:"white", textDecoration:"none"}}>
+    <NavLink to='/TvShows' style={{color:"white", textDecoration:"none"}}>
     <Container  className='navButton'>Web Series</Container>
     </NavLink>
     <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
@@ -254,14 +130,26 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
     <Container className='navButton'>Live</Container>
     </NavLink>
+    <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
+    <Container className='navButton'>Channels</Container>
+    </NavLink>
+    <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
+    <Container className='navButton'>Kids</Container>
+    </NavLink>
+    <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
+    <Container className='navButton'>Eduaruaa</Container>
+    </NavLink>
+    <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
+    <Container className='navButton'>Sports</Container>
+    </NavLink>
      </Flex>
      </Container>
 
     ):(<>
-    <Container p="10px" bg="#0F0617" color="white" position="fixed" top="0" width="99%" zIndex="1000">
-    <Flex as="nav" alignItems="center" color="white">
+    <Container p="10px" bg="#0F0617" color="white" position="fixed" top="0" minWidth="98%" zIndex="1000">
+    <Flex as="nav" alignItems="center" color="white" justifyContent="space-between">
+    <Flex>
     <img src="https://www.zee5.com/images/ZEE5_logo.svg?ver=2.52.40" alt="zee logo" style={{width: "60px"}}/>
-        <Flex>
     <UnorderedList style ={{listStyleType:"none", display:"flex", p:"10px"}}>
         
         <NavLink to='/' style={navLinkStyle} className="navLink">
@@ -350,10 +238,10 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
   )}
 </ListItem>
     </UnorderedList>
-        <Spacer />
-        
-        
-    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginLeft:"200px", marginTop:"10px"}}>
+    </Flex>
+
+    <Flex style={{maxWidth:"150%"}}>
+    <Box style={{marginRight:"30px", backgroundColor:"#0F0617", marginTop:"2px"}}>
     <InputGroup>
     <Input value={searchData} onChange ={handleSearchInputChange} type="text" placeholder='Search for Movies, Shows, Channels etc'
     sx={searchStyle} />
@@ -366,7 +254,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     </InputGroup>
      </Box>
      {isLoggedIn ? (
-          <div style={{marginTop:"10px"}}>
+          <div style={{marginTop:"2px"}}>
             <div class="icon-container">
             <AiOutlineUser className='icon'
               style={{ width: "30px", height: "30px", borderRadius: "50%", marginRight: "40px", marginTop:"5px" }}
@@ -442,7 +330,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
                 borderRadius: '5px',
                 fontSize: 'Bold',
                 cursor: 'pointer',
-                marginTop:"10px"
+                marginTop:"2px"
               }}
             >
               Login
@@ -450,7 +338,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </NavLink>
         )}
         <NavLink to='/BuyPlan'>
-        <Button mr={30} sx={{marginTop:"10px", bg:"#8230c6", 
+        <Button mr={30} sx={{marginTop:"2px", bg:"#8230c6", 
         color:"white", border: "1px #8230c6 solid", 
         borderRadius:"5px", width:"120px", height:"36px", 
         ":hover":{backgroundColor:"#4B0082", border: "1px #4B0082 solid"}}}>
@@ -458,7 +346,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </Button>
         </NavLink>
       
-        <HamburgerIcon  onClick = {handleMenuToggle} fontSize={25} textDecoration='none' color="white" marginTop="10px"/>
+        <HamburgerIcon  onClick = {handleMenuToggle} fontSize={25} textDecoration='none' color="white" marginTop="5px"/>
       {menuOpen &&  (
           <div className='menu'>
             <NavLink to ="/" style={{textDecoration:"none", color:"white"}}>
@@ -586,11 +474,10 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </div>
 
         )}
-       
         </Flex>
-        
-    </Flex>
-   </Container>
+       </Flex>
+        </Container>
+
         </>)}
 
         </>
