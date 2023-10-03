@@ -1,7 +1,6 @@
-import { Container, Box, Flex, Button } from '@chakra-ui/react'
-import { AddIcon, SmallAddIcon } from '@chakra-ui/icons';
+import { Container, Box, Flex} from '@chakra-ui/react'
 import {useEffect, useState} from 'react';
-import { Link, json } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ImageSlider from './ImageSlider';
 import React from 'react';
 import Footer from './Footer';
@@ -22,26 +21,8 @@ export default function Home({handleShown}) {
 
    
     const [smallerScreen, setSmallerScreen] = useState(window.innerWidth<500)
-    // const [hoveredStates, setHoveredStates] = useState({
-    //     exclusive: [],
-    //     movie: [],
-    //     tv: [],
-    //     video: [],
-    //     trailer: [],
-    //     webSeries: [],
-    //     documentry: [],
-    //   });
+   
     
-      // const handleHover = (rowName, index, isHovered) => {
-      //   // Clone the current state object
-      //   const updatedHoveredStates = { ...hoveredStates };
-      //   // Update the hover state for the specified row and index
-      //   updatedHoveredStates[rowName][index] = isHovered;
-      //   // Set the updated state object
-      //   setHoveredStates(updatedHoveredStates);
-      // };
-    
-  
     const getMovies=async()=>{
     try{const storedData = localStorage.getItem("videoData");
              
@@ -87,7 +68,6 @@ export default function Home({handleShown}) {
             const documentriesData = result.filter(item=>item.type==="documentary");
         
         
-        //  console.log(data.data);
          setExclusivesList(exclusiveList);
          setMoviesList(moviesData);
          setTvList(tvShowData);
@@ -140,7 +120,7 @@ export default function Home({handleShown}) {
           </Link>
           </Flex>
           <Flex sx={{ marginLeft:"20px", overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-            {exclusiveList.map((exclusive, index) => (
+            {exclusiveList.map((exclusive) => (
               <ComponentCard 
                 key={exclusive._id}
                 item={exclusive}
@@ -148,9 +128,6 @@ export default function Home({handleShown}) {
             ))}
           </Flex>
         </Container>
-
-    
-
         <Container style={{marginLeft:"40px"}}>
         <Flex style={{justifyContent:"space-between"}}>
           <Box
@@ -162,8 +139,7 @@ export default function Home({handleShown}) {
               marginLeft: "15px",
               letterSpacing: "1px",
               marginBottom: "0",
-            }}
-          >
+            }}>
             Top Hollywood Movies 
           </Box>
           <Link to="/AllMovies" style={{textDecoration:"none", color:"#a785ff"}}>
@@ -171,11 +147,10 @@ export default function Home({handleShown}) {
           </Link>
           </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-            {moviesList.map((movie, index) => (
+            {moviesList.map((movie) => (
               <ComponentCard
                 key={movie._id}
-                item={movie}
-              />
+                item={movie}/>
             ))}
           </Flex>
         </Container>
@@ -191,8 +166,7 @@ export default function Home({handleShown}) {
               marginLeft: "15px",
               letterSpacing: "1px",
               marginBottom: "0",
-            }}
-          >
+            }}>
            Unmissable shows
           </Box>
           <Link to="/AllShows" style={{textDecoration:"none", color:"#a785ff"}}>
@@ -200,11 +174,10 @@ export default function Home({handleShown}) {
           </Link>
           </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-            {tvShow.map((tvShow, index) => (
+            {tvShow.map((tvShow) => (
               <ComponentCard
                 key={tvShow._id}
-                item={tvShow}
-              />
+                item={tvShow} />
             ))}
           </Flex>
         </Container>
@@ -229,7 +202,7 @@ export default function Home({handleShown}) {
           </Link>
           </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-            {video.map((video, index) => (
+            {video.map((video) => (
               <ComponentCard
                 key={video._id}
                 item={video}
@@ -259,7 +232,7 @@ export default function Home({handleShown}) {
           </Link>
           </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-            {trailer.map((trailer, index) => (
+            {trailer.map((trailer) => (
               <ComponentCard
                 key={trailer._id}
                 item={trailer}
@@ -286,7 +259,7 @@ export default function Home({handleShown}) {
   </Link>
   </Flex>
   <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-    {documentries.map((documentary, index) => (
+    {documentries.map((documentary) => (
       <ComponentCard
         key={documentary._id}
         item={documentary}
@@ -315,7 +288,7 @@ export default function Home({handleShown}) {
           </Link>
           </Flex>
           <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-            {webSeries.map((webSeries, index) => (
+            {webSeries.map((webSeries) => (
               <ComponentCard
                 key={webSeries._id}
                 item={webSeries}
@@ -323,8 +296,6 @@ export default function Home({handleShown}) {
             ))}
           </Flex>
         </Container>
-    
-
       </>
     ):(
 <>
@@ -353,12 +324,10 @@ export default function Home({handleShown}) {
           </Link>
           </Flex>
           <Flex sx={{ marginLeft:"20px", overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-            {exclusiveList.map((exclusive, index) => (
+            {exclusiveList.map((exclusive) => (
               <ComponentCard 
                 key={exclusive._id}
                 item={exclusive}
-                // isHovered={hoveredStates.exclusive[index]}
-                // handleHover={(isHovered) => handleHover("exclusive", index, isHovered)}
               />
             ))}
           </Flex>

@@ -1,16 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Container, Flex, Button } from '@chakra-ui/react';
 import {MdPlaylistAdd, MdPlaylistAddCheck} from 'react-icons/md';
-
 import { useParams } from 'react-router';
 import VideoSong from './VideoSong';
 import Footer from './Footer';
 import ShortFilm from './ShortFilm';
 import {PiShareFat} from 'react-icons/pi';
-
-
-
-
 
 export default function Watch() {
 

@@ -214,6 +214,7 @@ border-radius: 2px;
 font-size : 22px;
 margin-left: 10px; 
 width: 50px;
+cursor: pointer;
 }
 .AppsIcon:hover{
 color: purple;

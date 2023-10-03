@@ -355,13 +355,13 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <NavLink to='/BuyPlan'>
         <Button mr={30} sx={{marginTop:"2px", bg:"#8230c6", 
         color:"white", border: "1px #8230c6 solid", 
-        borderRadius:"5px", width:"120px", height:"36px", 
+        borderRadius:"5px", width:"120px", height:"36px", cursor:"pointer",
         ":hover":{backgroundColor:"#4B0082", border: "1px #4B0082 solid"}}}>
         <LuCrown style={{paddingRight:"5px", fontSize:"25px"}}/>  BUY PLANS
           </Button>
         </NavLink>
       
-      <HamburgerIcon  ref={toogleRef} onClick = {handleMenuToggle} fontSize={25} textDecoration='none' color="white" marginTop="5px"/>
+      <HamburgerIcon  ref={toogleRef} onClick = {handleMenuToggle} fontSize={25} cursor="pointer" textDecoration='none' color="white" marginTop="5px"/>
       {menuOpen &&  (
           <div className='menu'>
             <NavLink to ="/" style={{textDecoration:"none", color:"white"}}>

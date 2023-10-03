@@ -1,6 +1,6 @@
 import { useEffect, useState, useParams } from "react";
-import { Container, Box, Button, Flex, Grid, Divider } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Container, Box, Button, Flex, Grid} from "@chakra-ui/react";
+// import { Link } from "react-router-dom";
 import {TbFaceIdError} from 'react-icons/tb';
 import ProfileItem from "./ProfileItem";
 import {AiOutlineClose} from 'react-icons/ai';
@@ -8,6 +8,7 @@ import {AiOutlineClose} from 'react-icons/ai';
 export default function Watchlist() {
     const[watchlist, setWatchList] = useState([]);
     const [loading, setLoading] = useState(true);
+    const[isAdded, setIsAdded] = useState(false);
    
     async function getWatchList (){
       const userInfo = localStorage.getItem("signup")
@@ -36,15 +37,31 @@ export default function Watchlist() {
     }
   }
 
-
+  async function addRemoveWatchList(showId){
+    const user = localStorage.getItem("signup");
+    console.log("userData", user);
+    if(user){
+      const parsedData = JSON.parse(user);
+     const response= await fetch(`https://academics.newtonschool.co/api/v1/ott/watchlist/like`,{
+          method:"PATCH",
+          headers:{
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${parsedData.sign.token}`,
+              projectId: "8jf3b15onzua",
+            },
+            body: JSON.stringify({ showId: showId }),
+      });
+      if (response.ok){
+        setIsAdded(!isAdded)
+      }
+      
+    }
+  }
      useEffect(()=>{
       getWatchList();
      },[])
 
-     const addRemoveWatchList=(itemId)=>{
-      const updatedWatchList = watchlist.filter((item)=>item._id !== itemId);
-      setWatchList(updatedWatchList);
-    }
 
     return (
       <div style={{ marginTop: "7rem" }}>

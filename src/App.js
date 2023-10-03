@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
 import {useState} from 'react';
 import Nav from './Navbar/Nav';
 import Home from './Main/Home';
 import Movies from './Main/Movies';
-import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import TvShows from './Main/TvShows';
 import Documentaries from './Main/Documentries';
 import VideoSong from './Main/VideoSong';
