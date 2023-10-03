@@ -34,6 +34,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
    
     const [smallerScreen,  setSmallerScreen] = useState(window.innerWidth < 1000);
 
+    const toogleRef = useRef(null); 
+
     const navLinkStyle = ({ isActive }) => {
       return {
         borderBottom: isActive ? "2px solid white" : "none",
@@ -57,7 +59,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     }
 
     const handleLogout = ()=>{  
-       console.log("ashg")
+      //  console.log("ashg")
         localStorage.removeItem('signupDeatils');
         setIsLoggedIn(false);
     }
@@ -65,6 +67,19 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     const clearSearchValue = () => {
         setSearchData('');
       };
+
+      useEffect(()=>{
+        const handleClickOutside = (event) => {
+          if (toogleRef.current && !toogleRef.current.contains(event.target)) {
+            setIsDropDownOpen(false);
+            setMenuOpen(false);
+          }
+        }
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+          document.removeEventListener("click", handleClickOutside);
+        };
+      }, [toogleRef]);
 
     const handleSearchInputChange = (event) => {
         const userInput = event.target.value;
@@ -139,8 +154,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
     <Container className='navButton'>Eduaruaa</Container>
     </NavLink>
-    <NavLink to='/NoResult' style={{color:"white", textDecoration:"none"}}>
-    <Container className='navButton'>Sports</Container>
+    <NavLink to='/WatchList' style={{color:"white", textDecoration:"none"}}>
+    <Container className='navButton'>My List</Container>
     </NavLink>
      </Flex>
      </Container>
@@ -167,7 +182,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
        
         <ListItem  onClick={(e)=>{toggleDropDown();
         }}>
-        <div className='AppsIcon'><AppsIcon /></div>
+        <div className='AppsIcon' ref={toogleRef}><AppsIcon /></div>
   {isDropdownOpen && (
     <div style={{ position: "absolute", marginTop: "20px", backgroundColor: "#0F0617", width: "200px" }}>
       <ul className="ul">
@@ -346,7 +361,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </Button>
         </NavLink>
       
-        <HamburgerIcon  onClick = {handleMenuToggle} fontSize={25} textDecoration='none' color="white" marginTop="5px"/>
+      <HamburgerIcon  ref={toogleRef} onClick = {handleMenuToggle} fontSize={25} textDecoration='none' color="white" marginTop="5px"/>
       {menuOpen &&  (
           <div className='menu'>
             <NavLink to ="/" style={{textDecoration:"none", color:"white"}}>

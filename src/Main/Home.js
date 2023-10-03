@@ -551,7 +551,7 @@ export default function Home({handleShown}) {
           </Flex>
         </Container>
     </Container>
-    {/* <Footer /> */}
+    <Footer />
     </>
     )}
     </>
