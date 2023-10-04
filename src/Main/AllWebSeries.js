@@ -1,32 +1,20 @@
 import React from 'react'
 import ComponentCard from './ComponentCard';
 import { Flex } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
+import FetchContext  from '../FetchContext';
+import { useContext } from 'react';
 
 export default function AllShows() {
-    const[webSeries, setwebSeries] = useState([]);
-
-    const getShows=async()=>{
-        try{ const storedData = localStorage.getItem("videoData");
-            if(storedData){
-            const getData = JSON.parse(storedData);
-            const parseData = getData.videoData;
-            console.log(parseData);
-            const webData = parseData.filter(item=>(item.type==="web series"));
-            setwebSeries(webData);
-            }
-
-            }catch(error){console.error("error")}
-        }
-    useEffect(()=>{
-        getShows();
-    },[])
+    const {apiData} = useContext(FetchContext); 
+    console.log(apiData);
 
   return (
     <div style={{marginTop:"6rem", marginLeft:"40px"}}>
       <h1 style={{color:"white", letterSpacing:"1px"}}>Web Series</h1>
       <Flex style={{flexWrap:"wrap"}}>
-        {webSeries.map((webSeries)=>(
+        {apiData.filter((drama)=>{return drama.type==="web series"})
+        .map((webSeries)=>(
             <ComponentCard 
             key={webSeries._id}
             item={webSeries}/>

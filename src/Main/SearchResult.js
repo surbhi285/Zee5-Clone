@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Button, Box } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 export default function SearchResult() {
     const {id} = useParams();
@@ -115,11 +114,6 @@ export default function SearchResult() {
                   Watch
                 </Button>
               </Link>
-              {/* <Button
-                style={{ border: "1px solid grey", height: "30px", borderRadius: "10px", cursor: "pointer" }}
-              >
-                <AddIcon sx={{ fontSize: "15px", color: "grey" }} />
-              </Button> */}
             </Box>
           </Box>
         )}

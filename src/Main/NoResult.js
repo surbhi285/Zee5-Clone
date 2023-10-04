@@ -4,18 +4,6 @@ import { Link } from 'react-router-dom';
 
 export default function() {
 
-const [smallerScreen, setSmallerScreen] = useState(window.innerWidth<1000)
-
-useEffect(()=>{
-  const handleResize=()=>{
-    setSmallerScreen(window.innerWidth<1000);
-  };
-  window.addEventListener("resize", handleResize);
-  return()=>{
-    window.removeEventListener("resize", handleResize);
-  }
-})
-
   return (
 <>
     <div style={{marginTop:"8rem"}}>

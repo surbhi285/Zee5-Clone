@@ -4,6 +4,7 @@ import{CiFacebook, CiTwitter} from 'react-icons/ci';
 import {BiLogoInstagram} from'react-icons/bi';
 import {AiOutlineYoutube} from 'react-icons/ai';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 export default function Footer() {
@@ -31,10 +32,10 @@ export default function Footer() {
     </Container>
     <Flex style={{color:"white"}}>
     <h3 style={{marginLeft:"20%"}}>Connect with us</h3>
-    <div><a href='https://m.facebook.com/ZEE5/events/'><CiFacebook style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%", color:"white", backgroundColor:"rgb(42, 41, 41)"}} /></a></div>
-    <div><a href='https://www.instagram.com/zee5/'><BiLogoInstagram style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%", color:"white", backgroundColor:"rgb(42, 41, 41)"}}/></a></div>
-    <div><a href='https://twitter.com/ZEE5India?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor'><CiTwitter style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%", color:"white", backgroundColor:"rgb(42, 41, 41)"}}/></a></div>
-    <div><a href='https://www.youtube.com/channel/UCXOgAl4w-FQero1ERbGHpXQ'><AiOutlineYoutube style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%", color:"white", backgroundColor:"rgb(42, 41, 41)"}}/></a></div>
+    <div><Link to ='https://m.facebook.com/ZEE5/events/'><CiFacebook style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%", color:"white", backgroundColor:"rgb(42, 41, 41)"}} /></Link></div>
+    <div><Link to ='https://www.instagram.com/zee5/'><BiLogoInstagram style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%", color:"white", backgroundColor:"rgb(42, 41, 41)"}}/></Link></div>
+    <div><Link to='https://twitter.com/ZEE5India?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor'><CiTwitter style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%", color:"white", backgroundColor:"rgb(42, 41, 41)"}}/></Link></div>
+    <div><Link to ='https://www.youtube.com/channel/UCXOgAl4w-FQero1ERbGHpXQ'><AiOutlineYoutube style={{width:"40px", height:"40px", marginTop:"10px", marginLeft:"10px", borderRadius:"50%", color:"white", backgroundColor:"rgb(42, 41, 41)"}}/></Link></div>
     
     </Flex>
   

@@ -6,7 +6,6 @@ import Home from './Main/Home';
 import Movies from './Main/Movies';
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import TvShows from './Main/TvShows';
-import Documentaries from './Main/Documentries';
 import VideoSong from './Main/VideoSong';
 import ShortFilm from './Main/ShortFilm';
 import Watch from './Main/Watch';
@@ -17,9 +16,9 @@ import SearchResult from './Main/SearchResult';
 import BuyPlan from './Main/BuyPlan';
 import AllMovies from './Main/AllMovies';
 import AllShows from './Main/AllShows';
-import AllDocumentries from './Main/AllDocumentries';
 import ZeeExclusive from './Main/ZeeExclusive';
 import AllTrailer from './Main/AllTrailer';
+import AllDocomentries from './Main/AllDocumentries';
 import AllWebSeries from './Main/AllWebSeries';
 import AllDrama from './Main/AllDrama';
 import NoResult from './Main/NoResult';
@@ -29,9 +28,10 @@ import Rental from './Main/Rental';
 import Transaction from './Main/Transaction';
 import AboutUS from './Main/AboutUS';
 import TermOfUse from './Main/TermOfUse';
+import { FetchProvider} from './FetchContext';
 
 function App() {
-  const [showNav, setShowNav] = useState(true);
+
   const[isLoggedIn, setIsLoggedIn] = useState(false);
   const[userName, setUserName] = useState("");
   const [Email, setEMail] = useState("");
@@ -40,48 +40,44 @@ function App() {
     setIsLoggedIn(status);
   };
 
-  const handleShown=()=>{
-        setShowNav(true);
-  }
-  const handleNotShown=()=>{
-       setShowNav(false);
-  }
+
 
   return (
 <>
+<FetchProvider>
    <Router>
-    {showNav &&  <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} username={userName}/>} 
+    <Nav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} username={userName}/>
    <Routes>
-            <Route path="/" element={<Home handleShown={handleShown}/>} />
-                <Route path="/Movies" element={<Movies handleShown={handleShown}/>} />
-                <Route path="/TvShows" element={<TvShows handleShown={handleShown}/>} />
-                <Route path="/Documentary" element={<Documentaries handleShown={handleShown}/>} />
-                <Route path="/Song" element={<VideoSong handleShown={handleShown}/>} />
-                <Route path="/shortfilm" element={<ShortFilm handleShown={handleShown}/>} />
-                <Route path="/watch/:id" element={<Watch handleShown={handleShown}/>} />
-                <Route path="/Watchlist" element={<Watchlist handleShown={handleShown}/>} />
-                <Route path="/result/:id"   element={<SearchResult handleShown={handleShown}/>} />
-                <Route path='/AllMovies' element={<AllMovies handleShown={handleShown}/>}/>
-                 <Route path="/AllShows" element={<AllShows handleShown={handleShown}/>} />
-                 <Route path="/AllDocumentries" element={<AllDocumentries handleShown={handleShown}/>} />
-                 <Route path="/ZeeExclusive" element={<ZeeExclusive handleShown={handleShown}/>} />
-                 <Route path="/AllTrailer" element={<AllTrailer handleShown={handleShown}/>} />
-                 <Route path="/AllWebSeries" element={<AllWebSeries handleShown={handleShown}/>} />
-                 <Route path="/AllDrama" element={<AllDrama handleShown={handleShown}/>} />
-                 <Route path="/NoResult" element={<NoResult handleShown={handleShown}/>} />
-                 <Route path="/Profile" element = {<Profile handleShown={handleShown} username={userName} email={Email}/>}/>
-                 <Route path="/Subscription" element = {<Subscription handleShown={handleShown}/>}/>
-                 <Route path="/Rental" element = {<Rental handleShown={handleShown}/>}/>
-                  <Route path="/transaction" element= {<Transaction handleShown={handleShown}/>}/>
-                  <Route path="/AboutUs" element={<AboutUS handleShown={handleShown}/>}/>
-                  <Route path="/TermOfUse" element={<TermOfUse handleShown={handleShown}/>}/>
+            <Route path="/" element={<Home/>} />
+                <Route path="/Movies" element={<Movies />} />
+                <Route path="/TvShows" element={<TvShows />} />
+                <Route path="/Song" element={<VideoSong />} />
+                <Route path="/shortfilm" element={<ShortFilm />} />
+                <Route path="/watch/:id" element={<Watch />} />
+                <Route path="/Watchlist" element={<Watchlist />} />
+                <Route path="/result/:id"   element={<SearchResult />} />
+                <Route path='/AllMovies' element={<AllMovies />}/>
+                 <Route path="/AllShows" element={<AllShows />} />
+                 <Route path="/AllDocumentries" element={<AllDocomentries />} />
+                 <Route path="/ZeeExclusive" element={<ZeeExclusive />} />
+                 <Route path="/AllTrailer" element={<AllTrailer />} />
+                 <Route path="/AllWebSeries" element={<AllWebSeries/>} />
+                 <Route path="/AllDrama" element={<AllDrama />} />
+                 <Route path="/NoResult" element={<NoResult />} />
+                 <Route path="/Profile" element = {<Profile username={userName} email={Email}/>}/>
+                 <Route path="/Subscription" element = {<Subscription />}/>
+                 <Route path="/Rental" element = {<Rental />}/>
+                  <Route path="/transaction" element= {<Transaction />}/>
+                  <Route path="/AboutUs" element={<AboutUS />}/>
+                  <Route path="/TermOfUse" element={<TermOfUse />}/>
               {/* No need to include Nav for /Login and /Register */}
             
-              <Route path="/Login" element={<Login handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName} setEMail={setEMail}/>} />
-                <Route path="/Register" element={<Register handleNotShown={handleNotShown} setLoggedInStatus={setLoggedInStatus} setUserName={setUserName} setEMail={setEMail}/>} />
-                <Route path="/BuyPlan" element={<BuyPlan handleNotShown={handleNotShown} />} />
+              <Route path="/Login" element={<Login  setLoggedInStatus={setLoggedInStatus} setUserName={setUserName} setEMail={setEMail}/>} />
+                <Route path="/Register" element={<Register  setLoggedInStatus={setLoggedInStatus} setUserName={setUserName} setEMail={setEMail}/>} />
+                <Route path="/BuyPlan" element={<BuyPlan  />} />
             </Routes>
     </Router>
+    </FetchProvider>
     </>
   );
 }

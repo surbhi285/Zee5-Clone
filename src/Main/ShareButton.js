@@ -1,4 +1,4 @@
-import { Flex, Button, Popover, PopoverBody, PopoverContent, PopoverTrigger} from '@chakra-ui/react'
+import { Flex,  Popover, PopoverBody, PopoverContent, PopoverTrigger} from '@chakra-ui/react'
 import { PiShareFat } from 'react-icons/pi';
 import {BiLogoFacebookCircle} from 'react-icons/bi';
 import {AiFillInstagram} from'react-icons/ai';

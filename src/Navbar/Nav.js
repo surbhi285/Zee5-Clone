@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import {useState, useRef} from 'react';
 import {Container, Flex, UnorderedList, ListItem, Spacer, Button, Box, Input, InputGroup, InputLeftElement, textDecoration, position} from '@chakra-ui/react'
-import {SearchIcon, DragHandleIcon, HamburgerIcon } from "@chakra-ui/icons";
-import {NavLink, Link} from 'react-router-dom';
+import {SearchIcon,  HamburgerIcon } from "@chakra-ui/icons";
+import {NavLink, Link, useLocation} from 'react-router-dom';
 import SearchCard from '../Main/SearchCard';
 import Zee from '../Assets/Zee.jpeg';
 import AppsIcon from '@mui/icons-material/Apps';
@@ -14,7 +14,7 @@ import { LuCrown } from 'react-icons/lu';
 
 
 export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
-    console.log(username);
+    
     const searchStyle={
         bg:"#0F0617", 
         color:"white", 
@@ -24,17 +24,19 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         border:"1px solid grey",
         borderRadius:"5px",  
     }
-
+      
+    const location = useLocation();
+  
     const[isDropdownOpen, setIsDropDownOpen] = useState(false);
     const[option, setIsOption] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-   
     const [searchData, setSearchData] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
    
     const [smallerScreen,  setSmallerScreen] = useState(window.innerWidth < 1000);
 
-    const toogleRef = useRef(null); 
+    // const toogleRef = useRef(null); 
+    // const menuRef = useRef(null);
 
     const navLinkStyle = ({ isActive }) => {
       return {
@@ -44,10 +46,9 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     };
    
     const toggleDropDown = () =>{
-      console.log("dropdown clicked")
-        setIsDropDownOpen(!isDropdownOpen);
-        console.log("isDropDown:", isDropdownOpen)
+      setIsDropDownOpen(!isDropdownOpen);
     };
+
    
     const handleOption = () => {
       setIsOption(!option);
@@ -55,11 +56,22 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
 
     const handleMenuToggle=()=>{
         setMenuOpen(!menuOpen)
-        console.log("hamburger opened");
+        // console.log("hamburger opened");
     }
 
+    // useEffect(()=>{
+    //   const handleClick=(e)=>{
+    //       if(menuRef.current && !menuRef.current.contains(e.target)){
+    //         setMenuOpen(false)
+    //       }
+    //   };
+    //   document.addEventListener("click", handleClick);
+    //   return()=>{
+    //     document.addEventListener("click", handleClick)
+    //   }
+    // })
+
     const handleLogout = ()=>{  
-      //  console.log("ashg")
         localStorage.removeItem('signupDeatils');
         setIsLoggedIn(false);
     }
@@ -68,24 +80,12 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         setSearchData('');
       };
 
-      useEffect(()=>{
-        const handleClickOutside = (event) => {
-          if (toogleRef.current && !toogleRef.current.contains(event.target)) {
-            setIsDropDownOpen(false);
-            setMenuOpen(false);
-          }
-        }
-        document.addEventListener("click", handleClickOutside);
-        return () => {
-          document.removeEventListener("click", handleClickOutside);
-        };
-      }, [toogleRef]);
+     
 
     const handleSearchInputChange = (event) => {
         const userInput = event.target.value;
         setSearchData(userInput);
-        // Show suggestions when the user starts typing
-        setShowSuggestions(userInput.length > 0);
+        setShowSuggestions(userInput.length > 0 );
       };
          
       useEffect(()=>{
@@ -98,6 +98,15 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         window.removeEventListener("resize", handleResize);
       };
     },[])
+
+    console.log(location)
+    if (
+      location.pathname === "/Login" ||
+      location.pathname === "/BuyPlan" ||
+      location.pathname === "/Register"
+    ) {
+      return null;
+    }
      
   return (
     <>
@@ -161,7 +170,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
      </Container>
 
     ):(<>
-    <Container p="10px" bg="#0F0617" color="white" position="fixed" top="0" minWidth="98%" zIndex="1000">
+    <Container p="10px" bg="#0F0617" color="white" position="fixed" top="0" minWidth="99%" zIndex="1000">
     <Flex as="nav" alignItems="center" color="white" justifyContent="space-between">
     <Flex>
     <img src="https://www.zee5.com/images/ZEE5_logo.svg?ver=2.52.40" alt="zee logo" style={{width: "60px"}}/>
@@ -180,9 +189,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         </NavLink>
         
        
-        <ListItem  onClick={(e)=>{toggleDropDown();
-        }}>
-        <div className='AppsIcon' ref={toogleRef}><AppsIcon /></div>
+        <ListItem  onClick={toggleDropDown}>
+        <div className='AppsIcon' ><AppsIcon /></div>
   {isDropdownOpen && (
     <div style={{ position: "absolute", marginTop: "20px", backgroundColor: "#0F0617", width: "200px" }}>
       <ul className="ul">
@@ -360,10 +368,10 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <LuCrown style={{paddingRight:"5px", fontSize:"25px"}}/>  BUY PLANS
           </Button>
         </NavLink>
-      
-      <HamburgerIcon  ref={toogleRef} onClick = {handleMenuToggle} fontSize={25} cursor="pointer" textDecoration='none' color="white" marginTop="5px"/>
+     
+      <HamburgerIcon onClick = {handleMenuToggle} fontSize={25} cursor="pointer" textDecoration='none' color="white" marginTop="5px"/>
       {menuOpen &&  (
-          <div className='menu'>
+          <div className='menu' >
             <NavLink to ="/" style={{textDecoration:"none", color:"white"}}>
            <div style={{paddingLeft:"50px", 
            fontWeight:"bold", 
@@ -411,7 +419,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
         <li  className="profileItem" style={{paddingLeft:"35px"}}>Songs</li>
         </NavLink>
-        <NavLink to='/VideoSong' style={{textDecoration:"none", color:"white"}}>
+        <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
         <li  className="profileItem" style={{paddingLeft:"35px"}}>Video</li>
         </NavLink>
         <NavLink to='/NoResult' style={{textDecoration:"none", color:"white"}}>
@@ -489,6 +497,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </div>
 
         )}
+        
         </Flex>
        </Flex>
         </Container>

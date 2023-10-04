@@ -4,8 +4,7 @@ import React from 'react'
 import {useState} from 'react'
 import {Link, NavLink} from "react-router-dom";
 
-export default function Login({handleNotShown, setLoggedInStatus, setEMail, setUserName}) {
-  handleNotShown();
+export default function Login({setLoggedInStatus, setEMail, setUserName}) {
 
   const[email, setEmail] = useState("");
   const[password, setPassword] = useState("");

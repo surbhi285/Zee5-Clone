@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link} from "react-router-dom";
-import { Button, Box, Flex } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import {PiShareFat} from 'react-icons/pi';
+import { Flex } from "@chakra-ui/react";
+
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ShareButton from "./ShareButton";
 
@@ -84,9 +83,6 @@ const ComponentCard = ({ item}) => {
             </div> 
           </div>
         </div>
-        
-          
-          
         </div>
       </div>
     )}

@@ -3,8 +3,8 @@ import { Flex } from '@chakra-ui/react'
 import Footer from './Footer'
 import ProfileItem from './ProfileItem'
 
-export default function Profile({handleShown, username, email}) {
-    handleShown();
+export default function Profile({ username, email}) {
+
     console.log("username", username)
     console.log("email", email);
   return (
@@ -48,7 +48,6 @@ export default function Profile({handleShown, username, email}) {
    </div>
    
     </Flex>
-    {/* <div color='purple'>Edit Profile</div> */}
     
     </div>
     <Footer />

@@ -50,7 +50,6 @@ const getMovies=async()=>{
           console.log("userData", user);
           if(user){
             const parsedData = JSON.parse(user);
-            // const isShowInWatchlist = parsedData.watchlist.some((item) => item.showId === showId);
            const response= await fetch(`https://academics.newtonschool.co/api/v1/ott/watchlist/like`,{
                 method:"PATCH",
                 headers:{

@@ -3,37 +3,13 @@ import {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import ComponentCard from './ComponentCard';
 import React from 'react';
+import {useContext} from'react';
+import FetchContext  from '../FetchContext';
 
 export default function ShortFilm() {
-    const[shortFilmList, setshortFilmList] = useState([]);
+    const {apiData} = useContext(FetchContext);
+    console.log(apiData);
 
-    const getMovies=async()=>{
-        try{const storedData = localStorage.getItem("videoData");
-                 
-            if(storedData){
-                const getData = JSON.parse(storedData);
-                const parseData = getData.videoData;
-                console.log(parseData);
-
-        const shortFilmData = parseData.filter(item=>item.type==='short film');
-       
-        
-         setshortFilmList(shortFilmData);
-         
-        }
-    }catch(error){console.error("error")}
-}
-        useEffect(()=>{
-            getMovies();
-        },[])
-
-        const addtoFav = (item) => {
-            const favMovies = JSON.parse(localStorage.getItem("favouriteMovies")) || [];
-            favMovies.push(item);
-            localStorage.setItem("favouriteMovies", JSON.stringify(favMovies));
-          };
-     
-  
   return (
     <>
     <Container style={{marginTop:"8rem"}}>
@@ -52,18 +28,16 @@ export default function ShortFilm() {
           >
           Movies & Shows You May Also Like
           </Box>
-          <Flex sx={{flexWrap:"wrap"}}>
-            {shortFilmList.map((exclusive, index) => (
-              <ComponentCard
-                key={exclusive._id}
-                item={exclusive}
-              />
-            ))}
-          </Flex>
+          <Flex style={{flexWrap:"wrap"}}>
+        {apiData.filter((drama)=>{return drama.type==="short film"})
+        .map((shortFilm)=>(
+            <ComponentCard 
+            key={shortFilm._id}
+            item={shortFilm}/>
+        ))}
+      </Flex>
         </Container>
 </Container>
-       
-      
     </>
   );
 }

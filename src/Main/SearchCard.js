@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
-import { color } from 'framer-motion';
 import { ListItem, UnorderedList, Container } from '@chakra-ui/react';
 
 export default function SearchCard({searchData, clearSearchValue}) {

@@ -1,32 +1,20 @@
 import React from 'react'
 import ComponentCard from './ComponentCard';
 import { Flex } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
 
-export default function AllShows() {
-    const[Trailer, setTrailer] = useState([]);
+import FetchContext from '../FetchContext';
+import { useContext } from 'react';
 
-    const getShows=async()=>{
-        try{ const storedData = localStorage.getItem("videoData");
-            if(storedData){
-            const getData = JSON.parse(storedData);
-            const parseData = getData.videoData;
-            console.log(parseData);
-            const TrailerData = parseData.filter(item=>(item.type==="trailer"));
-            setTrailer(TrailerData);
-            }
-
-            }catch(error){console.error("error")}
-        }
-    useEffect(()=>{
-        getShows();
-    },[])
+export default function AllTrailer() {
+    
+    const {apiData} = useContext(FetchContext);
 
   return (
     <div style={{marginTop:"6rem", marginLeft:"40px"}}>
       <h1 style={{color:"white", letterSpacing:"1px"}}>Short Movies</h1>
       <Flex style={{flexWrap:"wrap"}}>
-        {Trailer.map((trailer)=>(
+        {apiData.filter((drama)=>{return drama.type==="trailer"})
+        .map((trailer)=>(
             <ComponentCard 
             key={trailer._id}
             item={trailer}/>

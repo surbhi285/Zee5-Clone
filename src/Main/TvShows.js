@@ -1,52 +1,22 @@
 import { Container, Box, Flex, Button, border} from '@chakra-ui/react'
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import ComponentCard from './ComponentCard';
 import Footer from './Footer';
 import React from 'react';
 import ImageSlider from './ImageSlider';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import FetchContext from '../FetchContext';
 
-export default function TvShows({handleShown}) {
-handleShown();
 
-    
-    const[smallerScreen, setSmallerScreen] = useState(window.innerWidth<500)
-    const[tvShowList, settvShowList] = useState([]);
-    const[romantic, setRomantic] = useState([]);
-    const[action, setAction] = useState([]);
-    const[horror, setHorror] = useState([]);
-    const[comedy, setComedy] = useState([]);
 
-    
-    const getMovies=async()=>{
-        try{const storedData = localStorage.getItem("videoData");
-                 
-            if(storedData){
-                const getData = JSON.parse(storedData);
-                const parseData = getData.videoData;
-                console.log(parseData);
+export default function TvShows() {
+    const[smallerScreen, setSmallerScreen] = useState(window.innerWidth<500);
 
-        const tvData = parseData.filter(item=>item.type==='web series');
-        const romanticData = parseData.filter(item=> (item.type==="web series" || item.type==="tv show") && (item.keywords.includes("romance")|| item.keywords.includes("love") || item.keywords.includes("fantasy")));
-       
-        const actionData = parseData.filter(item=> (item.type==="web series" || item.type==="tv show") && (item.keywords.includes("action")|| item.keywords.includes("thriller")|| item.keywords.includes("sci-fi")));
-       
-        const horrorData = parseData.filter(item => (item.type==="web series" || item.type==="tv show") && (item.keywords.includes("horror")|| item.keywords.includes("darkness")||item.keywords.includes("betrayal")));
-    
-        const comedyData = parseData.filter(item=> (item.type==="web series" || item.type==="tv show") && (item.keywords.includes("drama")||item.keywords.includes("comedy")));
-       
-        
-         settvShowList(tvData);
-         setRomantic(romanticData);
-         setAction(actionData);
-         setHorror(horrorData);
-         setComedy(comedyData);
-        }
-    }catch(error){console.error("error")}
-}
+     const{apiData} = useContext(FetchContext);
+
+
 useEffect(()=>{
-  getMovies();
   const handleResize = () => {
      setSmallerScreen(window.innerWidth<500)
   };
@@ -55,7 +25,21 @@ useEffect(()=>{
     window.removeEventListener("resize", handleResize);
   };
   
-},[])
+},[]);
+
+const renderComponentCards = (data) => {
+  if (!Array.isArray(data)) {
+    return null;
+  }
+
+  return (
+    <Flex sx={{ overflowX: 'scroll', overflowY: 'scroll', '&::-webkit-scrollbar': { width: '1px' } }}>
+      {data.map((item) => (
+        <ComponentCard key={item._id} item={item} />
+      ))}
+    </Flex>
+  );
+      }
 
        
   
@@ -84,14 +68,7 @@ useEffect(()=>{
           <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-            <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-              {tvShowList.map((exclusive) => (
-                <ComponentCard
-                  key={exclusive._id}
-                  item={exclusive}
-                />
-              ))}
-            </Flex>
+            {renderComponentCards(apiData.filter((item) => (item.type==="tv show" || item.type==="web series")))}
           </Container>
   
           <Container style={{marginLeft:"10px"}}>
@@ -112,14 +89,7 @@ useEffect(()=>{
           <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-            <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-              {action.map((action) => (
-                <ComponentCard
-                  key={action._id}
-                  item={action}
-                />
-              ))}
-            </Flex>
+          {renderComponentCards(apiData.filter((item) =>(item.type==="tv show" || item.type==="web series") && (item.keywords.includes("action")|| item.keywords.includes("thriller")||item.keywords.includes("sci-fi"))))}
           </Container>
   
           <Container style={{marginLeft:"10px"}}>
@@ -140,14 +110,7 @@ useEffect(()=>{
           <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-            <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-              {comedy.map((comedy, index) => (
-                <ComponentCard
-                  key={comedy._id}
-                  item={comedy}
-                />
-              ))}
-            </Flex>
+            {renderComponentCards(apiData.filter((item) =>(item.type==="tv show" || item.type==="web series") && (item.keywords.includes("horror")||item.keywords.includes("darkness")||item.keywords.includes("betrayal"))))}
           </Container>
   
           <Container style={{marginLeft:"10px"}}>
@@ -168,14 +131,7 @@ useEffect(()=>{
           <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-            <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-              {romantic.map((romantic) => (
-                <ComponentCard
-                  key={romantic._id}
-                  item={romantic}
-                />
-              ))}
-            </Flex>
+            {renderComponentCards(apiData.filter((item) =>(item.type==="tv show" || item.type==="web series") && (item.keywords.includes("romance")|| item.keywords.includes("love")||item.keywords.includes("fantasy"))))}
           </Container>
           <Container style={{marginLeft:"10px"}}>
           <Flex style={{justifyContent:"space-between"}}>
@@ -194,14 +150,7 @@ useEffect(()=>{
           <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-            <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-              {horror.map((horror) => (
-                <ComponentCard
-                  key={horror._id}
-                  item={horror}
-                />
-              ))}
-            </Flex>
+            {renderComponentCards(apiData.filter((item) =>(item.type==="tv show" || item.type==="web series") && (item.keywords.includes("drama")|| item.keywords.includes("comedy")|| item.keywords.includes("epic"))))}
           </Container>
           </Container>
     ):(
@@ -209,33 +158,26 @@ useEffect(()=>{
        <Container>
          <ImageSlider />
        </Container>
-         <Container style={{marginLeft:"40px"}}>
+         <Container style={{marginLeft:"40px", marginTop:"30px"}}>
          <Flex style={{justifyContent:"space-between"}}>
              <Box
                as="p"
                sx={{
-                 fontSize: "25px",
+                 fontSize: "20px",
                  color: "white",
                  fontFamily: "Arial",
                  marginLeft: "20px",
                  letterSpacing: "1px",
-                 marginBottom: "20px",
+                 marginBottom:0
                }}
              >
                ZEE5 Exclusives
              </Box>
              <Link to="/AllShows" style={{textDecoration:"none", color:"#a785ff"}}>
-          <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
+          <Box style={{color:"#a785ff", paddingTop:"30px",paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-             <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-               {tvShowList.map((exclusive) => (
-                 <ComponentCard
-                   key={exclusive._id}
-                   item={exclusive}
-                 />
-               ))}
-             </Flex>
+          {renderComponentCards(apiData.filter((item) => (item.type==="tv show" || item.type==="web series")))}
            </Container>
    
            <Container style={{marginLeft:"40px", marginTop:"40px"}}>
@@ -243,12 +185,13 @@ useEffect(()=>{
              <Box
                as="p"
                sx={{
-                 fontSize: "25px",
+                 fontSize: "20px",
                  color: "white",
                  fontFamily: "Arial",
                  marginLeft: "20px",
                  letterSpacing: "1px",
-                 marginBottom: "20px",
+                 marginBottom:0
+                
                }}
              >
                Action Shows
@@ -257,14 +200,7 @@ useEffect(()=>{
           <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-             <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-               {action.map((action, index) => (
-                 <ComponentCard
-                   key={action._id}
-                   item={action}
-                 />
-               ))}
-             </Flex>
+          {renderComponentCards(apiData.filter((item) =>(item.type==="tv show" || item.type==="web series") && (item.keywords.includes("action")|| item.keywords.includes("thriller")||item.keywords.includes("sci-fi"))))}
            </Container>
    
            <Container style={{marginLeft:"40px", marginTop:"40px"}}>
@@ -272,12 +208,12 @@ useEffect(()=>{
              <Box
                as="p"
                sx={{
-                 fontSize: "25px",
+                 fontSize: "20px",
                  color: "white",
                  fontFamily: "Arial",
                  marginLeft: "20px",
                  letterSpacing: "1px",
-                 marginBottom: "20px",
+                 marginBottom:0
                }}
              >
              Comedy Shows
@@ -286,14 +222,7 @@ useEffect(()=>{
           <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-             <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-               {comedy.map((comedy, index) => (
-                 <ComponentCard
-                   key={comedy._id}
-                   item={comedy}
-                 />
-               ))}
-             </Flex>
+          {renderComponentCards(apiData.filter((item) =>(item.type==="tv show" || item.type==="web series") && (item.keywords.includes("comedy")||item.keywords.includes("drama")||item.keywords.includes("darkness"))))}
            </Container>
    
            <Container style={{marginLeft:"40px", marginTop:"40px"}}>
@@ -301,12 +230,12 @@ useEffect(()=>{
              <Box
                as="p"
                sx={{
-                 fontSize: "25px",
+                 fontSize: "20px",
                  color: "white",
                  fontFamily: "Arial",
                  marginLeft: "20px",
                  letterSpacing: "1px",
-                 marginBottom: "20px",
+                 marginBottom:0
                }}
              >
              Romantic Shows
@@ -315,28 +244,19 @@ useEffect(()=>{
           <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-             <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-               {romantic.map((romantic) => (
-                 <ComponentCard
-                   key={romantic._id}
-                   item={romantic}
-                 />
-               ))}
-             </Flex>
+             {renderComponentCards(apiData.filter((item) =>(item.type==="tv show" || item.type==="web series") && (item.keywords.includes("romance")||item.keywords.includes("love")||item.keywords.includes("betrayal"))))}
            </Container>
-   
-   
-           <Container style={{marginLeft:"40px", marginTop:"40px"}}>
+           <Container style={{marginLeft:"40px"}}>
            <Flex style={{justifyContent:"space-between"}}>
              <Box
                as="p"
                sx={{
-                 fontSize: "25px",
+                 fontSize: "20px",
                  color: "white",
                  fontFamily: "Arial",
                  marginLeft: "20px",
                  letterSpacing: "1px",
-                 marginBottom: "20px",
+                 marginBottom:0
                }}
              >
                Horror Shows
@@ -345,14 +265,7 @@ useEffect(()=>{
           <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
           </Link>
           </Flex>
-             <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-               {horror.map((horror) => (
-                 <ComponentCard
-                   key={horror._id}
-                   item={horror}
-                 />
-               ))}
-             </Flex>
+             {renderComponentCards(apiData.filter((item) =>(item.type==="tv show" || item.type==="web series") && (item.keywords.includes("horror")|| item.keywords.includes("thriller")|| item.keywords.includes("darkness"))))}
            </Container>
            </Container>
     )}

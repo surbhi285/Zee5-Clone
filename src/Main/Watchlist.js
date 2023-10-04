@@ -1,6 +1,5 @@
-import { useEffect, useState, useParams } from "react";
+import { useEffect, useState} from "react";
 import { Container, Box, Button, Flex, Grid} from "@chakra-ui/react";
-// import { Link } from "react-router-dom";
 import {TbFaceIdError} from 'react-icons/tb';
 import ProfileItem from "./ProfileItem";
 import {AiOutlineClose} from 'react-icons/ai';
@@ -8,7 +7,7 @@ import {AiOutlineClose} from 'react-icons/ai';
 export default function Watchlist() {
     const[watchlist, setWatchList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const[isAdded, setIsAdded] = useState(false);
+    const[isAdded, setIsAdded] = useState(true);
    
     async function getWatchList (){
       const userInfo = localStorage.getItem("signup")
@@ -53,7 +52,12 @@ export default function Watchlist() {
             body: JSON.stringify({ showId: showId }),
       });
       if (response.ok){
-        setIsAdded(!isAdded)
+        const updatedWatchlist = isAdded
+        ? watchlist.filter((item) => item._id !== showId)
+        : [...watchlist, showId];
+
+      setWatchList(updatedWatchlist);
+      setIsAdded(!isAdded);
       }
       
     }

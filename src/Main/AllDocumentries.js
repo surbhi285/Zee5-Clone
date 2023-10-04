@@ -1,32 +1,20 @@
 import React from 'react'
 import ComponentCard from './ComponentCard';
 import { Flex } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
+
+import {useContext} from 'react';
+import FetchContext from '../FetchContext';
 
 export default function AllShows() {
-    const[documentry, setDocumentry] = useState([]);
-
-    const getShows=async()=>{
-        try{ const storedData = localStorage.getItem("videoData");
-            if(storedData){
-            const getData = JSON.parse(storedData);
-            const parseData = getData.videoData;
-            console.log(parseData);
-            const DocumentaryData = parseData.filter(item=>(item.type==="documentary"));
-            setDocumentry(DocumentaryData);
-            }
-
-            }catch(error){console.error("error")}
-        }
-    useEffect(()=>{
-        getShows();
-    },[])
+  const{apiData} = useContext(FetchContext);
+    
 
   return (
     <div style={{marginTop:"6rem", marginLeft:"40px"}}>
       <h1 style={{color:"white", letterSpacing:"1px"}}>Documentaries</h1>
       <Flex style={{flexWrap:"wrap"}}>
-        {documentry.map((documentary)=>(
+      {apiData.filter((drama)=>{return drama.type==="documentary"})
+        .map((documentary)=>(
             <ComponentCard 
             key={documentary._id}
             item={documentary}/>

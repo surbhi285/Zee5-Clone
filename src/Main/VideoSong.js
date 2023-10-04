@@ -1,35 +1,17 @@
 import { Container, Box, Flex, Button, border} from '@chakra-ui/react'
 import { SmallAddIcon } from '@chakra-ui/icons';
-import {useEffect, useState} from 'react';
+// import {useEffect, useState} from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ComponentCard from './ComponentCard';
 import Footer from './Footer';
 import React from 'react';
+import FetchContext from '../FetchContext'; 
 
 export default function VideoSong() {
 
-    const[exclusive, setExclusive] = useState([]);
+    const {apiData} = useContext(FetchContext);
 
-
-    const getMovies=async()=>{
-        try{const storedData = localStorage.getItem("videoData");
-                 
-            if(storedData){
-                const getData = JSON.parse(storedData);
-                const parseData = getData.videoData;
-                console.log(parseData);
-        const songData = parseData.filter(item=>item.type==='video song');
-        const limitedSongData = songData.slice(0, 4);
-         setExclusive(limitedSongData);
-        
-        }
-    }catch(error){console.error("error")}
-}
-        useEffect(()=>{
-            getMovies();
-        },[])
-     
-  
   return (
    <Container style={{marginLeft:"30px"}}>
           <Box
@@ -45,14 +27,15 @@ export default function VideoSong() {
           >
             Recommendations For You
           </Box>
-          <Flex  style={{flexWrap:"wrap"}}>
-            {exclusive.map((exclusive) => (
-              <ComponentCard
-                key={exclusive._id}
-                item={exclusive}
-              />
-            ))}
-            </Flex>
+          <Flex style={{flexWrap:"wrap"}}>
+        {apiData.filter((drama)=> drama.type==="video song")
+        .slice(0,4)
+        .map((VideoSong)=>(
+            <ComponentCard 
+            key={VideoSong._id}
+            item={VideoSong}/>
+        ))}
+      </Flex>
         </Container>
   );
 }

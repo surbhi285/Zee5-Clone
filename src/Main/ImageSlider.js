@@ -2,7 +2,6 @@ import React, { useState, useEffect} from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import {BsCaretRightFill} from 'react-icons/bs';
-import {LuCrown} from "react-icons/lu"
 import movie1 from '../Assets/movie1.webp';
 import movie3 from '../Assets/movie3.webp';
 import movie2 from '../Assets/movie2.webp';

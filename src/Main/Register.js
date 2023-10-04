@@ -4,8 +4,8 @@ import {useState} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import { CloseIcon } from '@chakra-ui/icons';
 
-export default function Register({handleNotShown, setLoggedInStatus, setUserName, setEMail}) {
-  handleNotShown();
+export default function Register({setLoggedInStatus, setUserName, setEMail}) {
+ 
     
 const [error, setError]  = useState('')
 const[username, setUsername]=useState('')
@@ -42,7 +42,7 @@ const handleusername=(event)=>{
           "https://academics.newtonschool.co/api/v1/user/signup",{
             method:"POST",
             headers: {
-              'Content-Type': 'application/json', // Set content type to JSON
+              'Content-Type': 'application/json', 
               projectId:"8jf3b15onzua"
             },
             body: JSON.stringify({

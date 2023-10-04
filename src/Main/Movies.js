@@ -1,54 +1,20 @@
-import { Container, Box, Flex, Button, border} from '@chakra-ui/react'
-import { SmallAddIcon } from '@chakra-ui/icons';
-import {useEffect, useState} from 'react';
+import { Container, Box, Flex} from '@chakra-ui/react'
+import {useEffect, useState, useContext} from 'react';
 import React from 'react';
 import ComponentCard from './ComponentCard';
 import Footer from './Footer';
 import ImageSlider from "./ImageSlider";
 import { Link } from 'react-router-dom';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import FetchContext  from '../FetchContext';
 
-export default function Movies({handleShown}) {
- handleShown();
+
+export default function Movies() {
      
-       const[smallerScreen, setSmallerScreen] = useState(window.innerWidth<500);
-
-    const[moviesList, setMoviesList] = useState([]);
-    const[romantic, setRomantic] = useState([]);
-    const[action, setAction] = useState([]);
-    const[horror, setHorror] = useState([]);
-    const[comedy, setComedy] = useState([]);
+      const[smallerScreen, setSmallerScreen] = useState(window.innerWidth<500);
+      const{apiData} = useContext(FetchContext);
     
-    
-
-    const getMovies=async()=>{
-        try{const storedData = localStorage.getItem("videoData");
-                 
-            if(storedData){
-                const getData = JSON.parse(storedData);
-                const parseData = getData.videoData;
-                console.log(parseData);
-        const moviesData = parseData.filter(item=>item.type==='movie');
-        const romanticData = parseData.filter(item=> (item.type==="movie" || item.type==="trailer") && (item.keywords.includes("romance")|| item.keywords.includes("love")));
-        // console.log(romanticData);
-        const actionData = parseData.filter(item=> (item.type==="movie" || item.type==="trailer") && (item.keywords.includes("action")|| item.keywords.includes("thriller")));
-        // console.log(actionData);
-        const horrorData = parseData.filter(item => (item.type==="movie" || item.type==="trailer") && (item.keywords.includes("horror")||item.keywords.includes("darkness")));
-        // console.log(horrorData);
-        const comedyData = parseData.filter(item=> (item.type==="movie" || item.type==="trailer") && (item.keywords.includes("drama")|| item.keywords.includes("comedy")|| item.keywords.includes("epic")));
-        // console.log(comedyData);
-        
-        //  console.log(data.data);
-         setMoviesList(moviesData);
-         setRomantic(romanticData);
-         setAction(actionData);
-         setHorror(horrorData);
-         setComedy(comedyData);
-        }
-    }catch(error){console.error("error")}
-}
         useEffect(()=>{
-            getMovies();
             const handleResize=()=>{
             setSmallerScreen(window.innerWidth<500);
             };
@@ -57,6 +23,21 @@ export default function Movies({handleShown}) {
              window.addEventListener("resize", handleResize);
             }
         },[])
+
+        
+        const renderComponentCards = (data) => {
+          if (!Array.isArray(data)) {
+            return null;
+          }
+        
+          return (
+            <Flex sx={{ overflowX: 'scroll', overflowY: 'scroll', '&::-webkit-scrollbar': { width: '1px' } }}>
+              {data.map((item) => (
+                <ComponentCard key={item._id} item={item} />
+              ))}
+            </Flex>
+          );
+              }
 
   return (
     <>
@@ -83,14 +64,7 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
      </Flex>
-     <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-       {moviesList.map((exclusive) => (
-         <ComponentCard
-           key={exclusive._id}
-           item={exclusive}
-         />
-       ))}
-     </Flex>
+     {renderComponentCards(apiData.filter((item) => (item.type==="movie" || item.type==="trailer") && (item.keywords.includes("romance")|| item.keywords.includes("love"))))}
    </Container>
 
    <Container style={{marginLeft:"10px"}}>
@@ -110,14 +84,7 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
      </Flex>
-     <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-       {action.map((action) => (
-         <ComponentCard
-           key={action._id}
-           item={action}
-         />
-       ))}
-     </Flex>
+     {renderComponentCards(apiData.filter((item) =>(item.type==="movie" || item.type==="trailer") && (item.keywords.includes("action")|| item.keywords.includes("thriller"))))}
    </Container>
 
    <Container style={{marginLeft:"10px"}}>
@@ -138,14 +105,7 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
      </Flex>
-     <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-       {comedy.map((comedy) => (
-         <ComponentCard
-           key={comedy._id}
-           item={comedy}
-         />
-       ))}
-     </Flex>
+     {renderComponentCards(apiData.filter((item) =>(item.type==="movie" || item.type==="trailer") && (item.keywords.includes("horror")||item.keywords.includes("darkness"))))}
    </Container>
 
    <Container style={{marginLeft:"10px"}}>
@@ -166,14 +126,7 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
      </Flex>
-     <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-       {romantic.map((romantic) => (
-         <ComponentCard
-           key={romantic._id}
-           item={romantic}
-         />
-       ))}
-     </Flex>
+     {renderComponentCards(apiData.filter((item) =>(item.type==="movie" || item.type==="trailer") && (item.keywords.includes("action")|| item.keywords.includes("thriller"))))}
    </Container>
 
 
@@ -194,21 +147,14 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px", fontSize:"12px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
       </Flex>
-     <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-       {horror.map((horror) => (
-         <ComponentCard
-           key={horror._id}
-           item={horror}
-         />
-       ))}
-     </Flex>
+     {renderComponentCards(apiData.filter((item) =>(item.type==="movie" || item.type==="trailer") && (item.keywords.includes("drama")|| item.keywords.includes("comedy")|| item.keywords.includes("epic"))))}
    </Container>
    </Container>
     ):( <Container style={{marginTop:"8rem"}}>
     <Container>
       <ImageSlider />
     </Container>
-  <Container style={{marginLeft:"40px", marginTop:"40px"}}>
+  <Container style={{marginLeft:"40px", marginTop:"30px"}}>
     <Flex justifyContent={'space-between'}>
         <Box
           as="p"
@@ -218,7 +164,7 @@ export default function Movies({handleShown}) {
             fontFamily: "Arial",
             marginLeft: "20px",
             letterSpacing: "1px",
-            marginBottom: "20px",
+            marginBottom:"0",
           }}
         >
           ZEE5 Exclusives
@@ -227,16 +173,10 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
       </Flex>
-        <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-          {moviesList.map((exclusive) => (
-            <ComponentCard
-              key={exclusive._id}
-              item={exclusive}
-            />
-          ))}
-        </Flex>
+        {renderComponentCards(apiData.filter((item) => (item.type==="movie" || item.type==="trailer")))}
       </Container>
-      <Container style={{marginLeft:"40px", marginTop:"40px"}}>
+
+      <Container style={{marginLeft:"40px"}}>
         <Flex justifyContent={'space-between'}>
         <Box
           as="p"
@@ -246,7 +186,7 @@ export default function Movies({handleShown}) {
             fontFamily: "Arial",
             marginLeft: "20px",
             letterSpacing: "1px",
-            marginBottom: "20px",
+            marginBottom:"0",
           }}
         >
           Action Movies
@@ -255,17 +195,10 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
       </Flex>
-        <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-          {action.map((action) => (
-            <ComponentCard
-              key={action._id}
-              item={action}
-            />
-          ))}
-        </Flex>
+      {renderComponentCards(apiData.filter((item) =>(item.type==="movie" || item.type==="trailer") && (item.keywords.includes("action")|| item.keywords.includes("thriller"))))}
       </Container>
 
-      <Container style={{marginLeft:"40px", marginTop:"40px"}}>
+      <Container style={{marginLeft:"40px"}}>
         <Flex justifyContent={'space-between'}>
         <Box
           as="p"
@@ -275,7 +208,7 @@ export default function Movies({handleShown}) {
             fontFamily: "Arial",
             marginLeft: "20px",
             letterSpacing: "1px",
-            marginBottom: "20px",
+            marginBottom:"0",
           }}
         >
         Comedy Movies
@@ -284,17 +217,10 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
       </Flex>
-        <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-          {comedy.map((comedy) => (
-            <ComponentCard
-              key={comedy._id}
-              item={comedy}
-            />
-          ))}
-        </Flex>
+        {renderComponentCards(apiData.filter((item) =>(item.type==="movie" || item.type==="trailer") && (item.keywords.includes("comedy")|| item.keywords.includes("drama")||item.keywords.includes("sci-fi"))))}
       </Container>
 
-      <Container style={{marginLeft:"40px", marginTop:"40px"}}>
+      <Container style={{marginLeft:"40px"}}>
         <Flex justifyContent={'space-between'}>
         <Box
           as="p"
@@ -304,7 +230,7 @@ export default function Movies({handleShown}) {
             fontFamily: "Arial",
             marginLeft: "20px",
             letterSpacing: "1px",
-            marginBottom: "20px",
+            marginBottom:"0",
           }}
         >
         Romantic Movies
@@ -313,14 +239,7 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
       </Flex>
-        <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-          {romantic.map((romantic) => (
-            <ComponentCard
-              key={romantic._id}
-              item={romantic}
-            />
-          ))}
-        </Flex>
+        {renderComponentCards(apiData.filter((item) =>(item.type==="movie" || item.type==="trailer") && (item.keywords.includes("love")|| item.keywords.includes("romantic")|| item.keywords.includes("fantasy"))))}
       </Container>
 
 
@@ -334,7 +253,7 @@ export default function Movies({handleShown}) {
             fontFamily: "Arial",
             marginLeft: "20px",
             letterSpacing: "1px",
-            marginBottom: "20px",
+            marginBottom:"0",
           }}
         >
           Horror Movies
@@ -343,14 +262,7 @@ export default function Movies({handleShown}) {
       <Box style={{color:"#a785ff",paddingTop:"15px", paddingRight:"10px"}}>More <ChevronRightIcon style={{fontSize:"15px"}}/> </Box>
       </Link>
       </Flex>
-        <Flex sx={{ overflowX: "scroll", overflowY: "scroll", "&::-webkit-scrollbar": { width: "1px" } }}>
-          {horror.map((horror) => (
-            <ComponentCard
-              key={horror._id}
-              item={horror}
-            />
-          ))}
-        </Flex>
+        {renderComponentCards(apiData.filter((item) =>(item.type==="movie" || item.type==="trailer") && (item.keywords.includes("horror")|| item.keywords.includes("thriller")|| item.keywords.includes("epic"))))}
       </Container>
       </Container>
       )}

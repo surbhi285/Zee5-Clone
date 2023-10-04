@@ -1,12 +1,11 @@
 
 import React from 'react';
-import { Button, background } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { NavLink } from 'react-router-dom';
 
 
-export default function BuyPlan({handleNotShown}) {
-    handleNotShown();
+export default function BuyPlan() {
    const background ={
     background: `url('https://www.91-cdn.com/pricebaba-blogimages/wp-content/uploads/2023/06/Zee5-Subscription-plans.jpg')`,
     backgroundSize: 'cover',
