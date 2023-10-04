@@ -33,7 +33,7 @@ const responsive = {
 
     const carouselOptions = {
       responsive: responsive,
-      autoPlay: false,
+      autoPlay: true,
       infinite: true,
       autoPlaySpeed: 2000,
       keyBoardControl: true,
