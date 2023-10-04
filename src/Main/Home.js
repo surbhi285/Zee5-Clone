@@ -36,7 +36,7 @@ export default function Home() {
         
           return (
             <Flex sx={{ overflowX: 'scroll', overflowY: 'scroll', '&::-webkit-scrollbar': { width: '1px' } }}>
-              {data.map((item) => (
+              {data.slice(0, 10).map((item) => (
                 <ComponentCard key={item._id} item={item} />
               ))}
             </Flex>
