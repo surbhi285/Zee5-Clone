@@ -57,7 +57,7 @@ export default function SearchCard({searchData, clearSearchValue}) {
             top: "110%",
             left: 0,
             width: "100%",
-            maxHeight: "450px",
+            maxHeight: "500px",
             zIndex: 2,
             cursor:"pointer",
           }}

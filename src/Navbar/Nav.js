@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {useState, useRef} from 'react';
-import {Container, Flex, UnorderedList, ListItem, Spacer, Button, Box, Input, InputGroup, InputLeftElement, textDecoration, position} from '@chakra-ui/react'
+import {Container, Flex, UnorderedList, ListItem, Button, Box, Input, InputGroup, InputLeftElement} from '@chakra-ui/react'
 import {SearchIcon,  HamburgerIcon } from "@chakra-ui/icons";
 import {NavLink, Link, useLocation} from 'react-router-dom';
 import SearchCard from '../Main/SearchCard';
@@ -35,8 +35,8 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
    
     const [smallerScreen,  setSmallerScreen] = useState(window.innerWidth < 1000);
 
-    // const toogleRef = useRef(null); 
-    // const menuRef = useRef(null);
+    const toogleRef = useRef(null); 
+    const menuRef = useRef(null);
 
     const navLinkStyle = ({ isActive }) => {
       return {
@@ -59,20 +59,32 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         // console.log("hamburger opened");
     }
 
-    // useEffect(()=>{
-    //   const handleClick=(e)=>{
-    //       if(menuRef.current && !menuRef.current.contains(e.target)){
-    //         setMenuOpen(false)
-    //       }
-    //   };
-    //   document.addEventListener("click", handleClick);
-    //   return()=>{
-    //     document.addEventListener("click", handleClick)
-    //   }
-    // })
+    useEffect(()=>{
+      const handleClick=(e)=>{
+          if(menuRef.current && !menuRef.current.contains(e.target)){
+            setMenuOpen(false)
+          }
+      };
+      document.addEventListener("click", handleClick);
+      return()=>{
+        document.removeEventListener("click", handleClick)
+      }
+    })
+       
+    useEffect(()=>{
+      const handleClickOutside=(e)=>{
+          if(toogleRef.current && !toogleRef.current.contains(e.target)){
+            setIsDropDownOpen(false)
+          }
+      };
+      document.addEventListener("click", handleClickOutside);
+      return()=>{
+        document.removeEventListener("click", handleClickOutside)
+      }
+    })
 
     const handleLogout = ()=>{  
-        localStorage.removeItem('signupDeatils');
+        localStorage.removeItem('sign');
         setIsLoggedIn(false);
     }
 
@@ -121,13 +133,6 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     BUY PLANS</Button>
     </NavLink> 
     </Flex>
-    <Flex>
-    <NavLink to='/SearchCard' style={{textDecoration:"none", color:"white"}}>
-    <Box className='searchButton'>
-    <SearchIcon />
-     </Box>
-     </NavLink>
-     </Flex>
     </Flex>
     <Flex style={{overflowX: 'auto', whiteSpace: 'nowrap'}}>
     <NavLink to='/' style={{color:"white", textDecoration:"none"}}>
@@ -190,11 +195,11 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         
        
         <ListItem  onClick={toggleDropDown}>
-        <div className='AppsIcon' ><AppsIcon /></div>
-  {isDropdownOpen && (
+        <div className='AppsIcon' ref={toogleRef}><AppsIcon /></div>
+     {isDropdownOpen && (
     <div style={{ position: "absolute", marginTop: "20px", backgroundColor: "#0F0617", width: "200px" }}>
       <ul className="ul">
-      <NavLink to='/NoResult' style={{ color: "white", textDecoration: "none" }}>
+      <NavLink to='/NoResult'style={{ color: "white", textDecoration: "none" }}>
           <li className="listItem" style={{marginTop:"20px"}}>
             Premium
           </li>
@@ -369,7 +374,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </Button>
         </NavLink>
      
-      <HamburgerIcon onClick = {handleMenuToggle} fontSize={25} cursor="pointer" textDecoration='none' color="white" marginTop="5px"/>
+      <HamburgerIcon ref={menuRef} onClick = {handleMenuToggle} fontSize={25} cursor="pointer" textDecoration='none' color="white" marginTop="5px"/>
       {menuOpen &&  (
           <div className='menu' >
             <NavLink to ="/" style={{textDecoration:"none", color:"white"}}>
