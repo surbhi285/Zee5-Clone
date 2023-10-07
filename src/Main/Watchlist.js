@@ -10,7 +10,7 @@ export default function Watchlist() {
     const[isAdded, setIsAdded] = useState(true);
    
     async function getWatchList (){
-      const userInfo = localStorage.getItem("signup")
+      const userInfo = localStorage.getItem("sign")
       if (userInfo){
         const userDetail = JSON.parse(userInfo);
         const response = await(fetch("https://academics.newtonschool.co/api/v1/ott/watchlist/like",
@@ -31,13 +31,13 @@ export default function Watchlist() {
       setWatchList(data.data?.shows);
       setLoading(false)
       } else {
-        console.error("Data is not an array:", data.data.shows);
+        console.error("Data is not an array:",data.data.shows );
       }
     }
   }
 
   async function addRemoveWatchList(showId){
-    const user = localStorage.getItem("signup");
+    const user = localStorage.getItem("sign");
     console.log("userData", user);
     if(user){
       const parsedData = JSON.parse(user);

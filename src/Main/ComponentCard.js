@@ -5,10 +5,7 @@ import { Flex } from "@chakra-ui/react";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ShareButton from "./ShareButton";
 
-
-
-
-const ComponentCard = ({ item}) => {
+const ComponentCard = ({item}) => {
 
   const [smallerScreen, setSmallerScreen] = useState(window.innerWidth<550);
   useEffect(()=>{
@@ -23,9 +20,7 @@ const ComponentCard = ({ item}) => {
   },[])
 
 
-  const share = ()=>{
-
-  }
+  
   return (
     <>
     {smallerScreen ?(

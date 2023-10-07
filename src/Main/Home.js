@@ -32,8 +32,6 @@ export default function Home() {
           if (!Array.isArray(data)) {
             return null;
           }
-       
-        
           return (
             <Flex sx={{ overflowX: 'scroll', overflowY: 'scroll', '&::-webkit-scrollbar': { width: '1px' } }}>
               {data.slice(0, 10).map((item) => (
@@ -62,8 +60,7 @@ export default function Home() {
               marginLeft: "20px",
               letterSpacing: "1px",
               marginBottom: "0",
-            }}
-          >
+            }}>
             ZEE5 Exclusives
           </Box>
           <Link to="/ZeeExclusive" style={{textDecoration:"none", color:"#a785ff"}}>

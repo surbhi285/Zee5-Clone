@@ -174,7 +174,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
      </Flex>
      </Container>
 
-    ):(<>
+    ):(<> 
     <Container p="10px" bg="#0F0617" color="white" position="fixed" top="0" minWidth="99%" zIndex="1000">
     <Flex as="nav" alignItems="center" color="white" justifyContent="space-between">
     <Flex>
@@ -374,9 +374,9 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </Button>
         </NavLink>
      
-      <HamburgerIcon ref={menuRef} onClick = {handleMenuToggle} fontSize={25} cursor="pointer" textDecoration='none' color="white" marginTop="5px"/>
+      <HamburgerIcon onClick = {handleMenuToggle} fontSize={25} cursor="pointer" textDecoration='none' color="white" marginTop="5px"/>
       {menuOpen &&  (
-          <div className='menu' >
+          <div className='menu' ref={menuRef} >
             <NavLink to ="/" style={{textDecoration:"none", color:"white"}}>
            <div style={{paddingLeft:"50px", 
            fontWeight:"bold", 

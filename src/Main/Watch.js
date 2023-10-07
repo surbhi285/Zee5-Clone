@@ -14,7 +14,7 @@ const[isAdded, setIsAdded] = useState(false);
 
 const [smallerScreen, setSmallerScreen] = useState(window.innerWidth<1000)
 const videoRef = useRef(null);
-console.log(videoRef)   
+ 
 
 
 const {id} = useParams();
@@ -46,10 +46,11 @@ const getMovies=async()=>{
       },[id])
 
       async function addRemoveWatchList(showId){
-          const user = localStorage.getItem("signup");
+          const user = localStorage.getItem("sign");
           console.log("userData", user);
           if(user){
             const parsedData = JSON.parse(user);
+            console.log(parsedData);
            const response= await fetch(`https://academics.newtonschool.co/api/v1/ott/watchlist/like`,{
                 method:"PATCH",
                 headers:{
