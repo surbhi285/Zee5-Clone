@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Transaction() {
     return (
-        <Flex style={{marginTop:"10rem", marginLeft:"5rem", border:"1px solid grey", width:"70rem"}}>
+        <Flex style={{marginTop:"7rem", marginLeft:"5rem", border:"1px solid grey", width:"70rem"}}>
          <Container style={{ width: "20rem", flex: "0 0 10rem"}}>
             <ProfileItem />
               </Container>

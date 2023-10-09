@@ -8,7 +8,7 @@ export default function Profile({ username, email}) {
     console.log("username", username)
     console.log("email", email);
   return (
-    <div style={{marginTop:"8rem"}}>
+    <div style={{marginTop:"7rem"}}>
     <div style={{border:"0.5px solid grey", height:"40rem", width:"72rem", marginLeft:"70px"}}>
     <Flex>
     <ProfileItem />

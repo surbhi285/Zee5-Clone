@@ -36,7 +36,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
     const [smallerScreen,  setSmallerScreen] = useState(window.innerWidth < 1000);
 
     const toogleRef = useRef(null); 
-    const menuRef = useRef(null);
+    // const menuRef = useRef(null);
 
     const navLinkStyle = ({ isActive }) => {
       return {
@@ -59,17 +59,17 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         // console.log("hamburger opened");
     }
 
-    useEffect(()=>{
-      const handleClick=(e)=>{
-          if(menuRef.current && !menuRef.current.contains(e.target)){
-            setMenuOpen(false)
-          }
-      };
-      document.addEventListener("click", handleClick);
-      return()=>{
-        document.removeEventListener("click", handleClick)
-      }
-    })
+    // useEffect(()=>{
+    //   const handleClick=(e)=>{
+    //       if(menuRef.current && !menuRef.current.contains(e.target)){
+    //         setMenuOpen(false)
+    //       }
+    //   };
+    //   document.addEventListener("click", handleClick);
+    //   return()=>{
+    //     document.removeEventListener("click", handleClick)
+    //   }
+    // })
        
     useEffect(()=>{
       const handleClickOutside=(e)=>{
@@ -373,10 +373,10 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
         <LuCrown style={{paddingRight:"5px", fontSize:"25px"}}/>  BUY PLANS
           </Button>
         </NavLink>
-     
+    
       <HamburgerIcon onClick = {handleMenuToggle} fontSize={25} cursor="pointer" textDecoration='none' color="white" marginTop="5px"/>
       {menuOpen &&  (
-          <div className='menu' ref={menuRef} >
+          <div className='menu'>
             <NavLink to ="/" style={{textDecoration:"none", color:"white"}}>
            <div style={{paddingLeft:"50px", 
            fontWeight:"bold", 
@@ -502,7 +502,7 @@ export default function Nav({ isLoggedIn, setIsLoggedIn, username}) {
           </div>
 
         )}
-        
+      
         </Flex>
        </Flex>
         </Container>
